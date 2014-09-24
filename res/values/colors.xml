@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+     <!-- 白色 -->
+    <color name="white">#FFFFFF</color>
+    <!-- 红色 -->
+    <color name="red">#FF0000</color>
+    <!-- 橙色 -->
+    <color name="orange">#FF7F00</color>
+    <color name="orange_vote">#FF8400</color>
+    <!-- 黑色 -->
+    <color name="black">#000000</color>
+    <!-- 深粉红色 -->
+    <color name="deeppink">#FF1493</color>
+    <!-- 雪白色 -->
+    <color name="snow">#FFFAFA</color>
+    <!-- 桔黄色 -->
+    <color name="bisque">#FFE4C4</color>
+    <!-- 热粉红色 -->
+    <color name="hotpink">#FF69B4</color>
+    <!-- 淡灰色 -->
+    <color name="gainsboro">#DCDCDC</color>
+    <!-- 草绿色 -->
+    <color name="lawngreen">#7CFC00</color>
+    
+    <color name="darkblue">#ff0099cc</color>
+    <color name="darkerblue">#FF1C65A8</color>
+    
+    <color name="blue">#ffccddff</color>
+    <color name="grey">#58616d</color>
+    <color name="middlegrey">#898989</color>
+    <color name="brightergrey">#D8D8D8</color>
+    <color name="brightgrey">#CCCCCC</color>
+    <color name="darkgrey">#ff404040</color>
+    <color name="toasterro">#9fd524</color>
+    <color name="lightgrey">#ff888888</color>
+    <color name="semitransparent">#80000000</color>
+    <color name="lightransparent">#a0000000</color>
+    <color name="navpage">#FFE1E8EB</color>
+    <color name="light_grey">#808080</color>
+    <color name="yellow">#FF8000</color>
+    <color name="brightorange">#FF8F00</color>
+    <color name="split">#333333</color>
+    
+    <color name="transparent">#00000000</color>
+    <color name="transparent_black">#5F000000</color>
+    
+    <color name="color_input_tips">#b3b3b3</color>
+    <color name="color_tips">#e67300</color>
+</resources>

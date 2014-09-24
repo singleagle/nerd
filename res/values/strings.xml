@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">宅基地</string>
+    <string name="nearby">附近</string>
+    <string name="create_distraction">创建活动</string>
+    <string name="user_center">个人中心</string>
+    <string name="edit_distraction_hint">我的想法，写几句吧</string>
+    <string name="distraction_type">活动类型</string>
+    <string name="destination">目的地:</string>
+    <string name="time">时间:</string>
+    <string name="publish">发布</string>
+    <string name="distance_meters">%s米</string>
+</resources>
