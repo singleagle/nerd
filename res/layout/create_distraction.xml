@@ -2,76 +2,72 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="10dp"
+    android:background="@drawable/common_color_bg"
     android:descendantFocusability="beforeDescendants"
-    android:background="@drawable/common_color_bg" >
+    android:orientation="vertical" >
 
-   <EditText
+    <EditText
         android:id="@+id/description"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="top|left"
-        android:padding="10dip"
-        android:textColor="@android:color/black"
-        android:textColorHint="@color/color_input_tips"
-        android:textSize="16sp" 
         android:hint="@string/edit_distraction_hint"
         android:inputType="textMultiLine"
         android:lines="4"
         android:maxLength="99999"
-        android:maxLines="5"/>
-   
-   		<TextView
-	        android:id="@+id/type"
-	        android:background="@color/white"
-	        android:gravity="center_vertical"
-	        android:layout_width="match_parent"
-	        android:layout_height="30dp"
-	        android:layout_marginTop="10dp"
-	        android:text="@string/distraction_type"
-	        android:textSize="16sp"
-	        android:drawableRight="@drawable/selector_arrow_right"/>
-       
-       <TextView
-	        android:id="@+id/destination"
-	        android:background="@color/white"
-	        android:gravity="center_vertical"
-	        android:layout_width="match_parent"
-	        android:layout_height="30dp"
-	        android:layout_marginTop="20dp"
-	        android:text="@string/destination"
-	        android:textSize="16sp"
-	        android:drawableRight="@drawable/selector_arrow_right"/>
-       
-        <LinearLayout 
-            android:layout_width="match_parent"
-            android:background="@color/white"
-	        android:layout_height="30dp"
-	        android:layout_marginTop="20dp"
-	        android:gravity="center_vertical"
-	        android:orientation="horizontal">
-	        
-            <TextView
-		        android:layout_width="wrap_content"
-		        android:layout_height="match_parent"
-		        android:text="@string/time"
-		        android:textSize="16sp"
-		        />
-            
-            <TextView
-		        android:id="@+id/time"
-		        android:gravity="center_vertical"
-		        android:paddingLeft="20dp"
-		        android:layout_width="0dp"
-		        android:layout_height="match_parent"
-		        android:layout_weight="1"
-		        android:textSize="16sp"
-		        android:drawableRight="@drawable/selector_arrow_right"/> 
-            
-        </LinearLayout>
+        android:maxLines="5"
+        android:padding="10dip"
+        android:textColor="@android:color/black"
+        android:textColorHint="@color/input_hint"
+        android:textSize="16sp" />
 
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:drawableRight="@drawable/selector_arrow_right"
+        android:gravity="center_vertical"
+        android:text="@string/distraction_type"
+        android:textSize="16sp" />
 
+    <TextView
+        android:id="@+id/destination"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:drawableRight="@drawable/selector_arrow_right"
+        android:gravity="center_vertical"
+        android:text="@string/destination"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/time"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableRight="@drawable/selector_arrow_right"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.enjoy.nerd.R;
+import com.enjoy.nerd.distraction.DistractionDetailActivity;
 import com.enjoy.nerd.remoterequest.DistractionProfile;
 import com.enjoy.nerd.remoterequest.DistractionProfile.PageDAProfile;
 import com.enjoy.nerd.remoterequest.NearbyDistractionReq;
@@ -15,6 +16,7 @@ import com.enjoy.nerd.view.PullToRefreshBase.OnRefreshListener;
 import com.enjoy.nerd.view.PullToRefreshListView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -102,6 +104,9 @@ public class NearByFragment extends Fragment implements OnRefreshListener<ListVi
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		DistractionProfile profile = (DistractionProfile)parent.getItemAtPosition(position);
+		Intent intent = new Intent(getActivity(), DistractionDetailActivity.class);
+		intent.putExtra(DistractionDetailActivity.KEY_DA_ID, profile.getId());
+		getActivity().startActivity(intent);
 	}
 
 

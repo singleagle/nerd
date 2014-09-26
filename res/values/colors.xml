@@ -45,6 +45,9 @@
     <color name="transparent">#00000000</color>
     <color name="transparent_black">#5F000000</color>
     
-    <color name="color_input_tips">#b3b3b3</color>
-    <color name="color_tips">#e67300</color>
+    <color name="main_txt">@color/black</color>
+    <color name="input">@color/black</color>
+    <color name="input_hint">#b3b3b3</color>
+    <color name="tips">#e67300</color>
+    
 </resources>
