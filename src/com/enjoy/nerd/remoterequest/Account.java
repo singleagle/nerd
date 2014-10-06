@@ -5,22 +5,20 @@ public class Account  {
 	static public final int SEX_UNKNOWN = 0;
 	static public final int SEX_MALE = 1;
 	static public final int SEX_WOMAN = 2;
-	
+
 	long uin;
 	String name;
 	String headerImgUrl;
 	String phoneNO;
+	String password;
+	String accessToken;
+	
 	int sexType; 
 	
 	public Account() {
 		
 	}
-	
-	public Account(long uin, String name) {
-		this.uin = uin;
-		this.name = name;
-	}
-	
+
 	public String getPhoneNO() {
 		return phoneNO;
 	}
@@ -30,6 +28,14 @@ public class Account  {
 		this.phoneNO = phoneNO;
 	}
 
+	
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
 
 	public void setUin(long uin) {
 		this.uin = uin;

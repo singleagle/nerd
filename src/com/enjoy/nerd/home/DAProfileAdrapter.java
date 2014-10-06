@@ -63,8 +63,9 @@ public class DAProfileAdrapter extends BaseAdapter {
 			convertView = LayoutInflater.from(mContext).inflate(R.layout.daprofile_item, parent, false);
 			holder = new ViewHolder();
 			holder.daImgView = (ImageView) convertView.findViewById(R.id.image);
+			holder.creatorNameView = (TextView) convertView.findViewById(R.id.user_name);
 			holder.titleView = (TextView) convertView.findViewById(R.id.title);
-			holder.contentView = (TextView)convertView.findViewById(R.id.description);
+			holder.contentView = (TextView)convertView.findViewById(R.id.description);  
 			holder.destView = (TextView)convertView.findViewById(R.id.dest);
 			holder.startTimeView = (TextView)convertView.findViewById(R.id.starttime);
 			holder.partnerView = (TextView)convertView.findViewById(R.id.partner_count);
@@ -83,6 +84,8 @@ public class DAProfileAdrapter extends BaseAdapter {
 		}else{
 			holder.titleView.setText("无标题");
 		}
+		
+		holder.creatorNameView.setText(String.valueOf(profile.getCreatUserId()));
 		holder.contentView.setText(profile.getDescription());
 		holder.destView.setText(profile.getOrigin());
 		holder.startTimeView.setText(TIMEFORMAT.format(new Date(profile.getStartTime())));
@@ -92,6 +95,7 @@ public class DAProfileAdrapter extends BaseAdapter {
 
 	private static class ViewHolder{
 		ImageView daImgView;
+		TextView  creatorNameView;
 		TextView  titleView;
 		TextView  contentView;
 		TextView  destView;

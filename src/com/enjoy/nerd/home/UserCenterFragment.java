@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class UserCenterFragment extends Fragment implements View.OnClickListener {
 	private static final int CODE_LOGIN = 1;
@@ -37,14 +38,17 @@ public class UserCenterFragment extends Fragment implements View.OnClickListener
     
     private void startLoginActivity(){
     	Intent intent = new Intent(getActivity(), LoginActivity.class);
-    	getActivity().startActivityForResult(intent, CODE_LOGIN);
+    	startActivityForResult(intent, CODE_LOGIN);
     }
     
     
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == CODE_LOGIN){
-			mNickView.setText(mAccountManager.getLoginUserName());
+			if(mAccountManager.isLogin()){
+				mNickView.setText(mAccountManager.getLoginUserName());
+			}
+			
 		}
 	}
 
@@ -55,6 +59,8 @@ public class UserCenterFragment extends Fragment implements View.OnClickListener
 		case R.id.nick_name:
 			if(mAccountManager.isLogin()){
 				mAccountManager.logout();
+				mNickView.setText(null);
+				Toast.makeText(getActivity(), R.string.logout_success, Toast.LENGTH_LONG).show();
 			}else{
 				startLoginActivity();
 			}

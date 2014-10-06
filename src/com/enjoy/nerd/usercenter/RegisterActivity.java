@@ -7,6 +7,7 @@ import com.enjoy.nerd.remoterequest.Account;
 import com.enjoy.nerd.remoterequest.RegisterReq;
 import com.enjoy.nerd.remoterequest.RemoteRequest.FailResponseListner;
 import com.enjoy.nerd.remoterequest.RemoteRequest.SuccessResponseListner;
+import com.enjoy.nerd.remoterequest.xmpp.OpenfireRegisterReq;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -38,7 +39,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
 		mPhoneNOView = (EditText)findViewById(R.id.reg_phoneNO);
-		mNameView = (EditText)findViewById(R.id.nick_name);
+		mNameView = (EditText)findViewById(R.id.reg_user_name);
 		mPasswordView = (EditText)findViewById(R.id.reg_password);
 		mPasswordConfirmView = (EditText)findViewById(R.id.reg_password_confirm);
 		mRegisterBtn = (Button)findViewById(R.id.reg_register_button);
@@ -51,12 +52,11 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
 	}
 
 	private void submitRegisterInfo(){
-		RegisterReq request = new RegisterReq(this);
+		OpenfireRegisterReq request = new OpenfireRegisterReq(this);
 		request.setPhoneNO(mPhoneNOView.getText().toString());
 		String password = mPasswordView.getText().toString();
-		Charset charset = Charset.forName("UTF-8");
-		byte[]  input = charset.encode(password).array();
-		request.setPassword(Base64.encodeToString(input, Base64.DEFAULT));
+		request.setPassword(password);
+		
 		if(mNameView.getText() != null){
 			request.setName(mNameView.getText().toString());
 		}

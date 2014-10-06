@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">宅基地</string>
+    <string name="img_common_desc">nerd</string>
     <string name="nearby">附近</string>
     <string name="create_distraction">创建活动</string>
     <string name="user_center">个人中心</string>
@@ -23,6 +24,21 @@
     <string name="nick_name">昵称</string>
     <string name="privacy_policy">隐私和服务协议</string>  
     <string name="invalidate_input">输入不合法</string>
+    <string name="login_success">登录成功</string>
+    <string name="login_fail">登录失败:%d</string>
+    <string name="logout_success">退出登录</string>
+    <string name="login_tips">请登录！</string>
+    <string name="create_chat">发起对话</string>
     
+    <string name="send">发送</string>
+    <string name="favorite">收藏</string>
+    <string name="cancel">取消</string>
+    <string name="take_picture">拍照</string>
+    <string name="select_from_album">从相册中选择</string>
+    <string name="save">保存</string>
+    <string name="press_talk">按住说话</string>
+    <string name="stop_talk">松开停止</string>
+    <string name="flip_up_tip">手指上滑，取消发送</string>
+    <string name="release_tip">松开手指，取消发送</string>
     
 </resources>

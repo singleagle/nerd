@@ -258,122 +258,204 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class drawable {
         public static final int arrow_right_normal=0x7f020000;
         public static final int arrow_right_selected=0x7f020001;
-        public static final int btnbg_high=0x7f020002;
-        public static final int btnbg_normal=0x7f020003;
-        public static final int comm_scroller_bar=0x7f020004;
-        public static final int common_color_bg=0x7f020005;
-        public static final int create_distraction=0x7f020006;
-        public static final int create_distraction_pressed=0x7f020007;
-        public static final int default_da_img=0x7f020008;
-        public static final int default_ptr_rotate=0x7f020009;
-        public static final int default_user_header=0x7f02000a;
-        public static final int ic_account=0x7f02000b;
-        public static final int ic_action_search=0x7f02000c;
-        public static final int ic_distance=0x7f02000d;
-        public static final int ic_launcher=0x7f02000e;
-        public static final int ic_partner=0x7f02000f;
-        public static final int ic_partner_selected=0x7f020010;
-        public static final int ic_password=0x7f020011;
-        public static final int ic_unlogin=0x7f020012;
-        public static final int input_bg=0x7f020013;
-        public static final int item_divider_with_margin_left=0x7f020014;
-        public static final int nearby=0x7f020015;
-        public static final int selector_arrow_right=0x7f020016;
-        public static final int selector_btn=0x7f020017;
-        public static final int user_center=0x7f020018;
-        public static final int welcome_bg=0x7f020019;
-        public static final int xsearch_loading=0x7f02001a;
-        public static final int xsearch_msg_pull_arrow_down=0x7f02001b;
+        public static final int bg_cancel_talk=0x7f020002;
+        public static final int bg_other_message=0x7f020003;
+        public static final int bg_self_message=0x7f020004;
+        public static final int bg_talking=0x7f020005;
+        public static final int btn_chat_albumpic=0x7f020006;
+        public static final int btn_chat_albumpic_pressed=0x7f020007;
+        public static final int btn_chat_takepic=0x7f020008;
+        public static final int btn_chat_takepic_pressed=0x7f020009;
+        public static final int btnbg_high=0x7f02000a;
+        public static final int btnbg_normal=0x7f02000b;
+        public static final int cancel_talk=0x7f02000c;
+        public static final int chat_audio_btnbg_pressed=0x7f02000d;
+        public static final int chat_bottom_bg=0x7f02000e;
+        public static final int chat_btn_add=0x7f02000f;
+        public static final int chat_btn_add_pressed=0x7f020010;
+        public static final int chat_btn_switch_audio=0x7f020011;
+        public static final int chat_btn_switch_audio_pressed=0x7f020012;
+        public static final int chat_edit_bg=0x7f020013;
+        public static final int chat_edittext_bg=0x7f020014;
+        public static final int chat_switch_keyboard=0x7f020015;
+        public static final int chat_switch_keyboard_pressed=0x7f020016;
+        public static final int chat_time_bg=0x7f020017;
+        public static final int chat_voice_buble_left=0x7f020018;
+        public static final int chat_voice_buble_right=0x7f020019;
+        public static final int comm_scroller_bar=0x7f02001a;
+        public static final int common_color_bg=0x7f02001b;
+        public static final int create_distraction=0x7f02001c;
+        public static final int create_distraction_pressed=0x7f02001d;
+        public static final int default_da_img=0x7f02001e;
+        public static final int default_ptr_rotate=0x7f02001f;
+        public static final int default_user_header=0x7f020020;
+        public static final int ic_account=0x7f020021;
+        public static final int ic_action_search=0x7f020022;
+        public static final int ic_distance=0x7f020023;
+        public static final int ic_launcher=0x7f020024;
+        public static final int ic_partner=0x7f020025;
+        public static final int ic_partner_selected=0x7f020026;
+        public static final int ic_password=0x7f020027;
+        public static final int ic_unlogin=0x7f020028;
+        public static final int icon_voice_left=0x7f020029;
+        public static final int icon_voice_right=0x7f02002a;
+        public static final int input_bg=0x7f02002b;
+        public static final int item_divider_with_margin_left=0x7f02002c;
+        public static final int left_speaker=0x7f02002d;
+        public static final int microphone=0x7f02002e;
+        public static final int microphone_1=0x7f02002f;
+        public static final int microphone_2=0x7f020030;
+        public static final int microphone_3=0x7f020031;
+        public static final int microphone_4=0x7f020032;
+        public static final int nearby=0x7f020033;
+        public static final int personicon=0x7f020034;
+        public static final int right_speaker=0x7f020035;
+        public static final int selector_arrow_right=0x7f020036;
+        public static final int selector_btn=0x7f020037;
+        public static final int selector_chat_addbtn=0x7f020038;
+        public static final int selector_chat_albumbtn=0x7f020039;
+        public static final int selector_chat_audiobtn_bg=0x7f02003a;
+        public static final int selector_chat_takebtn=0x7f02003b;
+        public static final int selector_emotion_button=0x7f02003c;
+        public static final int selector_switch_audio=0x7f02003d;
+        public static final int selector_switch_keyboard=0x7f02003e;
+        public static final int send_msg_fail=0x7f02003f;
+        public static final int to_doctor_detail=0x7f020040;
+        public static final int toolview_emotion=0x7f020041;
+        public static final int toolview_emotion_pressed=0x7f020042;
+        public static final int user_center=0x7f020043;
+        public static final int voice_left_anmi1=0x7f020044;
+        public static final int voice_left_anmi2=0x7f020045;
+        public static final int voice_left_anmi3=0x7f020046;
+        public static final int voice_right_anmi1=0x7f020047;
+        public static final int voice_right_anmi2=0x7f020048;
+        public static final int voice_right_anmi3=0x7f020049;
+        public static final int welcome_bg=0x7f02004a;
+        public static final int xsearch_loading=0x7f02004b;
+        public static final int xsearch_msg_pull_arrow_down=0x7f02004c;
     }
     public static final class id {
         public static final int both=0x7f050003;
-        public static final int content=0x7f050012;
-        public static final int description=0x7f05000b;
-        public static final int dest=0x7f05000d;
-        public static final int dest_container=0x7f05000c;
-        public static final int destination=0x7f050023;
+        public static final int btn_talking=0x7f050010;
+        public static final int chat_bottom_fragment_host=0x7f050013;
+        public static final int chat_bottom_layout=0x7f05000a;
+        public static final int chat_bottom_line=0x7f05000b;
+        public static final int chat_btn_add=0x7f050011;
+        public static final int chat_edit_text=0x7f05000f;
+        public static final int chat_emotion_btn=0x7f05000e;
+        public static final int chat_pull_list=0x7f050009;
+        public static final int chat_send_btn=0x7f050012;
+        public static final int chat_switch_btn=0x7f05000c;
+        public static final int content=0x7f05001e;
+        public static final int create_chat=0x7f05001c;
+        public static final int description=0x7f050016;
+        public static final int dest=0x7f050018;
+        public static final int dest_container=0x7f050017;
+        public static final int destination=0x7f05002f;
         public static final int disabled=0x7f050000;
-        public static final int distance=0x7f050010;
+        public static final int distance=0x7f05001b;
         public static final int flip=0x7f050008;
-        public static final int homeContainer=0x7f050011;
-        public static final int image=0x7f050009;
-        public static final int login_bottom_line=0x7f050018;
-        public static final int login_forget_password_view=0x7f05001a;
-        public static final int login_header_img=0x7f050014;
-        public static final int login_login_button=0x7f050017;
-        public static final int login_password=0x7f050016;
-        public static final int login_register_view=0x7f050019;
-        public static final int login_uin=0x7f050015;
+        public static final int homeContainer=0x7f05001d;
+        public static final int image=0x7f050014;
+        public static final int login_bottom_line=0x7f050024;
+        public static final int login_forget_password_view=0x7f050026;
+        public static final int login_header_img=0x7f050020;
+        public static final int login_login_button=0x7f050023;
+        public static final int login_password=0x7f050022;
+        public static final int login_register_view=0x7f050025;
+        public static final int login_uin=0x7f050021;
         public static final int manualOnly=0x7f050004;
-        public static final int my_create=0x7f050033;
-        public static final int my_join=0x7f050034;
-        public static final int nick_name=0x7f050032;
-        public static final int partner_count=0x7f05000f;
+        public static final int msgitem_content_container=0x7f050034;
+        public static final int msgitem_headimg=0x7f050033;
+        public static final int msgitem_piccontent=0x7f050036;
+        public static final int msgitem_progressbar=0x7f050038;
+        public static final int msgitem_state_indicator=0x7f050039;
+        public static final int msgitem_textcontent=0x7f050035;
+        public static final int msgitem_time=0x7f050032;
+        public static final int msgitem_voicecontent=0x7f050037;
+        public static final int my_create=0x7f050048;
+        public static final int my_join=0x7f050049;
+        public static final int nick_name=0x7f050047;
+        public static final int partner_count=0x7f05001a;
         public static final int pullDownFromTop=0x7f050005;
         public static final int pullFromEnd=0x7f050002;
         public static final int pullFromStart=0x7f050001;
         public static final int pullUpFromBottom=0x7f050006;
-        public static final int pull_list=0x7f050025;
-        public static final int pull_to_load_footer_content=0x7f050027;
-        public static final int pull_to_load_footer_hint_textview=0x7f050029;
-        public static final int pull_to_load_footer_progressbar=0x7f050028;
-        public static final int pull_to_refresh_header_arrow=0x7f05002f;
-        public static final int pull_to_refresh_header_content=0x7f05002a;
-        public static final int pull_to_refresh_header_hint_textview=0x7f05002c;
-        public static final int pull_to_refresh_header_progressbar=0x7f050030;
-        public static final int pull_to_refresh_header_text=0x7f05002b;
-        public static final int pull_to_refresh_header_time=0x7f05002e;
-        public static final int pull_to_refresh_last_update_time_text=0x7f05002d;
-        public static final int pull_webview=0x7f050026;
-        public static final int reg_header_img=0x7f05001b;
-        public static final int reg_password=0x7f05001d;
-        public static final int reg_password_confirm=0x7f05001e;
-        public static final int reg_phoneNO=0x7f05001c;
-        public static final int reg_register_button=0x7f050020;
-        public static final int reg_user_name=0x7f05001f;
-        public static final int register_agree_text=0x7f050021;
+        public static final int pull_list=0x7f05003a;
+        public static final int pull_to_load_footer_content=0x7f05003c;
+        public static final int pull_to_load_footer_hint_textview=0x7f05003e;
+        public static final int pull_to_load_footer_progressbar=0x7f05003d;
+        public static final int pull_to_refresh_header_arrow=0x7f050044;
+        public static final int pull_to_refresh_header_content=0x7f05003f;
+        public static final int pull_to_refresh_header_hint_textview=0x7f050041;
+        public static final int pull_to_refresh_header_progressbar=0x7f050045;
+        public static final int pull_to_refresh_header_text=0x7f050040;
+        public static final int pull_to_refresh_header_time=0x7f050043;
+        public static final int pull_to_refresh_last_update_time_text=0x7f050042;
+        public static final int pull_webview=0x7f05003b;
+        public static final int reg_header_img=0x7f050027;
+        public static final int reg_password=0x7f050029;
+        public static final int reg_password_confirm=0x7f05002a;
+        public static final int reg_phoneNO=0x7f050028;
+        public static final int reg_register_button=0x7f05002c;
+        public static final int reg_user_name=0x7f05002b;
+        public static final int register_agree_text=0x7f05002d;
         public static final int rotate=0x7f050007;
-        public static final int starttime=0x7f05000e;
-        public static final int time=0x7f050024;
-        public static final int title=0x7f05000a;
-        public static final int type=0x7f050022;
-        public static final int user_icon=0x7f050031;
-        public static final int welcome_container=0x7f050013;
-        public static final int welcome_title=0x7f050035;
+        public static final int starttime=0x7f050019;
+        public static final int text_input=0x7f05000d;
+        public static final int time=0x7f050030;
+        public static final int title=0x7f050015;
+        public static final int type=0x7f05002e;
+        public static final int user_icon=0x7f050046;
+        public static final int user_name=0x7f050031;
+        public static final int welcome_container=0x7f05001f;
+        public static final int welcome_title=0x7f05004a;
     }
     public static final class layout {
-        public static final int activity_distraction_detail=0x7f030000;
-        public static final int activity_home=0x7f030001;
-        public static final int activity_login=0x7f030002;
-        public static final int activity_register=0x7f030003;
-        public static final int create_distraction=0x7f030004;
-        public static final int daprofile_item=0x7f030005;
-        public static final int home_tab_indicator=0x7f030006;
-        public static final int nearby=0x7f030007;
-        public static final int pull_refresh_webview=0x7f030008;
-        public static final int pull_to_load_footer=0x7f030009;
-        public static final int pull_to_refresh_header=0x7f03000a;
-        public static final int pull_to_refresh_header2=0x7f03000b;
-        public static final int user_center=0x7f03000c;
-        public static final int welcome=0x7f03000d;
+        public static final int activity_chat=0x7f030000;
+        public static final int activity_distraction_detail=0x7f030001;
+        public static final int activity_home=0x7f030002;
+        public static final int activity_login=0x7f030003;
+        public static final int activity_register=0x7f030004;
+        public static final int create_distraction=0x7f030005;
+        public static final int daprofile_item=0x7f030006;
+        public static final int home_tab_indicator=0x7f030007;
+        public static final int msgitem_incoming=0x7f030008;
+        public static final int msgitem_outgoing=0x7f030009;
+        public static final int nearby=0x7f03000a;
+        public static final int pull_refresh_webview=0x7f03000b;
+        public static final int pull_to_load_footer=0x7f03000c;
+        public static final int pull_to_refresh_header=0x7f03000d;
+        public static final int pull_to_refresh_header2=0x7f03000e;
+        public static final int user_center=0x7f03000f;
+        public static final int welcome=0x7f030010;
     }
     public static final class string {
         public static final int app_name=0x7f080016;
-        public static final int create_distraction=0x7f080018;
-        public static final int destination=0x7f08001c;
-        public static final int distance_meters=0x7f08001f;
-        public static final int distraction_type=0x7f08001b;
-        public static final int edit_distraction_hint=0x7f08001a;
-        public static final int forget_password=0x7f080024;
-        public static final int invalidate_input=0x7f08002c;
-        public static final int join_distraction=0x7f080021;
-        public static final int login=0x7f080022;
-        public static final int login_password=0x7f080028;
-        public static final int login_password_confirm=0x7f080029;
-        public static final int my_distraction=0x7f080020;
-        public static final int nearby=0x7f080017;
-        public static final int nick_name=0x7f08002a;
-        public static final int phone_number=0x7f080027;
+        public static final int cancel=0x7f080035;
+        public static final int create_chat=0x7f080032;
+        public static final int create_distraction=0x7f080019;
+        public static final int destination=0x7f08001d;
+        public static final int distance_meters=0x7f080020;
+        public static final int distraction_type=0x7f08001c;
+        public static final int edit_distraction_hint=0x7f08001b;
+        public static final int favorite=0x7f080034;
+        public static final int flip_up_tip=0x7f08003b;
+        public static final int forget_password=0x7f080025;
+        public static final int img_common_desc=0x7f080017;
+        public static final int invalidate_input=0x7f08002d;
+        public static final int join_distraction=0x7f080022;
+        public static final int login=0x7f080023;
+        public static final int login_fail=0x7f08002f;
+        public static final int login_password=0x7f080029;
+        public static final int login_password_confirm=0x7f08002a;
+        public static final int login_success=0x7f08002e;
+        public static final int login_tips=0x7f080031;
+        public static final int logout_success=0x7f080030;
+        public static final int my_distraction=0x7f080021;
+        public static final int nearby=0x7f080018;
+        public static final int nick_name=0x7f08002b;
+        public static final int phone_number=0x7f080028;
         /**  加载中提示 
          */
         public static final int picture_image_loading=0x7f080008;
@@ -386,8 +468,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  图片保存的文字 
          */
         public static final int picture_save_succeed=0x7f080012;
-        public static final int privacy_policy=0x7f08002b;
-        public static final int publish=0x7f08001e;
+        public static final int press_talk=0x7f080039;
+        public static final int privacy_policy=0x7f08002c;
+        public static final int publish=0x7f08001f;
         public static final int pull_to_refresh_footer_hint_ready=0x7f08000e;
         public static final int pull_to_refresh_header_hint_loading=0x7f08000c;
         /**  下拉刷新和上拉加载更多的文本 
@@ -405,11 +488,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pushmsg_center_pull_down_update_time=0x7f080004;
         public static final int pushmsg_center_pull_release_text=0x7f080003;
         public static final int pushmsg_center_pull_up_text=0x7f080001;
-        public static final int register=0x7f080023;
-        public static final int state_dislogin=0x7f080025;
-        public static final int state_login=0x7f080026;
-        public static final int time=0x7f08001d;
-        public static final int user_center=0x7f080019;
+        public static final int register=0x7f080024;
+        public static final int release_tip=0x7f08003c;
+        public static final int save=0x7f080038;
+        public static final int select_from_album=0x7f080037;
+        public static final int send=0x7f080033;
+        public static final int state_dislogin=0x7f080026;
+        public static final int state_login=0x7f080027;
+        public static final int stop_talk=0x7f08003a;
+        public static final int take_picture=0x7f080036;
+        public static final int time=0x7f08001e;
+        public static final int user_center=0x7f08001a;
         public static final int xsearch_loading=0x7f080006;
     }
     public static final class style {
@@ -482,7 +571,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:ptrAdapterViewBackground
+          @attr name com.enjoy.nerd:ptrAdapterViewBackground
         */
         public static final int PullToRefresh_ptrAdapterViewBackground = 16;
         /**
@@ -501,7 +590,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>flip</code></td><td>0x1</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name android:ptrAnimationStyle
+          @attr name com.enjoy.nerd:ptrAnimationStyle
         */
         public static final int PullToRefresh_ptrAnimationStyle = 12;
         /**
@@ -513,7 +602,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:ptrDrawable
+          @attr name com.enjoy.nerd:ptrDrawable
         */
         public static final int PullToRefresh_ptrDrawable = 6;
         /**
@@ -523,7 +612,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:ptrDrawableBottom
+          @attr name com.enjoy.nerd:ptrDrawableBottom
         */
         public static final int PullToRefresh_ptrDrawableBottom = 18;
         /**
@@ -535,7 +624,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:ptrDrawableEnd
+          @attr name com.enjoy.nerd:ptrDrawableEnd
         */
         public static final int PullToRefresh_ptrDrawableEnd = 8;
         /**
@@ -547,7 +636,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:ptrDrawableStart
+          @attr name com.enjoy.nerd:ptrDrawableStart
         */
         public static final int PullToRefresh_ptrDrawableStart = 7;
         /**
@@ -557,7 +646,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:ptrDrawableTop
+          @attr name com.enjoy.nerd:ptrDrawableTop
         */
         public static final int PullToRefresh_ptrDrawableTop = 17;
         /**
@@ -571,7 +660,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:ptrHeaderBackground
+          @attr name com.enjoy.nerd:ptrHeaderBackground
         */
         public static final int PullToRefresh_ptrHeaderBackground = 1;
         /**
@@ -585,7 +674,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:ptrHeaderSubTextColor
+          @attr name com.enjoy.nerd:ptrHeaderSubTextColor
         */
         public static final int PullToRefresh_ptrHeaderSubTextColor = 3;
         /**
@@ -597,7 +686,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:ptrHeaderTextAppearance
+          @attr name com.enjoy.nerd:ptrHeaderTextAppearance
         */
         public static final int PullToRefresh_ptrHeaderTextAppearance = 10;
         /**
@@ -611,7 +700,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:ptrHeaderTextColor
+          @attr name com.enjoy.nerd:ptrHeaderTextColor
         */
         public static final int PullToRefresh_ptrHeaderTextColor = 2;
         /**
@@ -628,7 +717,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
           <p>This is a private symbol.
-          @attr name android:ptrListViewExtrasEnabled
+          @attr name com.enjoy.nerd:ptrListViewExtrasEnabled
         */
         public static final int PullToRefresh_ptrListViewExtrasEnabled = 14;
         /**
@@ -652,7 +741,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>pullUpFromBottom</code></td><td>0x2</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name android:ptrMode
+          @attr name com.enjoy.nerd:ptrMode
         */
         public static final int PullToRefresh_ptrMode = 4;
         /**
@@ -665,7 +754,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
           <p>This is a private symbol.
-          @attr name android:ptrOverScroll
+          @attr name com.enjoy.nerd:ptrOverScroll
         */
         public static final int PullToRefresh_ptrOverScroll = 9;
         /**
@@ -679,7 +768,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:ptrRefreshableViewBackground
+          @attr name com.enjoy.nerd:ptrRefreshableViewBackground
         */
         public static final int PullToRefresh_ptrRefreshableViewBackground = 0;
         /**
@@ -695,7 +784,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
           <p>This is a private symbol.
-          @attr name android:ptrRotateDrawableWhilePulling
+          @attr name com.enjoy.nerd:ptrRotateDrawableWhilePulling
         */
         public static final int PullToRefresh_ptrRotateDrawableWhilePulling = 15;
         /**
@@ -708,7 +797,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
           <p>This is a private symbol.
-          @attr name android:ptrScrollingWhileRefreshingEnabled
+          @attr name com.enjoy.nerd:ptrScrollingWhileRefreshingEnabled
         */
         public static final int PullToRefresh_ptrScrollingWhileRefreshingEnabled = 13;
         /**
@@ -721,7 +810,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
           <p>This is a private symbol.
-          @attr name android:ptrShowIndicator
+          @attr name com.enjoy.nerd:ptrShowIndicator
         */
         public static final int PullToRefresh_ptrShowIndicator = 5;
         /**
@@ -733,7 +822,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:ptrSubHeaderTextAppearance
+          @attr name com.enjoy.nerd:ptrSubHeaderTextAppearance
         */
         public static final int PullToRefresh_ptrSubHeaderTextAppearance = 11;
     };

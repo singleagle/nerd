@@ -1,9 +1,12 @@
 package com.enjoy.nerd.remoterequest;
 
+import java.nio.charset.Charset;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.util.Base64;
 
 import com.enjoy.nerd.http.RequestParams;
 import com.google.gson.Gson;
@@ -65,9 +68,12 @@ public class RegisterReq  extends PostRequest<Account>{
 	@Override
 	protected void onFillRequestParams(RequestParams params) {
 		params.put("phoneno", phoneNO);
-		params.put("password", password);
+		Charset charset = Charset.forName("UTF-8");
+		byte[]  input = charset.encode(password).array();
+		params.put("password", Base64.encodeToString(input, Base64.DEFAULT));
+		
 		if(name != null){
-			params.put("name", name);
+			params.put("nickname", name);
 		}
 		
 		if(headerImgUrl != null){
@@ -78,8 +84,7 @@ public class RegisterReq  extends PostRequest<Account>{
 
 	@Override
 	protected String buidRequestUrl() {
-		// TODO Auto-generated method stub
-		return null;
+		return VENUS_BASE_URL + "/register";
 	}
 
 	@Override

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.enjoy.nerd.distraction.IMMessageListItemView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingRight="5dp"
+    android:paddingLeft="5dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+    
+    <TextView 
+        android:id="@+id/msgitem_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:background="@drawable/chat_time_bg"
+        android:layout_centerHorizontal="true"
+        android:padding="3dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        />
+    
+    <com.enjoy.nerd.view.CircularImageView
+        android:id="@+id/msgitem_headimg"
+        android:layout_below="@+id/msgitem_time"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/default_user_header" />
+
+    <FrameLayout 
+        android:id="@+id/msgitem_content_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_other_message"
+        android:layout_marginRight="5dp"
+        android:layout_below="@id/msgitem_time"
+        android:layout_toRightOf="@id/msgitem_headimg">
+	    <TextView 
+	        android:id="@+id/msgitem_textcontent"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:minHeight="30dp"
+	        android:gravity="center_vertical"
+	        android:maxWidth="220dp"
+	        />
+	    
+		 <com.enjoy.nerd.view.CircularImageView
+	        android:id="@+id/msgitem_piccontent"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:contentDescription="@string/img_common_desc"
+	        android:visibility="gone"
+	        android:maxWidth="250dp"/>
+		 
+		 <ImageView 
+		     android:id="@+id/msgitem_voicecontent"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:contentDescription="@string/img_common_desc"
+		     android:visibility="gone"
+		     android:src="@drawable/icon_voice_right"/>
+	 </FrameLayout>
+	 
+	
+    <ProgressBar 
+        android:id="@+id/msgitem_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_alignTop="@id/msgitem_content_container"
+        android:layout_toLeftOf="@id/msgitem_content_container"
+        android:visibility="gone"/>
+    
+    <ImageView 
+        android:id="@+id/msgitem_state_indicator"
+        android:contentDescription="@string/img_common_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_alignTop="@id/msgitem_content_container"
+        android:layout_toLeftOf="@id/msgitem_content_container"
+        android:src="@drawable/send_msg_fail"
+        android:visibility="visible"/>
+    
+</com.enjoy.nerd.distraction.IMMessageListItemView>

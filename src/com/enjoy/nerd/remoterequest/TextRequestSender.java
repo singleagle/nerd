@@ -29,7 +29,7 @@ public class TextRequestSender extends  TextHttpResponseHandler {
 	
 	 private static AsyncHttpClient mAsyncHttpClient = new AsyncHttpClient();
 	 private Handler mRespondHandler;
-	 RemoteRequest<?> mRemoteRequest;
+	 HttpRequest<?> mRemoteRequest;
 	 RequestHandle mRequestHandle;
 	 String mRequestUrl;
 	 RequestParams params;
@@ -41,7 +41,7 @@ public class TextRequestSender extends  TextHttpResponseHandler {
 		 params.put("deviceId", tManager.getDeviceId());
 	 }
 	 
-	 public int submitRequest(RemoteRequest<?> request){
+	 public int submitRequest(HttpRequest<?> request){
 		 mRemoteRequest = request;
 		 if(mRequestHandle != null){
 			 mRequestHandle.cancel(true);

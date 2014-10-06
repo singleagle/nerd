@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@drawable/common_color_bg">
+
+    <com.enjoy.nerd.view.PullToRefreshListView
+        android:id="@+id/chat_pull_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/chat_bottom_layout"
+        android:listSelector="@android:color/transparent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:transcriptMode="alwaysScroll"/>
+
+    <RelativeLayout 
+        android:id="@id/chat_bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+	    <LinearLayout
+	        android:id="@+id/chat_bottom_line"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/chat_bottom_bg"
+	        android:orientation="horizontal"
+	        android:gravity="center_vertical"
+	        >
+	        <ImageView
+	            android:id="@+id/chat_switch_btn"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:contentDescription="@string/img_common_desc"
+	            android:layout_gravity="center_vertical"
+	            android:layout_marginLeft="5dp"
+	            android:layout_marginRight="5dp"
+	            android:src="@drawable/selector_switch_audio"/>
+	        <RelativeLayout
+		        android:id="@+id/text_input"
+		        android:layout_width="0dip"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1">
+		        <ImageView 
+		            android:id="@+id/chat_emotion_btn"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_centerVertical="true"
+		            android:layout_alignParentRight="true"
+		            android:layout_marginLeft="5dp"
+		            android:contentDescription="@string/img_common_desc"
+		            android:src="@drawable/selector_emotion_button"/>
+		        
+		        <EditText
+		            android:id="@+id/chat_edit_text"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_toLeftOf="@id/chat_emotion_btn"
+		            android:inputType="textMultiLine"
+		            android:maxLines="4"
+		            android:singleLine="false"
+		            android:padding="5dp"
+		            android:background="@drawable/chat_edit_bg"/>
+	        </RelativeLayout>
+	        
+	        <Button 
+	            android:id="@+id/btn_talking"
+	            android:layout_width="0dip"
+	            android:layout_height="35dp"
+	            android:text="@string/press_talk"
+	            android:layout_weight="1"
+	            android:textSize="14sp" 
+	            android:textColor="#555555" 
+	            android:visibility="gone"
+	            android:background="@drawable/selector_chat_audiobtn_bg"
+	            />
+
+	        <FrameLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" >
+
+	            <ImageView
+	                android:id="@+id/chat_btn_add"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_marginLeft="5dp"
+	                android:layout_marginRight="10dp"
+	                android:contentDescription="@string/img_common_desc"
+	                android:src="@drawable/selector_chat_addbtn" />
+
+	            <Button
+	                android:id="@+id/chat_send_btn"
+	                android:layout_width="55dp"
+	                android:layout_height="40dp"
+	                android:background="@drawable/selector_btn"
+	                android:text="@string/send"
+	                android:textColor="#555555"
+	                android:textSize="14sp"
+	                android:visibility="gone" />
+	        </FrameLayout>
+
+	    </LinearLayout>
+	    
+	    <RelativeLayout 
+	        android:id="@+id/chat_bottom_fragment_host"
+	        android:layout_width="match_parent"
+	        android:layout_below="@+id/chat_bottom_line"
+	        android:visibility="gone"
+	        android:layout_height="200dp">
+	        
+	   </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

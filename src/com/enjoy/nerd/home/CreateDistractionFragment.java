@@ -6,9 +6,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.enjoy.nerd.R;
+import com.enjoy.nerd.remoterequest.Account;
 import com.enjoy.nerd.remoterequest.AddDistractionReq;
 import com.enjoy.nerd.remoterequest.RemoteRequest.FailResponseListner;
 import com.enjoy.nerd.remoterequest.RemoteRequest.SuccessResponseListner;
+import com.enjoy.nerd.usercenter.AccountManager;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -110,7 +112,7 @@ public class CreateDistractionFragment extends Fragment implements SuccessRespon
     	request.registerListener(ADD_DA_ID, this, this);
     	request.setDescription(mDescriptionView.getText().toString());
     	request.setPayType(AddDistractionReq.PAYTYPE_AA);
-    	request.setCreatUserId(123L);
+    	request.setCreatUserId(AccountManager.getInstance(getActivity()).getLoginUIN());
     	request.setType(0x10001);
     	request.setAddress("深圳市南山区西丽镇欧陆经典小区");
     	long startTime = 0;
@@ -127,7 +129,12 @@ public class CreateDistractionFragment extends Fragment implements SuccessRespon
     public boolean onOptionsItemSelected(MenuItem item) {
     	switch(item.getItemId()){
     	case MENU_ID_PUBLISH:
-    		sendAddDAReq();
+    		if(AccountManager.getInstance(getActivity()).isLogin()){
+    			sendAddDAReq();
+    		}else{
+    			Toast.makeText(getActivity(), R.string.login_tips, Toast.LENGTH_LONG).show();
+    		}
+    		
     		break;
     	
     	default:

@@ -62,7 +62,7 @@ public class NearbyDistractionReq extends GetRequest<PageDAProfile>{
 
 	@Override
 	protected String buidRequestUrl() {
-		return  VENUS_BASE_URL + "/admin/distractions";
+		return  VENUS_BASE_URL + "/sec/distractions";
 	}
 
 	@Override

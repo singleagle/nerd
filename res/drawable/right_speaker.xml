@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:apk="http://schemas.android.com/apk/res/android" apk:oneshot="false">
+    <item apk:drawable="@drawable/voice_right_anmi1" apk:duration="500" />
+    <item apk:drawable="@drawable/voice_right_anmi2" apk:duration="500" />
+    <item apk:drawable="@drawable/voice_right_anmi3" apk:duration="500" />
+</animation-list>

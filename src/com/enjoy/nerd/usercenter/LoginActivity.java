@@ -1,25 +1,31 @@
 package com.enjoy.nerd.usercenter;
 
+import java.nio.charset.Charset;
+
 import com.enjoy.nerd.R;
+import com.enjoy.nerd.remoterequest.Account;
+import com.enjoy.nerd.usercenter.AccountManager.LoginResultListner;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class LoginActivity extends Activity implements View.OnClickListener{
+public class LoginActivity extends Activity implements View.OnClickListener, LoginResultListner{
 	static public final int CODE_REGISTER = 1;
 	
 	private View mRegisterView;
 	private View mForgetPassword;
 	private Button mLoginBtn;
-	private EditText mUinView;
+	private EditText mUIDView;
 	private EditText mPasswordView;
 	
 	
@@ -27,7 +33,8 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		mUinView = (EditText) findViewById(R.id.login_uin);
+		mUIDView = (EditText) findViewById(R.id.login_uin);
+		mUIDView.setText(AccountManager.getInstance(this).getLastLoginUIN());
 		mPasswordView = (EditText) findViewById(R.id.login_password);
 		
 		mLoginBtn = (Button) findViewById(R.id.login_login_button);
@@ -45,9 +52,9 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 		if(requestCode == CODE_REGISTER){
 			long uin = data.getLongExtra(RegisterActivity.KEY_UIN, 0);
 			if(uin != 0){
-				mUinView.setText(String.valueOf(uin));
+				mUIDView.setText(String.valueOf(uin));
 			}else{
-				mUinView.setText(null);
+				mUIDView.setText(null);
 			}
 			
 		}
@@ -58,10 +65,31 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 		super.onDestroy();
 	}
 
+	void performLogin(){
+		EditText invaidateEdit = null;
+		
+		if(mUIDView.getText() == null){
+			invaidateEdit = mUIDView;
+		}else	if(mPasswordView.getText() == null){
+			invaidateEdit = mPasswordView;
+		}
+		
+		if(invaidateEdit != null){
+			Toast.makeText(this, R.string.invalidate_input, Toast.LENGTH_LONG).show();
+			invaidateEdit.requestFocus();
+		}else{
+
+			 AccountManager.getInstance(this).login(mUIDView.getText().toString(),
+					 mPasswordView.getText().toString() , this);
+		}
+	}
+	
+	
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()){
 		case R.id.login_login_button:
+			performLogin();
 			break;
 			
 		case R.id.login_register_view:
@@ -70,6 +98,18 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 			break;
 		}
 		
+	}
+
+	@Override
+	public void onSucess(Account account) {
+		Toast.makeText(this, R.string.login_success, Toast.LENGTH_LONG).show();
+		setResult(1);
+		finish();
+	}
+
+	@Override
+	public void onFailure(int error, String reason) {
+		Toast.makeText(this, getString(R.string.login_fail, error), Toast.LENGTH_LONG).show();
 	}
 
 }
