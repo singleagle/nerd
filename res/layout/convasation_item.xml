@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.enjoy.nerd.usercenter.ConversationListItemView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingRight="5dp"
+    android:paddingLeft="5dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+    
+    <ImageView
+        android:id="@+id/conv_headimg"
+        android:contentDescription="@string/img_common_desc"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/default_user_header" />
+        
+    <TextView
+        android:id="@+id/conv_subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/conv_headimg"
+        android:gravity="center_vertical"
+        android:minHeight="30dp"
+        android:text="@string/time"
+        android:textSize="20sp" />
+     
+     <TextView 
+        android:id="@+id/conv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="30dp"
+        android:gravity="center_vertical"
+        android:maxWidth="220dp"
+        android:text="@string/time"
+        android:textSize="14sp"
+        android:layout_alignBaseline="@id/conv_subject"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        />
+	    
+    <TextView 
+        android:id="@+id/conv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/time"
+        android:textSize="14sp"
+        android:layout_below="@id/conv_subject"
+        android:layout_toRightOf="@id/conv_headimg"
+        />
+		 
+	 <ImageView 
+	     android:id="@+id/conv_alert"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:contentDescription="@string/img_common_desc"
+	     android:visibility="visible"
+	     android:layout_below="@id/conv_time"
+	     android:layout_alignParentRight="true"
+	     android:src="@drawable/icon_voice_right"/>
+
+	 
+</com.enjoy.nerd.usercenter.ConversationListItemView>

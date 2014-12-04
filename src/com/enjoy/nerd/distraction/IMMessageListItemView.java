@@ -2,9 +2,11 @@ package com.enjoy.nerd.distraction;
 
 import java.util.regex.Matcher;
 
+import com.enjoy.nerd.AccountManager;
 import com.enjoy.nerd.R;
 import com.enjoy.nerd.db.IMMessage;
 import com.enjoy.nerd.utils.EmotionUtil;
+import com.enjoy.nerd.utils.LogWrapper;
 import com.enjoy.nerd.utils.RemoteFileFetcher;
 import com.enjoy.nerd.view.CircularImageView;
 
@@ -62,6 +64,9 @@ public class IMMessageListItemView extends RelativeLayout {
 
 
 	private CharSequence formatMessage(String content){
+		if(content == null){
+			return " ";
+		}
 		Matcher matcher = EmotionUtil.pattern.matcher(content);
 		SpannableString spannableString = new SpannableString(content);
 		while(matcher.find()){
@@ -69,7 +74,7 @@ public class IMMessageListItemView extends RelativeLayout {
 			int end = matcher.end();
 			String subStr = content.substring(start, end);
 			Bitmap bitmap = EmotionUtil.getBitmapFromAssets(getContext().getAssets(), subStr);
-			if(bitmap != null){
+			if(bitmap != null){ 
 				ImageSpan imageSpan = new ImageSpan(getContext(), bitmap);
 				spannableString.setSpan(imageSpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
@@ -128,7 +133,7 @@ public class IMMessageListItemView extends RelativeLayout {
 	
 	
 	private void setVoiceImgState(ImageView voiceImg, boolean playing){
-		boolean incoming = mIMMessage.isIncomingMsg();
+		boolean incoming = mIMMessage.isIncomingMsg(AccountManager.getInstance(getContext()).getLoginUIN());
 		if(playing){
 			if(incoming){
 				voiceImg.setImageResource(R.drawable.right_speaker);

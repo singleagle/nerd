@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">宅基地</string>
+    <string name="app_name">乐聚</string>
     <string name="img_common_desc">nerd</string>
     <string name="nearby">附近</string>
     <string name="create_distraction">创建活动</string>
@@ -12,6 +12,7 @@
     <string name="distance_meters">%s米</string>
     <string name="my_distraction">我创建的活动</string>
     <string name="join_distraction">我参加的活动</string>
+    <string name="msg_list">消息列表</string>
     
     <string name="login">登录</string>
     <string name="register">注册</string>
@@ -40,5 +41,8 @@
     <string name="stop_talk">松开停止</string>
     <string name="flip_up_tip">手指上滑，取消发送</string>
     <string name="release_tip">松开手指，取消发送</string>
+    
+    <string name="datype_name_hint">类型名称</string>
+    <string name="submint">提交</string>
     
 </resources>

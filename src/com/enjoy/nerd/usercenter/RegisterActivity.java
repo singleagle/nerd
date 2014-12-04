@@ -52,7 +52,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
 	}
 
 	private void submitRegisterInfo(){
-		OpenfireRegisterReq request = new OpenfireRegisterReq(this);
+		RegisterReq request = new RegisterReq(this);
 		request.setPhoneNO(mPhoneNOView.getText().toString());
 		String password = mPasswordView.getText().toString();
 		request.setPassword(password);

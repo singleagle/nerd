@@ -1,13 +1,17 @@
 package com.enjoy.nerd.distraction;
 
 
+import com.enjoy.nerd.AccountManager;
 import com.enjoy.nerd.R;
+import com.enjoy.nerd.db.IMConversation;
 import com.enjoy.nerd.db.IMMessage;
+import com.enjoy.nerd.db.IMMessageManager;
 import com.enjoy.nerd.distraction.MsgItemAdapter.ContentObserver;
 import com.enjoy.nerd.remoterequest.RemoteRequest.FailResponseListner;
 import com.enjoy.nerd.remoterequest.RemoteRequest.SuccessResponseListner;
 import com.enjoy.nerd.remoterequest.xmpp.IMMessageSendReq;
-import com.enjoy.nerd.usercenter.AccountManager;
+import com.enjoy.nerd.usercenter.ConversationAdapter;
+import com.enjoy.nerd.utils.LogWrapper;
 import com.enjoy.nerd.view.PullToRefreshBase;
 import com.enjoy.nerd.view.PullToRefreshBase.OnRefreshListener;
 import com.enjoy.nerd.view.PullToRefreshListView;
@@ -33,9 +37,14 @@ import android.widget.Toast;
 
 public class ChatActivity extends Activity implements OnRefreshListener<ListView>,
 								View.OnClickListener, ContentObserver{
+	public static final String TAG = "ChatAcitivty";
+	
 	private static final int REQID_SEND_CHAT = 1;
 	
-	long mDACreator;
+	public static final String KEY_RECIPIENT_ID ="recipient_id";
+	public static final String KEY_CONVERSATION_ID ="conversation_id";
+	
+	private IMConversation mConversation;
 	private ImageView emotionView;
 	private ImageView addView;
 	private ImageView chatModeSwitcher;	
@@ -45,22 +54,33 @@ public class ChatActivity extends Activity implements OnRefreshListener<ListView
 	private MsgItemAdapter mMsgItemAdapter;
 	private String mChatTag;
 	private VoicePlayer mVoicePlayer;
+	private Cursor mIMMsgCursor;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chat);
-		mDACreator = getIntent().getLongExtra(DistractionDetailActivity.KEY_DA_CREATOR_UID, 0);
+
+		int cid = getIntent().getIntExtra(KEY_CONVERSATION_ID, -1);
+
+		if(cid != -1){
+			mConversation = IMMessageManager.getIMConversation(getContentResolver(), cid);
+		}else{
+			String recipient  = getIntent().getStringExtra(KEY_RECIPIENT_ID);
+			if(recipient != null){
+				mConversation = IMMessageManager.getIMConversation(getContentResolver(), recipient, true);
+			}else{
+				LogWrapper.e(TAG, "no recipient id!!");
+				finish();
+				return;
+			}
+		}
+		getActionBar().setTitle(mConversation.getSubject());
 		mVoicePlayer = new VoicePlayer(this);
 		initView();
 	}
+
 	
-	private Cursor getIMMessageCursor(){
-		String owner = AccountManager.getInstance(this).getLastLoginUIN();
-		return getContentResolver().query(IMMessage.Columns.CONTENT_URI, IMMessage.Columns.IMMESSAGE_QUERY_COLUMNS, 
-				IMMessage.Columns.WHERE_GROUP, new String []{owner, String.valueOf(mDACreator)}, IMMessage.Columns.DEFAULT_SORT_ORDER);
-		
-	}
 	
 	private void initView(){
 		chatTextView = (EditText) findViewById(R.id.chat_edit_text);
@@ -92,8 +112,11 @@ public class ChatActivity extends Activity implements OnRefreshListener<ListView
 		pullListView.setOnRefreshListener(this);
 		pullListView.setPullLoadEnabled(true);
 		mChatListView = pullListView.getRefreshableView();
-		Cursor cursor = getIMMessageCursor();
-		mMsgItemAdapter = new MsgItemAdapter(this, cursor, mVoicePlayer);
+		mIMMsgCursor = getContentResolver().query(IMMessage.Columns.CONTENT_URI, IMMessage.Columns.IMMESSAGE_QUERY_COLUMNS, 
+				IMMessage.Columns.WHERE_CONVERSATION, new String []{String.valueOf(mConversation.getId())},
+				IMMessage.Columns.DEFAULT_SORT_ORDER);
+
+		mMsgItemAdapter = new MsgItemAdapter(this, mIMMsgCursor, mVoicePlayer);
 		mMsgItemAdapter.registerContentObserver(this);
 		mChatListView.setAdapter(mMsgItemAdapter);
 		mChatListView.setStackFromBottom(true);
@@ -119,15 +142,17 @@ public class ChatActivity extends Activity implements OnRefreshListener<ListView
 		
 	}
 
+	
 	private void sendChat(String content){
 		IMMessageSendReq sendReq = new IMMessageSendReq(this);
-		sendReq.setUid(String.valueOf(mDACreator));
+		sendReq.setRecipientUid(mConversation.getRecipient());
 		sendReq.setTextContent(content);
 		sendReq.setChatTag(mChatTag);
 		sendReq.setCreateTime(System.currentTimeMillis());
-		IMMessage imMsg = new IMMessage(sendReq, AccountManager.getInstance(this).getLoginUIN());
-		ContentValues contentValues = imMsg.createContentValues();
-		Uri contentUri = getContentResolver().insert(IMMessage.Columns.CONTENT_URI, contentValues);
+		
+		Uri contentUri = IMMessageManager.addMessage(getContentResolver(), sendReq, mConversation, 
+				AccountManager.getInstance(this).getLoginUIN());
+		
 		ChatMsgSendResultListner listner = new ChatMsgSendResultListner(contentUri);
 		sendReq.registerListener(REQID_SEND_CHAT, listner, listner);
 		sendReq.submit();
@@ -148,7 +173,7 @@ public class ChatActivity extends Activity implements OnRefreshListener<ListView
 	
 	@Override
 	public void notifyContentChanged() {
-		mMsgItemAdapter.swapCursor(getIMMessageCursor());
+		mMsgItemAdapter.changeCursor(mIMMsgCursor);
 	}
 	
 

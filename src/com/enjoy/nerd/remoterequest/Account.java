@@ -12,7 +12,6 @@ public class Account  {
 	String phoneNO;
 	String password;
 	String accessToken;
-	
 	int sexType; 
 	
 	public Account() {

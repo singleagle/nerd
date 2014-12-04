@@ -12,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.zip.CRC32;
 
 
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
@@ -49,6 +50,9 @@ public class FileUtil {
     	return buffer.toString();
     }
     
+    public static String getFriendAvatarDir(){
+    	return FileUtil.getAppExtDir() + "/avatar/";
+    }
     /**
      * 
      * @param url

@@ -115,8 +115,8 @@ public  class AddDistractionReq extends PostRequest<String>{
 	}
 
 	@Override
-	protected String parse(Gson gson, JSONObject response)throws JSONException {
-		return response.getString("_id");
+	protected String parse(Gson gson, String response)throws JSONException {
+		return new JSONObject(response).getString("_id");
 	}
 
 

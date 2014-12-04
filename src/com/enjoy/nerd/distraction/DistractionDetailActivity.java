@@ -42,7 +42,7 @@ public class DistractionDetailActivity extends Activity implements View.OnClickL
 		switch(v.getId()){
 		case R.id.create_chat:
 			Intent intent = new Intent(this, ChatActivity.class);
-			intent.putExtra(KEY_DA_CREATOR_UID, mUId);
+			intent.putExtra(ChatActivity.KEY_RECIPIENT_ID, String.valueOf(mUId));
 			startActivity(intent);
 			break;
 			

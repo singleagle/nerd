@@ -17,17 +17,24 @@ import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smackx.OfflineMessageManager;
 import org.jivesoftware.smackx.packet.DelayInfo;
 
+import com.enjoy.nerd.AccountManager;
 import com.enjoy.nerd.NerdApp;
+import com.enjoy.nerd.db.IMConversation;
 import com.enjoy.nerd.db.IMMessage;
-import com.enjoy.nerd.usercenter.AccountManager;
+import com.enjoy.nerd.db.IMConversation.Columns;
+import com.enjoy.nerd.db.IMMessageManager;
+import com.enjoy.nerd.utils.LogWrapper;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.IBinder;
 
 
@@ -38,6 +45,8 @@ import android.os.IBinder;
  * @author tangwh
  */
 public class IMMessageRecieverService extends Service implements ChatManagerListener {
+	private static final String TAG = "IMMessageRecieverService";
+	
 	private NotificationManager notificationManager;
 	private ChatManager mChatManager;
 	private OfflineMessageManager mOfflineMessageManager;
@@ -78,24 +87,16 @@ public class IMMessageRecieverService extends Service implements ChatManagerList
 	}
 
 
-	private void saveRecivedChatMsg(Message message, boolean fromGroup){
-		IMMessage imMsg = new IMMessage(message, AccountManager.getInstance(this).getLoginUIN(), fromGroup);
-		ContentValues content = imMsg.createContentValues();
-		getContentResolver().insert(IMMessage.Columns.CONTENT_URI, content);
-	}
-	
+
 
 	@Override
 	public void chatCreated(Chat chat, final  boolean createdLocally) {
-		
 		chat.addMessageListener(new MessageListener(){
-			boolean mFromOther = !createdLocally;
-			
+
 			@Override
 			public void processMessage(Chat chat, Message message) {
-				if(mFromOther){
-					saveRecivedChatMsg(message, false);
-				}
+				LogWrapper.d(TAG, "recieve msg:" + message.getBody());
+				IMMessageManager.addMessage(getContentResolver(), message);
 			}
 			
 		});

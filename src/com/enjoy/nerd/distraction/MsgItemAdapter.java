@@ -1,5 +1,6 @@
 package com.enjoy.nerd.distraction;
 
+import com.enjoy.nerd.AccountManager;
 import com.enjoy.nerd.R;
 import com.enjoy.nerd.db.IMMessage;
 
@@ -49,9 +50,14 @@ public class MsgItemAdapter extends CursorAdapter {
 
 	private boolean isIncomingMsg(Cursor cursor){
 		IMMessage immsg = new IMMessage(cursor);
-		return immsg.isIncomingMsg();
+		return immsg.isIncomingMsg(AccountManager.getInstance(mContext).getLoginUIN());
 	}
 	
+	@Override
+	public int getViewTypeCount() {
+		return 2;
+	}
+
 	@Override
 	public int getItemViewType(int position) {
 		boolean isIncoming = isIncomingMsg((Cursor)getItem(position));

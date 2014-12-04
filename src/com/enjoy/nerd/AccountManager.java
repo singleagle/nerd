@@ -1,6 +1,5 @@
-package com.enjoy.nerd.usercenter;
+package com.enjoy.nerd;
 
-import com.enjoy.nerd.NerdApp;
 import com.enjoy.nerd.remoterequest.Account;
 import com.enjoy.nerd.remoterequest.RemoteRequest.FailResponseListner;
 import com.enjoy.nerd.remoterequest.RemoteRequest.SuccessResponseListner;

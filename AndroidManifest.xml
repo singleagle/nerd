@@ -52,6 +52,20 @@
        <activity
             android:name=".usercenter.RegisterActivity"
             android:screenOrientation="portrait" />
+       
+       <activity
+            android:name=".usercenter.ConversationListActivity"
+            android:screenOrientation="portrait" />
+       
+       
+       <activity
+            android:name=".distraction.DATypeSelectActivity"
+            android:screenOrientation="portrait" />
+              
+       <activity
+            android:name=".distraction.AddDATypeActivity"
+            android:screenOrientation="portrait" />
+       
        <service 
            android:name=".remoterequest.xmpp.IMMessageRecieverService"
            android:exported = "false"/>

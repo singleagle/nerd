@@ -66,8 +66,8 @@ public class NearbyDistractionReq extends GetRequest<PageDAProfile>{
 	}
 
 	@Override
-	protected PageDAProfile parse(Gson gson, JSONObject response) throws JSONException {
-		return gson.fromJson(response.toString(), PageDAProfile.class);
+	protected PageDAProfile parse(Gson gson, String response) throws JSONException {
+		return gson.fromJson(response, PageDAProfile.class);
 	}
 	
 }

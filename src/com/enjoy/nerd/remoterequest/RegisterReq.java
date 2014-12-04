@@ -68,10 +68,7 @@ public class RegisterReq  extends PostRequest<Account>{
 	@Override
 	protected void onFillRequestParams(RequestParams params) {
 		params.put("phoneno", phoneNO);
-		Charset charset = Charset.forName("UTF-8");
-		byte[]  input = charset.encode(password).array();
-		params.put("password", Base64.encodeToString(input, Base64.DEFAULT));
-		
+		params.put("password", Encryptor.encode(password));
 		if(name != null){
 			params.put("nickname", name);
 		}
@@ -88,9 +85,9 @@ public class RegisterReq  extends PostRequest<Account>{
 	}
 
 	@Override
-	protected Account parse(Gson gson, JSONObject response)
+	protected Account parse(Gson gson, String response)
 			throws JSONException {
-		return gson.fromJson(response.toString(), Account.class);
+		return gson.fromJson(response, Account.class);
 	}
 	
 }

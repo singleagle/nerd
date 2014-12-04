@@ -6,6 +6,8 @@
 .metadata
 bin/
 tmp/
+src/org/
+gen/
 *.tmp
 *.bak
 *.swp

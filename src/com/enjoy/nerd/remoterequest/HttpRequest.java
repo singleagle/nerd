@@ -16,7 +16,7 @@ import android.content.Context;
 abstract public class HttpRequest<T> extends RemoteRequest<T> {
 	static private final String TAG = "RemoteRequest";
 	
-	static public final String VENUS_BASE_URL = "http://192.168.1.5:8080/venus/rest";
+	static public final String VENUS_BASE_URL ="http://120.24.208.105:8080/venus/rest";
 	protected final TextRequestSender mSender;
 
 	
@@ -51,7 +51,8 @@ abstract public class HttpRequest<T> extends RemoteRequest<T> {
 				//gsonBuilder.excludeFieldsWithoutExposeAnnotation();
  
 			    Gson gson = gsonBuilder.create();
-				T data = parse(gson, jsonData.getJSONObject("body"));
+			    JSONObject body = jsonData.getJSONObject("body");
+				T data = parse(gson, body.toString());
 				if(data != null){
 					error = 0;
 					if(mSuccessListner != null){
@@ -89,7 +90,7 @@ abstract public class HttpRequest<T> extends RemoteRequest<T> {
 	
 	abstract protected String methond();
 	
-	abstract protected T parse(Gson gson, JSONObject response) throws JSONException;
+	abstract protected T parse(Gson gson, String response) throws JSONException;
 
 	
 }

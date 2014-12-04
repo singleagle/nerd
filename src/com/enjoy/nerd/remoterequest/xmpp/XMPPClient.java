@@ -1,9 +1,12 @@
 package com.enjoy.nerd.remoterequest.xmpp;
 
+import org.jivesoftware.smack.BOSHConfiguration;
+import org.jivesoftware.smack.BOSHConnection;
 import org.jivesoftware.smack.Connection;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.ReconnectionManager;
 import org.jivesoftware.smack.Roster;
+import org.jivesoftware.smack.SmackConfiguration;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.XMPPError;
@@ -41,9 +44,10 @@ import android.os.HandlerThread;
 import android.util.Log;
 
 public class XMPPClient {
-	private static final String XMPPSERVER = "192.168.1.5";
+	private static final String XMPPSERVER = "120.24.208.105";//"192.168.1.5";
+	private static final boolean USE_BOSH = false;
 	
-	XMPPConnection mConnection;
+	Connection mConnection;
 	Context mContext;
 	HandlerThread mTransferThread;
 	Handler mTransferHandler;
@@ -60,16 +64,28 @@ public class XMPPClient {
 	            e.printStackTrace();
 	    }
 		//ReconnectionManager reconnectionManager =  new ReconnectionManager(mConnection);
+		ConnectionConfiguration config;
+		if(USE_BOSH){
+			config = new BOSHConfiguration(XMPPSERVER);
+		}else{
+			config = new ConnectionConfiguration(XMPPSERVER, 5222, "enjoy.com");
+		}
 		
-		ConnectionConfiguration config = new ConnectionConfiguration(XMPPSERVER, 5222, "enjoy.com");
 		config.setSendPresence(true);
 		config.setReconnectionAllowed(true);
 		config.setDebuggerEnabled(true);
+		config.setSASLAuthenticationEnabled(false);
+		SmackConfiguration.setPacketReplyTimeout(10*60*1000);
 		// 允许登陆成功后更新在线状态
-		config.setSendPresence(true);
+		
+		if(USE_BOSH){
+			mConnection = new BOSHConnection((BOSHConfiguration)config);
+		}else{
+			mConnection = new XMPPConnection(config);		
+		}
 		// 收到好友邀请后manual表示需要经过同意,accept_all表示不经同意自动为好友
 		Roster.setDefaultSubscriptionMode(Roster.SubscriptionMode.accept_all);
-		mConnection = new XMPPConnection(config);
+		
 		mConnection.getChatManager();
 		Connection.DEBUG_ENABLED = true;
 		initPacketParser();

@@ -3,8 +3,8 @@ package com.enjoy.nerd.db;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smackx.packet.DelayInfo;
 
+import com.enjoy.nerd.AccountManager;
 import com.enjoy.nerd.remoterequest.xmpp.IMMessageSendReq;
-import com.enjoy.nerd.usercenter.AccountManager;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -30,10 +30,8 @@ public class IMMessage {
 	public static final int RCV_STATE_READ = 2;
 	
 	private int mId;
-	private long mOwner;
+	private int mConversationId;
 	private String mSender;
-	private String mRecipient;
-	private String mGroup;
 	private int mType;
 	private String mContent;
 	private int mSendState;
@@ -43,10 +41,8 @@ public class IMMessage {
 	
 	public IMMessage(Cursor cursor){
 		mId = cursor.getInt(Columns.IMMESSAGE_ID_INDEX);
-		mOwner = cursor.getLong(Columns.IMMESSAGE_OWNER_INDEX);
+		mConversationId = cursor.getInt(Columns.IMMESSAGE_CID_INDEX);
 		mSender = cursor.getString(Columns.IMMESSAGE_SENDER_INDEX);
-		mRecipient = cursor.getString(Columns.IMMESSAGE_RECIPIENT_INDEX);
-		mGroup = cursor.getString(Columns.IMMESSAGE_GROUP_INDEX);
 		mType = cursor.getShort(Columns.IMMESSAGE_TYPE_INDEX);
 		mContent = cursor.getString(Columns.IMMESSAGE_CONTENT_INDEX);
 		mSendState = cursor.getShort(Columns.IMMESSAGE_SEND_STATE_INDEX);
@@ -54,18 +50,16 @@ public class IMMessage {
 		mCreateTime = cursor.getLong(Columns.IMMESSAGE_CREATETIME_INDEX);
 	}
 	
-	public IMMessage(Message recieveMessage, long owner, boolean fromGroup){
+	public IMMessage(Message recieveMessage, int conversationId, boolean fromGroup){
 		mId = -1;
-		mOwner =  owner;
+		mConversationId = conversationId;
+		
 		if(fromGroup){
 			mSender = recieveMessage.getFrom().split("/")[1];
-			mGroup =  recieveMessage.getFrom().split("@")[0];;
 		}else{
 			mSender = recieveMessage.getFrom().split("@")[0];
-			mGroup =  mSender;
 		}
 		
-		mRecipient = String.valueOf(owner);
 		String typeValue = (String)recieveMessage.getProperty(PROP_TYPE);
 		mType = TYPE_TEXT;
 		if(typeValue != null){
@@ -89,19 +83,15 @@ public class IMMessage {
          }
          if (timestamp != null){ 
              mCreateTime = timestamp.getStamp().getTime(); 
-         }else if(recieveMessage.getProperty(PROP_TIME) != null){
-        	 mCreateTime = Long.valueOf((String)recieveMessage.getProperty(PROP_TIME));
          }else{  
         	 mCreateTime = System.currentTimeMillis(); 
          }
 	}
 	
-	public IMMessage(IMMessageSendReq sendRequest, long owner){
+	public IMMessage(IMMessageSendReq sendRequest, long sender, int cid){
 		mId = -1;
-		mOwner = owner;
-		mSender = String.valueOf(owner);
-		mRecipient = sendRequest.getUid();
-		mGroup = mRecipient;
+		mConversationId = cid;
+		mSender = String.valueOf(sender);
 		mType = sendRequest.getMsgType();
 		mContent = sendRequest.getTextContent();
 		mSendState = SEND_STATE_SENDING;
@@ -110,12 +100,10 @@ public class IMMessage {
 	}
 	
 	public ContentValues createContentValues(){
-		ContentValues content = new ContentValues();
+		ContentValues content = new ContentValues(7);
 		
-		content.put(IMMessage.Columns.OWNER, mOwner);
+		content.put(IMMessage.Columns.CID, mConversationId);
 		content.put(IMMessage.Columns.SENDER, mSender);
-		content.put(IMMessage.Columns.RECIPIENT, mRecipient);
-		content.put(IMMessage.Columns.GROUP, mGroup);
 		content.put(IMMessage.Columns.TYPE, mType);
 		content.put(IMMessage.Columns.CONTENT, mContent);
 		content.put(IMMessage.Columns.SEND_STATE, mSendState);
@@ -125,8 +113,8 @@ public class IMMessage {
 		return content;
 	}
 	
-	public boolean isIncomingMsg(){
-		String ownerStr = String.valueOf(mOwner);
+	public boolean isIncomingMsg(long loginUser){
+		String ownerStr = String.valueOf(loginUser);
 		return ownerStr.equals(mSender);
 	}
 	
@@ -134,21 +122,10 @@ public class IMMessage {
 		return mId;
 	}
 
-	public long getOwner() {
-		return mOwner;
-	}
-
 	public String getSender() {
 		return mSender;
 	}
 
-	public String getRecipient() {
-		return mRecipient;
-	}
-
-	public String getGroup() {
-		return mGroup;
-	}
 
 	public int getType() {
 		return mType;
@@ -170,16 +147,11 @@ public class IMMessage {
 		return mCreateTime;
 	}
 
-
-
 	public static class Columns implements BaseColumns {
 	    public static final Uri CONTENT_URI = Uri.parse("content://com.enjoy.nerd/immessages");
 	    
-	    
-	    public static final String OWNER = "owner";
+	    public static final String CID = "cid";
 	    public static final String SENDER = "sender";
-	    public static final String RECIPIENT = "recipient";
-	    public static final String GROUP = "group_name";
 	    public static final String TYPE = "type";
 	    public static final String CONTENT = "content";	  
 	    public static final String SEND_STATE = "send_state";
@@ -189,19 +161,18 @@ public class IMMessage {
         public static final String DEFAULT_SORT_ORDER = CREATETIME + " ASC";
         
         public static final String[] IMMESSAGE_QUERY_COLUMNS = {
-            _ID, OWNER, SENDER, RECIPIENT, GROUP, TYPE, CONTENT, SEND_STATE, RCV_STATE, CREATETIME
+            _ID, CID, SENDER, TYPE, CONTENT, SEND_STATE, RCV_STATE, CREATETIME
         };
         
-        public static final String  WHERE_GROUP = OWNER + "=? and " + GROUP + "=?";
-	    public static final int IMMESSAGE_ID_INDEX = 0;
-	    public static final int IMMESSAGE_OWNER_INDEX = 1;
+        public static final String WHERE_CONVERSATION = CID + "=?";
+
+        public static final int IMMESSAGE_ID_INDEX = 0;
+	    public static final int IMMESSAGE_CID_INDEX = 1;
 	    public static final int IMMESSAGE_SENDER_INDEX = 2;
-	    public static final int IMMESSAGE_RECIPIENT_INDEX = 3;
-	    public static final int IMMESSAGE_GROUP_INDEX = 4;
-	    public static final int IMMESSAGE_TYPE_INDEX = 5;
-	    public static final int IMMESSAGE_CONTENT_INDEX = 6;
-	    public static final int IMMESSAGE_SEND_STATE_INDEX = 7;
-	    public static final int IMMESSAGE_RCV_STATE_INDEX = 8;
-	    public static final int IMMESSAGE_CREATETIME_INDEX = 9;
+	    public static final int IMMESSAGE_TYPE_INDEX = 3;
+	    public static final int IMMESSAGE_CONTENT_INDEX = 4;
+	    public static final int IMMESSAGE_SEND_STATE_INDEX = 5;
+	    public static final int IMMESSAGE_RCV_STATE_INDEX = 6;
+	    public static final int IMMESSAGE_CREATETIME_INDEX = 7;
 	}
 }

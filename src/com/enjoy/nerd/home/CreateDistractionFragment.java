@@ -5,18 +5,21 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.enjoy.nerd.AccountManager;
 import com.enjoy.nerd.R;
+import com.enjoy.nerd.distraction.DATypeSelectActivity;
 import com.enjoy.nerd.remoterequest.Account;
 import com.enjoy.nerd.remoterequest.AddDistractionReq;
+import com.enjoy.nerd.remoterequest.DATypeReq.DAType;
 import com.enjoy.nerd.remoterequest.RemoteRequest.FailResponseListner;
 import com.enjoy.nerd.remoterequest.RemoteRequest.SuccessResponseListner;
-import com.enjoy.nerd.usercenter.AccountManager;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -35,13 +38,18 @@ public class CreateDistractionFragment extends Fragment implements SuccessRespon
 								View.OnClickListener, OnDateSetListener{
 	static private final int MENU_ID_PUBLISH = 0;
 	
-	static private final int ADD_DA_ID = 0;
+	static private final int ADD_DA_ID = 1;
+	
+	static private final int REQ_CODE_SELECT_DATYPE = 1;
 	
 	private TextView mTimeView;
-	private TextView mDestinationView;
+	private EditText mDestinationView;
+	private View     mDATypeContainer;
 	private TextView mDATypeView;
 	private EditText mDescriptionView;
-	DatePickerDialog mDatePickerDialog;
+	private DatePickerDialog mDatePickerDialog;
+	private DAType  mSelectedType;
+	
 	private final SimpleDateFormat DATAFORMAT = new SimpleDateFormat("yy-MM-dd");
 	
 	@Override
@@ -55,13 +63,13 @@ public class CreateDistractionFragment extends Fragment implements SuccessRespon
             Bundle savedInstanceState) {
     	View view = inflater.inflate(R.layout.create_distraction, container, false);
     	mDescriptionView = (EditText)view.findViewById(R.id.description);
+    	mDATypeContainer = view.findViewById(R.id.type_container);
+    	mDATypeContainer.setOnClickListener(this);
     	mDATypeView = (TextView)view.findViewById(R.id.type);
-    	mDATypeView.setOnClickListener(this);
     	mTimeView = (TextView)view.findViewById(R.id.time);
     	mTimeView.setText(DATAFORMAT.format(Calendar.getInstance().getTime()));
     	mTimeView.setOnClickListener(this);
-    	mDestinationView = (TextView)view.findViewById(R.id.destination);
-    	mDestinationView.setOnClickListener(this);
+    	mDestinationView = (EditText)view.findViewById(R.id.destination);
 		getActivity().getActionBar().setTitle(R.string.create_distraction);
     	return view;
     }
@@ -86,12 +94,27 @@ public class CreateDistractionFragment extends Fragment implements SuccessRespon
             mDatePickerDialog.show();
 			break;
 			
+		case R.id.type_container:
+			Intent intent = new Intent(getActivity(), DATypeSelectActivity.class);
+			startActivityForResult(intent, REQ_CODE_SELECT_DATYPE);
+			
+			break;
+			
 		default:
 			break;
 		}
 		
 	}
 
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(REQ_CODE_SELECT_DATYPE == requestCode && resultCode == Activity.RESULT_OK){
+			mSelectedType = data.getParcelableExtra(DATypeSelectActivity.DATYPE);
+			if(mSelectedType != null){
+				mDATypeView.setText(mSelectedType.getSubTypeName());
+			}
+		}
+	}
 
 	@Override
 	public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -113,8 +136,12 @@ public class CreateDistractionFragment extends Fragment implements SuccessRespon
     	request.setDescription(mDescriptionView.getText().toString());
     	request.setPayType(AddDistractionReq.PAYTYPE_AA);
     	request.setCreatUserId(AccountManager.getInstance(getActivity()).getLoginUIN());
-    	request.setType(0x10001);
-    	request.setAddress("深圳市南山区西丽镇欧陆经典小区");
+    	request.setType(mSelectedType.getTypeId());
+    	
+    	if(mDestinationView.getText() != null){
+    		request.setAddress(mDestinationView.getText().toString());
+    	}
+    	
     	long startTime = 0;
 		try {
 			startTime = DATAFORMAT.parse(mTimeView.getText().toString()).getTime();
@@ -129,10 +156,12 @@ public class CreateDistractionFragment extends Fragment implements SuccessRespon
     public boolean onOptionsItemSelected(MenuItem item) {
     	switch(item.getItemId()){
     	case MENU_ID_PUBLISH:
-    		if(AccountManager.getInstance(getActivity()).isLogin()){
-    			sendAddDAReq();
-    		}else{
+    		if(!AccountManager.getInstance(getActivity()).isLogin()){
     			Toast.makeText(getActivity(), R.string.login_tips, Toast.LENGTH_LONG).show();
+    		}else if(mSelectedType == null || mDescriptionView.getText() == null){
+    			Toast.makeText(getActivity(), R.string.invalidate_input, Toast.LENGTH_LONG).show();
+    		}else{
+    			sendAddDAReq();
     		}
     		
     		break;

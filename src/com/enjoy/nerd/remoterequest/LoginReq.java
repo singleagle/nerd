@@ -47,9 +47,7 @@ public class LoginReq  extends PostRequest<Account>{
 	@Override
 	protected void onFillRequestParams(RequestParams params) {
 		params.put("uid", uid);
-		Charset charset = Charset.forName("UTF-8");
-		byte[]  input = charset.encode(password).array();
-		params.put("password", Base64.encodeToString(input, Base64.DEFAULT));
+		params.put("password", Encryptor.encode(password));
 	}
 
 	@Override
@@ -58,9 +56,9 @@ public class LoginReq  extends PostRequest<Account>{
 	}
 
 	@Override
-	protected Account parse(Gson gson, JSONObject response)
+	protected Account parse(Gson gson, String response)
 			throws JSONException {
-		return gson.fromJson(response.toString(), Account.class);
+		return gson.fromJson(response, Account.class);
 	}
 	
 }

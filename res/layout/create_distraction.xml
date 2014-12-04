@@ -23,26 +23,45 @@
         android:textColorHint="@color/input_hint"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/type"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:drawableRight="@drawable/selector_arrow_right"
-        android:gravity="center_vertical"
-        android:text="@string/distraction_type"
-        android:textSize="16sp" />
+    
+	    <LinearLayout
+	        android:id="@+id/type_container"
+	        android:layout_width="match_parent"
+	        android:layout_height="30dp"
+	        android:layout_marginTop="20dp"
+	        android:background="@color/white"
+	        android:gravity="center_vertical"
+	        android:orientation="horizontal" >
+	        
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:text="@string/distraction_type"
+		        android:textSize="16sp" />
+		
+		    <TextView
+		        android:id="@+id/type"
+		        android:layout_width="0dp"
+		        android:layout_height="match_parent"
+		        android:layout_weight="1"
+		        android:gravity="right"
+		        android:drawableRight="@drawable/selector_arrow_right"
+		        android:textSize="16sp" />
+		    
+		    </LinearLayout>
 
-    <TextView
+    <EditText
         android:id="@+id/destination"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
         android:background="@color/white"
-        android:drawableRight="@drawable/selector_arrow_right"
         android:gravity="center_vertical"
-        android:text="@string/destination"
+        android:inputType="text"
+        android:singleLine="true"
+        android:hint="@string/destination"
+        android:textColor="@android:color/black"
+        android:textColorHint="@color/input_hint"
         android:textSize="16sp" />
 
     <LinearLayout

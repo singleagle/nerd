@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 
 public class IMMessageSendReq  extends XMPPRequest<String>{
 	private String textContent; 
-	private String uid;
+	private String recipientUid;
 	private String chatTag;
 	private int    msgType;
 	private long  createTime;
@@ -38,12 +38,12 @@ public class IMMessageSendReq  extends XMPPRequest<String>{
 	}
 	
 
-	public String getUid() {
-		return uid;
+	public String getRecipientUid() {
+		return recipientUid;
 	}
 
-	public void setUid(String uid) {
-		this.uid = uid;
+	public void setRecipientUid(String recipientUid) {
+		this.recipientUid = recipientUid;
 	}
 
 	public String getChatTag() {
@@ -79,7 +79,7 @@ public class IMMessageSendReq  extends XMPPRequest<String>{
 	@Override
 	protected Object handleSendAction(Connection connection) throws XMPPException {
 		ChatManager manager = connection.getChatManager();
-		String jid = uid + "@" + connection.getServiceName() + "/Smack";
+		String jid = recipientUid + "@" + connection.getServiceName() + "/Smack";
 		Chat chat = manager.getThreadChat(chatTag);
 		if(chat == null){
 			chat = manager.createChat(jid, null);

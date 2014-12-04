@@ -1,7 +1,8 @@
 package com.enjoy.nerd.home;
 
+import com.enjoy.nerd.AccountManager;
 import com.enjoy.nerd.R;
-import com.enjoy.nerd.usercenter.AccountManager;
+import com.enjoy.nerd.usercenter.ConversationListActivity;
 import com.enjoy.nerd.usercenter.LoginActivity;
 
 import android.app.Activity;
@@ -32,6 +33,8 @@ public class UserCenterFragment extends Fragment implements View.OnClickListener
     		mNickView.setText(mAccountManager.getLoginUserName());
     	}
     	mNickView.setOnClickListener(this);
+    	TextView convView = (TextView)view.findViewById(R.id.my_conversation);
+    	convView.setOnClickListener(this);
     	return view;
     }
 
@@ -64,6 +67,11 @@ public class UserCenterFragment extends Fragment implements View.OnClickListener
 			}else{
 				startLoginActivity();
 			}
+			break;
+		
+		case R.id.my_conversation:
+			Intent intent = new Intent(getActivity(), ConversationListActivity.class);
+			startActivity(intent);
 			break;
 			
 		default:

@@ -2,9 +2,10 @@ package com.enjoy.nerd.usercenter;
 
 import java.nio.charset.Charset;
 
+import com.enjoy.nerd.AccountManager;
 import com.enjoy.nerd.R;
+import com.enjoy.nerd.AccountManager.LoginResultListner;
 import com.enjoy.nerd.remoterequest.Account;
-import com.enjoy.nerd.usercenter.AccountManager.LoginResultListner;
 
 import android.app.Activity;
 import android.content.Intent;

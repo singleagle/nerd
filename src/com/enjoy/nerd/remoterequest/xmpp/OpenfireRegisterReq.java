@@ -21,6 +21,7 @@ import android.content.Context;
 
 import com.enjoy.nerd.http.RequestParams;
 import com.enjoy.nerd.remoterequest.Account;
+import com.enjoy.nerd.remoterequest.Encryptor;
 import com.google.gson.Gson;
 
 
@@ -89,7 +90,7 @@ public class OpenfireRegisterReq  extends XMPPRequest<Account>{
 	    }
 	    attributes.put("phone", phoneNO);
 	    attributes.put("name", name);
-	    accountManager.createAccount(phoneNO, password, attributes);
+	    accountManager.createAccount(phoneNO, Encryptor.encode(password), attributes);
 	    Collection<String> accountAttributes = accountManager.getAccountAttributes();
 		return accountManager.getAccountAttribute("name");
 	}
