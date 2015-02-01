@@ -16,7 +16,7 @@ import android.content.Context;
 abstract public class HttpRequest<T> extends RemoteRequest<T> {
 	static private final String TAG = "RemoteRequest";
 	
-	static public final String VENUS_BASE_URL ="http://120.24.208.105:8080/venus/rest";
+	static public final String VENUS_BASE_URL ="http://192.168.1.101:5000/api/v1";//"http://120.24.208.105:8080/venus/rest";
 	protected final TextRequestSender mSender;
 
 	

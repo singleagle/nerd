@@ -80,7 +80,7 @@
         android:padding="5dp"
         android:layout_alignTop="@id/msgitem_content_container"
         android:layout_toLeftOf="@id/msgitem_content_container"
-        android:src="@drawable/send_msg_fail"
+        android:src="@drawable/msg_state_fail"
         android:visibility="visible"/>
     
 </com.enjoy.nerd.distraction.IMMessageListItemView>

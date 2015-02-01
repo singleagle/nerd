@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="com/enjoy/nerd/view/extras/PullToRefreshWebView2.java|com/enjoy/nerd/view/extras/SoundPullEventListener.java|com/enjoy/nerd/view/internal/FlipLoadingLayout.java|com/enjoy/nerd/view/internal/IndicatorLayout.java|com/enjoy/nerd/view/internal/RotateLoadingLayout.java|com/enjoy/nerd/view/internal/Utils.java|com/enjoy/nerd/view/internal/ViewCompat.java|com/google/gson/|com/google/gson/annotations/|com/google/gson/internal/|com/google/gson/internal/bind/|com/google/gson/reflect/|com/google/gson/stream/" kind="src" path="src"/>
+	<classpathentry excluding="com/enjoy/nerd/view/extras/PullToRefreshWebView2.java|com/enjoy/nerd/view/extras/SoundPullEventListener.java|com/enjoy/nerd/view/internal/FlipLoadingLayout.java|com/enjoy/nerd/view/internal/IndicatorLayout.java|com/enjoy/nerd/view/internal/RotateLoadingLayout.java|com/enjoy/nerd/view/internal/Utils.java|com/enjoy/nerd/view/internal/ViewCompat.java|com/google/gson/|com/google/gson/annotations/|com/google/gson/internal/|com/google/gson/internal/bind/|com/google/gson/reflect/|com/google/gson/stream/|org/robobinding/" kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="src" path="ext-smack"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>

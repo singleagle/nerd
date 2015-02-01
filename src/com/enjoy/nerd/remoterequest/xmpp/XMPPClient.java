@@ -44,7 +44,7 @@ import android.os.HandlerThread;
 import android.util.Log;
 
 public class XMPPClient {
-	private static final String XMPPSERVER = "120.24.208.105";//"192.168.1.5";
+	private static final String XMPPSERVER = "192.168.1.101";//"120.24.208.105";
 	private static final boolean USE_BOSH = false;
 	
 	Connection mConnection;

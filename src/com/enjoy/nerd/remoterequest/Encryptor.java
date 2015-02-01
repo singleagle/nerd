@@ -10,9 +10,10 @@ public  class Encryptor{
 	
 	public static String encode(String rawString){
 		return rawString;
-		//Charset charset = Charset.forName("UTF-8");
-		//byte[]  input = charset.encode(rawString).array();
-		//return  Base64.encodeToString(input, Base64.DEFAULT);
+		/*
+		Charset charset = Charset.forName("UTF-8");
+		byte[]  input = charset.encode(rawString).array();
+		return  Base64.encodeToString(input, Base64.DEFAULT);*/
 	}
 
 }

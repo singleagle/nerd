@@ -118,7 +118,7 @@ public class IMMessageListItemView extends RelativeLayout {
 		
 		if(message.getSendState() == IMMessage.SEND_STATE_FAILURE){
 			mStateIndicator.setVisibility(View.VISIBLE);
-			mStateIndicator.setImageResource(R.drawable.send_msg_fail);
+			mStateIndicator.setImageResource(R.drawable.msg_state_fail);
 			mProgressBar.setVisibility(View.GONE);
 		}else{
 			mStateIndicator.setVisibility(View.GONE);

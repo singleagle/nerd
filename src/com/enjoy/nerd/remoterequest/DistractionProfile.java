@@ -111,7 +111,7 @@ public class DistractionProfile {
 	static public class PageDAProfile{
 		private int startIndex;
 		private int totalCount;
-		private ArrayList<DistractionProfile> DAProfileList;
+		private ArrayList<DistractionProfile> list;
 		
 		
 		public int getStartIndex() {
@@ -131,11 +131,11 @@ public class DistractionProfile {
 		}
 		
 		public List<DistractionProfile> getDAProfileList() {
-			return DAProfileList;
+			return list;
 		}
 		
 		public void setDAProfileList(ArrayList<DistractionProfile> DAProfileList) {
-			this.DAProfileList = DAProfileList;
+			this.list = DAProfileList;
 		}
 	}
 	
