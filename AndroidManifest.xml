@@ -59,11 +59,11 @@
        
        
        <activity
-            android:name=".distraction.DATypeSelectActivity"
+            android:name=".distraction.DATagSelectActivity"
             android:screenOrientation="portrait" />
               
        <activity
-            android:name=".distraction.AddDATypeActivity"
+            android:name=".distraction.AddDATagActivity"
             android:screenOrientation="portrait" />
        
        <service 

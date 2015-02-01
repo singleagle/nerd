@@ -1,5 +1,7 @@
 package com.enjoy.nerd.remoterequest;
 
+import java.util.ArrayList;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,12 +18,12 @@ public  class AddDistractionReq extends PostRequest<String>{
 	static public final int PAYTYPE_YOU = 2;
 	
 	private String title;
-	private int type;
 	private long creatUserId;
 	private String description;
 	private String address;
 	private int payType;
 	private long startTime;
+	private ArrayList<String> tagIdList = new ArrayList<String>();
 
 	
 	public AddDistractionReq(Context context) {
@@ -39,11 +41,9 @@ public  class AddDistractionReq extends PostRequest<String>{
 		return this;
 	}
 
-	
 
-
-	public AddDistractionReq setType(int type) {
-		this.type = type;
+	public AddDistractionReq setType(String type) {
+		tagIdList.add(0, type);
 		return this;
 	}
 
@@ -102,6 +102,7 @@ public  class AddDistractionReq extends PostRequest<String>{
 	protected void onFillRequestParams(RequestParams params) {
 		params.put("title", title);
 		params.put("createuser", Long.toString(creatUserId));
+		params.put("tagIdlist", tagIdList.get(0));
 		params.put("description", description);
 		params.put("address", address);
 		params.put("paytype", Integer.toString(payType));

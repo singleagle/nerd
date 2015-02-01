@@ -3,8 +3,8 @@ package com.enjoy.nerd.distraction;
 import java.util.ArrayList;
 
 import com.enjoy.nerd.R;
-import com.enjoy.nerd.remoterequest.DATypeReq;
-import com.enjoy.nerd.remoterequest.DATypeReq.DAType;
+import com.enjoy.nerd.remoterequest.DATagReq;
+import com.enjoy.nerd.remoterequest.DATagReq.DATag;
 import com.enjoy.nerd.remoterequest.RemoteRequest.FailResponseListner;
 import com.enjoy.nerd.remoterequest.RemoteRequest.SuccessResponseListner;
 
@@ -24,10 +24,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-public class DATypeSelectActivity extends Activity implements OnClickListener, FailResponseListner,
-										SuccessResponseListner<ArrayList<DAType>>, OnItemClickListener {
+public class DATagSelectActivity extends Activity implements OnClickListener, FailResponseListner,
+										SuccessResponseListner<ArrayList<DATag>>, OnItemClickListener {
 	
-	public static final String DATYPE = "datype";
+	public static final String DATAG = "datag";
 	private static final int REQ_ID_TYPE = 1;
 	
 	private static final int REQ_CODE_ADDTYPE = 1;
@@ -47,7 +47,7 @@ public class DATypeSelectActivity extends Activity implements OnClickListener, F
     }
 
     private void requestDATypeList(){
-    	DATypeReq request = new DATypeReq(this);
+    	DATagReq request = new DATagReq(this);
     	request.registerListener(REQ_ID_TYPE, this, this);
     	request.submit();
     }
@@ -61,16 +61,16 @@ public class DATypeSelectActivity extends Activity implements OnClickListener, F
     
 	@Override
 	public void onClick(View v) {
-		Intent intent = new Intent(this, AddDATypeActivity.class);
+		Intent intent = new Intent(this, AddDATagActivity.class);
 		startActivityForResult(intent, REQ_CODE_ADDTYPE);
 	}
 	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		DAType type = (DAType) mAdapter.getItem(position);
+		DATag tag = (DATag) mAdapter.getItem(position);
 		Intent data = new Intent();
-		data.putExtra(DATYPE, type);
+		data.putExtra(DATAG, tag);
 		setResult(RESULT_OK, data);
 		finish();
 	}
@@ -81,30 +81,30 @@ public class DATypeSelectActivity extends Activity implements OnClickListener, F
 	}
 
 	@Override
-	public void onSucess(int requestId, ArrayList<DAType> response) {
+	public void onSucess(int requestId, ArrayList<DATag> response) {
 		mAdapter = new DATypeAdapter(this, response);
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
 	}
 	
 	private static class DATypeAdapter extends BaseAdapter{
-		private ArrayList<DAType> mTypeList;
+		private ArrayList<DATag> mTagList;
 		private Context mContext;
 		
 		
-		public DATypeAdapter(Context context,  ArrayList<DAType> typeList ){
+		public DATypeAdapter(Context context,  ArrayList<DATag> tagList ){
 			mContext = context;
-			mTypeList = (ArrayList<DAType>) typeList.clone();
+			mTagList = (ArrayList<DATag>) tagList.clone();
 		}
 		
 		@Override
 		public int getCount() {
-			return mTypeList.size();
+			return mTagList.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			return mTypeList.get(position);
+			return mTagList.get(position);
 		}
 
 		@Override
@@ -114,7 +114,7 @@ public class DATypeSelectActivity extends Activity implements OnClickListener, F
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			DAType type = (DAType) getItem(position);
+			DATag type = (DATag) getItem(position);
 			if(type == null){
 				return null;
 			}
@@ -123,7 +123,7 @@ public class DATypeSelectActivity extends Activity implements OnClickListener, F
 				convertView = LayoutInflater.from(mContext).inflate(R.layout.datype_item, parent, false);
 			}
 			TextView typeView = (TextView) convertView.findViewById(R.id.type_name);
-			typeView.setText(type.getSubTypeName());
+			typeView.setText(type.getName());
 			return convertView;
 		}
 		

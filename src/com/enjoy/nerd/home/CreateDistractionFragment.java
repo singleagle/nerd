@@ -7,10 +7,10 @@ import java.util.Date;
 
 import com.enjoy.nerd.AccountManager;
 import com.enjoy.nerd.R;
-import com.enjoy.nerd.distraction.DATypeSelectActivity;
+import com.enjoy.nerd.distraction.DATagSelectActivity;
 import com.enjoy.nerd.remoterequest.Account;
 import com.enjoy.nerd.remoterequest.AddDistractionReq;
-import com.enjoy.nerd.remoterequest.DATypeReq.DAType;
+import com.enjoy.nerd.remoterequest.DATagReq.DATag;
 import com.enjoy.nerd.remoterequest.RemoteRequest.FailResponseListner;
 import com.enjoy.nerd.remoterequest.RemoteRequest.SuccessResponseListner;
 
@@ -48,7 +48,7 @@ public class CreateDistractionFragment extends Fragment implements SuccessRespon
 	private TextView mDATypeView;
 	private EditText mDescriptionView;
 	private DatePickerDialog mDatePickerDialog;
-	private DAType  mSelectedType;
+	private DATag  mSelectedType;
 	
 	private final SimpleDateFormat DATAFORMAT = new SimpleDateFormat("yy-MM-dd");
 	
@@ -95,7 +95,7 @@ public class CreateDistractionFragment extends Fragment implements SuccessRespon
 			break;
 			
 		case R.id.type_container:
-			Intent intent = new Intent(getActivity(), DATypeSelectActivity.class);
+			Intent intent = new Intent(getActivity(), DATagSelectActivity.class);
 			startActivityForResult(intent, REQ_CODE_SELECT_DATYPE);
 			
 			break;
@@ -109,9 +109,9 @@ public class CreateDistractionFragment extends Fragment implements SuccessRespon
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(REQ_CODE_SELECT_DATYPE == requestCode && resultCode == Activity.RESULT_OK){
-			mSelectedType = data.getParcelableExtra(DATypeSelectActivity.DATYPE);
+			mSelectedType = data.getParcelableExtra(DATagSelectActivity.DATAG);
 			if(mSelectedType != null){
-				mDATypeView.setText(mSelectedType.getSubTypeName());
+				mDATypeView.setText(mSelectedType.getName());
 			}
 		}
 	}
@@ -136,7 +136,7 @@ public class CreateDistractionFragment extends Fragment implements SuccessRespon
     	request.setDescription(mDescriptionView.getText().toString());
     	request.setPayType(AddDistractionReq.PAYTYPE_AA);
     	request.setCreatUserId(AccountManager.getInstance(getActivity()).getLoginUIN());
-    	request.setType(mSelectedType.getTypeId());
+    	request.setType(mSelectedType.getId());
     	
     	if(mDestinationView.getText() != null){
     		request.setAddress(mDestinationView.getText().toString());

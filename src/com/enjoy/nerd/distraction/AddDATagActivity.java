@@ -3,7 +3,7 @@ package com.enjoy.nerd.distraction;
 
 import com.enjoy.nerd.AccountManager;
 import com.enjoy.nerd.R;
-import com.enjoy.nerd.remoterequest.AddDATypeReq;
+import com.enjoy.nerd.remoterequest.AddDATagReq;
 import com.enjoy.nerd.remoterequest.RemoteRequest.FailResponseListner;
 import com.enjoy.nerd.remoterequest.RemoteRequest.SuccessResponseListner;
 
@@ -21,42 +21,41 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
-public class AddDATypeActivity extends Activity implements OnClickListener, FailResponseListner,
+public class AddDATagActivity extends Activity implements OnClickListener, FailResponseListner,
 										SuccessResponseListner<String> {
 	
-	private static final int REQ_ID_ADDTYPE = 1;
+	private static final int REQ_ID_ADDTAG = 1;
 	
 	private Button mSubmitBtn;
-	private EditText mTypeNameView;
+	private EditText mTagNameView;
 
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_datype);
-        mTypeNameView = (EditText)findViewById(R.id.type_name);
+        mTagNameView = (EditText)findViewById(R.id.type_name);
         mSubmitBtn = (Button)findViewById(R.id.submit_button);
         mSubmitBtn.setOnClickListener(this);
     }
 
-    private void requestAddDAType(String typeName){
-    	AddDATypeReq request = new AddDATypeReq(this);
-    	request.setMainTypeId(0);
-    	request.setSubTypeName(typeName);
+    private void requestAddDATag(String tagName){
+    	AddDATagReq request = new AddDATagReq(this);
+    	request.setTagName(tagName);
     	request.setCreateUIN(AccountManager.getInstance(this).getLoginUIN());
-    	request.registerListener(REQ_ID_ADDTYPE, this, this);
+    	request.registerListener(REQ_ID_ADDTAG, this, this);
     	request.submit();
     }
     
 	@Override
 	public void onClick(View v) {
-		String typeName = mTypeNameView.getText().toString();
+		String tagName = mTagNameView.getText().toString();
 		if(!AccountManager.getInstance(this).isLogin()){
 			Toast.makeText(this, R.string.login_tips, Toast.LENGTH_LONG).show();
-		}else if(TextUtils.isEmpty(typeName)){
+		}else if(TextUtils.isEmpty(tagName)){
 			//TODO: toast
 		}else{
-			requestAddDAType(typeName);
+			requestAddDATag(tagName);
 		}
 	}
 	

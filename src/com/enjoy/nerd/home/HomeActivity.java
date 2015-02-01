@@ -3,6 +3,7 @@ package com.enjoy.nerd.home;
 import java.util.ArrayList;
 import java.util.zip.Inflater;
 
+import com.enjoy.nerd.NerdApp;
 import com.enjoy.nerd.R;
 import com.enjoy.nerd.R.layout;
 
@@ -61,8 +62,20 @@ public class HomeActivity extends FragmentActivity{
         showWelcomeFragement();
         mUIHandler.sendEmptyMessageDelayed(MSG_SHOW_TAB_CONTENT, 2000);
     }
+    
+    
 
-    void showWelcomeFragement(){
+    @Override
+	protected void onDestroy() {
+		NerdApp app = (NerdApp) getApplicationContext();
+		app.getXMPPClient().release();
+		
+		super.onDestroy();
+	}
+
+
+
+	void showWelcomeFragement(){
     	getActionBar().hide();
     	FragmentTransaction transaction = mFragmentManager.beginTransaction();
     	Fragment fragment = new WelcomeFragment();
