@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
-import com.enjoy.nerd.http.RequestParams;
 import com.enjoy.nerd.remoterequest.Account;
 import com.enjoy.nerd.remoterequest.Encryptor;
 import com.google.gson.Gson;

@@ -1,9 +1,10 @@
 package com.enjoy.nerd.remoterequest;
 
+import java.util.HashMap;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.enjoy.nerd.http.RequestParams;
 import com.google.gson.Gson;
 
 import android.content.Context;
@@ -69,7 +70,7 @@ public  class AddDATagReq extends PostRequest<String>{
 
 
 	@Override
-	protected void onFillRequestParams(RequestParams params) {
+	protected void onFillRequestParams(HashMap<String, String> params) {
 		params.put("createuin", Long.toString(createUIN));
 		params.put("tagname", tagName);
 		if(parentId != null){

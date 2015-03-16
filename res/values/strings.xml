@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">乐聚</string>
+    <string name="app_name">名城好趣处</string>
     <string name="img_common_desc">nerd</string>
+    <string name="recommend">推荐</string>
     <string name="nearby">附近</string>
     <string name="create_distraction">创建活动</string>
     <string name="user_center">个人中心</string>
@@ -9,6 +10,7 @@
     <string name="destination">目的地:</string>
     <string name="time">时间:</string>
     <string name="publish">发布</string>
+    <string name="create">创建</string>
     <string name="distance_meters">%s米</string>
     <string name="my_distraction">我创建的活动</string>
     <string name="join_distraction">我参加的活动</string>

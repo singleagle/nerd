@@ -1,11 +1,12 @@
 package com.enjoy.nerd.remoterequest;
 
+import java.util.HashMap;
+
 import javax.xml.transform.ErrorListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.enjoy.nerd.http.RequestParams;
 import com.enjoy.nerd.utils.LogWrapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,17 +17,18 @@ import android.content.Context;
 abstract public class HttpRequest<T> extends RemoteRequest<T> {
 	static private final String TAG = "RemoteRequest";
 	
-	static public final String VENUS_BASE_URL ="http://192.168.1.101:5000/api/v1";//"http://120.24.208.105:8080/venus/rest";
-	protected final TextRequestSender mSender;
+	static public final String VENUS_BASE_URL ="http://192.168.1.101/api/v1";
+	//static public final String VENUS_BASE_URL = "http://120.24.208.105/api/v1";
+	protected final VolleyStringRequestSender mSender;
 
 	
 	public HttpRequest(Context context){
 		super(context);
-		mSender = new TextRequestSender(context);
+		mSender = new VolleyStringRequestSender(context);
 	}
 	
 	
-	final void fillRequestParams(RequestParams params){
+	final void fillRequestParams(HashMap<String, String> params){
 		onFillRequestParams(params);
 	}
 	
@@ -84,7 +86,7 @@ abstract public class HttpRequest<T> extends RemoteRequest<T> {
 		}
 	}
 	
-	abstract protected  void onFillRequestParams(RequestParams params);
+	abstract protected  void onFillRequestParams(HashMap<String, String> params);
 	
 	abstract protected String buidRequestUrl();
 	

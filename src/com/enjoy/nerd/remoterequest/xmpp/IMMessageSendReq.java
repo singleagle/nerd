@@ -3,19 +3,12 @@ package com.enjoy.nerd.remoterequest.xmpp;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManager;
 import org.jivesoftware.smack.Connection;
-import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
-import org.jivesoftware.smack.packet.Packet;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.content.Context;
 
 import com.enjoy.nerd.db.IMMessage;
-import com.enjoy.nerd.http.RequestParams;
-import com.enjoy.nerd.remoterequest.Account;
-import com.google.gson.Gson;
 
 public class IMMessageSendReq  extends XMPPRequest<String>{
 	private String textContent; 

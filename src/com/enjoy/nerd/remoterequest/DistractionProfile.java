@@ -1,35 +1,24 @@
 package com.enjoy.nerd.remoterequest;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 
 public class DistractionProfile {
 	private String id;
 	private String title;
 	private long createTime;
 	private long startTime;
-	private long createUserId;
+	private SimpleUserInfo createUserInfo;
 	private String description;
 	private Location originLoc;
 	private Location dstLoc;
 	private int farawayMeters;
 	private int requestMemberCount;
 	private int partnerCount;
-	private int goodCount;
-	private ArrayList<String> tagNameList;
-	
-	private String imageId;
+	private int likeNum;
+	private String[] tagNameArray;
+	private String imageurl;
 
 	public String getId() {
 		return id;
@@ -48,8 +37,8 @@ public class DistractionProfile {
 	}
 	
 	public String getScheme(){
-		if(tagNameList != null && tagNameList.size() != 0){
-			return tagNameList.get(0);
+		if(tagNameArray != null && tagNameArray.length != 0){
+			return tagNameArray[0];
 		}
 		return null;
 	}
@@ -70,12 +59,12 @@ public class DistractionProfile {
 		this.startTime = startTime;
 	}
 
-	public long getCreateUserId() {
-		return createUserId;
+	public SimpleUserInfo getCreateUserInfo() {
+		return createUserInfo;
 	}
 
-	public void setCreateUserId(long createUserId) {
-		this.createUserId = createUserId;
+	public void setCreateUserInfo(SimpleUserInfo createUserInfo) {
+		this.createUserInfo = createUserInfo;
 	}
 
 	public String getDescription() {
@@ -91,7 +80,7 @@ public class DistractionProfile {
 			return null;
 		}
 		
-		return originLoc.address;
+		return originLoc.getAddress();
 	}
 	
 	public String getDestAddress(){
@@ -99,7 +88,7 @@ public class DistractionProfile {
 			return null;
 		}
 		
-		return dstLoc.address;
+		return dstLoc.getAddress();
 	}
 	
 	
@@ -127,56 +116,18 @@ public class DistractionProfile {
 		this.partnerCount = partnerCount;
 	}
 	
-	public int getGoodCount(){
-		return goodCount;
+	public int getLikeNum(){
+		return likeNum;
 	}
 
-	public String getImageId() {
-		return imageId;
+	public String getImageUrl() {
+		return imageurl;
 	}
 
-	public void setImageId(String imageId) {
-		this.imageId = imageId;
+	public void setImageUrl(String imageUrl) {
+		this.imageurl = imageUrl;
 	}
-	
-	static class Location{
-		String address;
-		int confidence;
-		double[] location;
-		
-		
-		/*
-		static public class LocationSerializer implements JsonDeserializer<Location>, JsonSerializer<Location>{
 
-			@Override
-			public Location deserialize(JsonElement json, Type typeOfT,
-					JsonDeserializationContext context)
-					throws JsonParseException {
-				JsonObject jobj = json.getAsJsonObject();
-				Location location = new Location();
-				
-				location.address = jobj.getAsString();
-				location.confidence = jobj.get("confidence").getAsInt();
-				location.location[0] = jobj.get("location").getAsJsonArray().get(0).getAsDouble();
-				location.location[1] = jobj.get("location").getAsJsonArray().get(0).getAsDouble();
-				return location;
-			}
-			
-			@Override
-			public JsonElement serialize(Location src, Type typeOfSrc,
-					JsonSerializationContext context) {
-				JsonObject jobj = new JsonObject();
-				jobj.addProperty("address", src.address);
-				jobj.addProperty("confidence", src.confidence);
-				JsonArray jArray = new JsonArray();
-				jArray.add(new JsonPrimitive(src.location[0]));
-				jArray.add(new JsonPrimitive(src.location[0]));
-				jobj.add("location", jArray);
-				return jobj;
-			}	
-			
-		}*/
-	}
 	
 	static public class PageDAProfile{
 		private int startIndex;

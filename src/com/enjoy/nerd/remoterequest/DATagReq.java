@@ -1,13 +1,13 @@
 package com.enjoy.nerd.remoterequest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.enjoy.nerd.remoterequest.DATagReq.DATag;
-import com.enjoy.nerd.http.RequestParams;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
@@ -24,7 +24,7 @@ public class DATagReq extends GetRequest<ArrayList<DATag>> {
 	
 
 	@Override
-	protected void onFillRequestParams(RequestParams params) {
+	protected void onFillRequestParams(HashMap<String, String> params) {
 		return ;
 	}
 
@@ -56,28 +56,28 @@ public class DATagReq extends GetRequest<ArrayList<DATag>> {
 	
 	
 	public static class DATag implements Parcelable{
-		private String id;
-		private String parentId;
+		private String _id;
+		private String parent;
 		private String name;
 		
 		
 		
-		public DATag(String typeId, String parentId, String name) {
-			this.id = typeId;
-			this.parentId = parentId;
+		public DATag(String tagId, String parentId, String name) {
+			this._id = tagId;
+			this.parent = parentId;
 			this.name= name;
 		}
 
 
 
 		public String getId() {
-			return id;
+			return _id;
 		}
 
 
 
 		public String getParentId() {
-			return parentId;
+			return parent;
 		}
 
 
@@ -96,14 +96,14 @@ public class DATagReq extends GetRequest<ArrayList<DATag>> {
 
 		@Override
 		public void writeToParcel(Parcel dest, int flags) {
-			dest.writeString(id);
-			dest.writeString(parentId);
+			dest.writeString(_id);
+			dest.writeString(parent);
 			dest.writeString(name);
 		}
 		
 		private DATag(Parcel in){
-			id = in.readString();
-			parentId = in.readString();
+			_id = in.readString();
+			parent = in.readString();
 			name = in.readString();
 		}
 		

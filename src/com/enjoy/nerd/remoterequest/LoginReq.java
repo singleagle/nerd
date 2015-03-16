@@ -1,6 +1,7 @@
 package com.enjoy.nerd.remoterequest;
 
 import java.nio.charset.Charset;
+import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,7 +9,6 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.util.Base64;
 
-import com.enjoy.nerd.http.RequestParams;
 import com.google.gson.Gson;
 
 
@@ -45,7 +45,7 @@ public class LoginReq  extends PostRequest<Account>{
 
 	
 	@Override
-	protected void onFillRequestParams(RequestParams params) {
+	protected void onFillRequestParams(HashMap<String, String> params) {
 		params.put("uid", uid);
 		params.put("password", Encryptor.encode(password));
 	}

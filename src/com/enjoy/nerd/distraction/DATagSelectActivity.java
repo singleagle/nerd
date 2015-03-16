@@ -34,7 +34,7 @@ public class DATagSelectActivity extends Activity implements OnClickListener, Fa
 	
 	private ListView mListView;
 	private ImageView mAddImg;
-	private DATypeAdapter mAdapter;
+	private DATagAdapter mAdapter;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,17 +82,17 @@ public class DATagSelectActivity extends Activity implements OnClickListener, Fa
 
 	@Override
 	public void onSucess(int requestId, ArrayList<DATag> response) {
-		mAdapter = new DATypeAdapter(this, response);
+		mAdapter = new DATagAdapter(this, response);
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
 	}
 	
-	private static class DATypeAdapter extends BaseAdapter{
+	private static class DATagAdapter extends BaseAdapter{
 		private ArrayList<DATag> mTagList;
 		private Context mContext;
 		
 		
-		public DATypeAdapter(Context context,  ArrayList<DATag> tagList ){
+		public DATagAdapter(Context context,  ArrayList<DATag> tagList ){
 			mContext = context;
 			mTagList = (ArrayList<DATag>) tagList.clone();
 		}
@@ -114,16 +114,16 @@ public class DATagSelectActivity extends Activity implements OnClickListener, Fa
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			DATag type = (DATag) getItem(position);
-			if(type == null){
+			DATag tag = (DATag) getItem(position);
+			if(tag == null){
 				return null;
 			}
 			
 			if(convertView == null){
-				convertView = LayoutInflater.from(mContext).inflate(R.layout.datype_item, parent, false);
+				convertView = LayoutInflater.from(mContext).inflate(R.layout.datag_item, parent, false);
 			}
-			TextView typeView = (TextView) convertView.findViewById(R.id.type_name);
-			typeView.setText(type.getName());
+			TextView tagView = (TextView) convertView.findViewById(R.id.tag_name);
+			tagView.setText(tag.getName());
 			return convertView;
 		}
 		

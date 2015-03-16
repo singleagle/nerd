@@ -1,11 +1,11 @@
 package com.enjoy.nerd.remoterequest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.enjoy.nerd.http.RequestParams;
 import com.enjoy.nerd.remoterequest.DistractionProfile.PageDAProfile;
 import com.google.gson.Gson;
 
@@ -48,7 +48,7 @@ public class NearbyDistractionReq extends GetRequest<PageDAProfile>{
 	}
 
 	@Override
-	protected void onFillRequestParams(RequestParams params) {
+	protected void onFillRequestParams(HashMap<String, String> params) {
 		if(address != null){
 			params.put("address", address);
 		}else{

@@ -21,4 +21,8 @@ public class LogWrapper {
 	static  public int e(String tag, String msg){
 		return Log.e(tag, msg);
 	}
+	
+	static  public int e(String tag, String msg, Throwable tr){
+		return Log.e(tag, msg, tr);
+	}
 }

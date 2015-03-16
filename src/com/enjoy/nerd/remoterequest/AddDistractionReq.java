@@ -1,11 +1,12 @@
 package com.enjoy.nerd.remoterequest;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.enjoy.nerd.http.RequestParams;
 import com.google.gson.Gson;
 
 import android.content.Context;
@@ -24,6 +25,7 @@ public  class AddDistractionReq extends PostRequest<String>{
 	private int payType;
 	private long startTime;
 	private ArrayList<String> tagIdList = new ArrayList<String>();
+	private ArrayList<String> imgUrlList = new ArrayList<String>();
 
 	
 	public AddDistractionReq(Context context) {
@@ -96,13 +98,25 @@ public  class AddDistractionReq extends PostRequest<String>{
 		return this;
 	}
 
+	
+	public AddDistractionReq setImgUrlList(AbstractList<String> urlList){
+		imgUrlList.clear();
+		imgUrlList.addAll(urlList);
+		return this;	
+	}
 
 
 	@Override
-	protected void onFillRequestParams(RequestParams params) {
-		params.put("title", title);
+	protected void onFillRequestParams(HashMap<String, String> params) {
+		if(title != null){
+			params.put("title", title);
+		}
+
 		params.put("createuser", Long.toString(creatUserId));
-		params.put("tagIdlist", tagIdList.get(0));
+		if(!imgUrlList.isEmpty()){
+			params.put("imgurllist", imgUrlList.get(0));
+		}
+		params.put("tagidlist", tagIdList.get(0));
 		params.put("description", description);
 		params.put("address", address);
 		params.put("paytype", Integer.toString(payType));

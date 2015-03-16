@@ -5,7 +5,6 @@ import javax.xml.transform.ErrorListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.enjoy.nerd.http.RequestParams;
 import com.enjoy.nerd.utils.LogWrapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -36,5 +36,10 @@
 			<type>2</type>
 			<location>E:/game/github/asmack/smack/source</location>
 		</link>
+		<link>
+			<name>volley-src</name>
+			<type>2</type>
+			<location>E:/game/github/volley/src</location>
+		</link>
 	</linkedResources>
 </projectDescription>

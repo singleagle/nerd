@@ -10,7 +10,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.enjoy.nerd.NerdApp;
-import com.enjoy.nerd.http.RequestParams;
 import com.enjoy.nerd.remoterequest.RemoteRequest;
 import com.enjoy.nerd.utils.LogWrapper;
 import com.google.gson.Gson;

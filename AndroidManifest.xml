@@ -37,6 +37,10 @@
                 android:value="android.support.v4.app.FragmentActivity" />
         </activity>
         
+        <activity
+            android:name=".home.CreateDistractionActivity"
+            android:screenOrientation="portrait" />
+        
        <activity
             android:name=".distraction.DistractionDetailActivity"
             android:screenOrientation="portrait" />

@@ -6,23 +6,12 @@ import java.util.Map;
 
 import org.jivesoftware.smack.AccountManager;
 import org.jivesoftware.smack.Connection;
-import org.jivesoftware.smack.PacketCollector;
-import org.jivesoftware.smack.SmackConfiguration;
 import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smack.filter.AndFilter;
-import org.jivesoftware.smack.filter.PacketFilter;
-import org.jivesoftware.smack.filter.PacketIDFilter;
-import org.jivesoftware.smack.filter.PacketTypeFilter;
-import org.jivesoftware.smack.packet.IQ;
-import org.jivesoftware.smack.packet.Packet;
-import org.jivesoftware.smack.packet.Registration;
 
 import android.content.Context;
 
-import com.enjoy.nerd.http.RequestParams;
 import com.enjoy.nerd.remoterequest.Account;
 import com.enjoy.nerd.remoterequest.Encryptor;
-import com.google.gson.Gson;
 
 
 public class OpenfireRegisterReq  extends XMPPRequest<Account>{

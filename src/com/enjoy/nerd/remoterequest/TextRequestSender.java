@@ -32,11 +32,11 @@ public class TextRequestSender extends  TextHttpResponseHandler {
 	 HttpRequest<?> mRemoteRequest;
 	 RequestHandle mRequestHandle;
 	 String mRequestUrl;
-	 RequestParams params;
+	 HashMap<String, String> mParams;
 	 
 	 TextRequestSender(Context context){
 		 mRespondHandler = new Handler();
-		 params = new RequestParams();
+		 mParams = new HashMap<String, String>();
 		 TelephonyManager tManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
 		 params.put("deviceId", tManager.getDeviceId());
 	 }
@@ -47,7 +47,9 @@ public class TextRequestSender extends  TextHttpResponseHandler {
 			 mRequestHandle.cancel(true);
 		 }
 		 mRequestUrl = request.buidRequestUrl();
-		 request.fillRequestParams(params);
+		 request.fillRequestParams(mParams);
+		 RequestParams params = new RequestParams(mParams);
+		 
 		 if(request.methond().equalsIgnoreCase("get")){
 			 mRequestHandle = mAsyncHttpClient.get(mRequestUrl, params,  this);
 		 }else if(request.methond().equalsIgnoreCase("post")){
