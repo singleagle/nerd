@@ -2,6 +2,7 @@ package com.enjoy.nerd.distraction;
 
 
 import com.enjoy.nerd.AccountManager;
+import com.enjoy.nerd.BaseAcitivity;
 import com.enjoy.nerd.R;
 import com.enjoy.nerd.remoterequest.AddDATagReq;
 import com.enjoy.nerd.remoterequest.RemoteRequest.FailResponseListner;
@@ -21,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
-public class AddDATagActivity extends Activity implements OnClickListener, FailResponseListner,
+public class AddDATagActivity extends BaseAcitivity implements OnClickListener,
 										SuccessResponseListner<String> {
 	
 	private static final int REQ_ID_ADDTAG = 1;
@@ -57,13 +58,6 @@ public class AddDATagActivity extends Activity implements OnClickListener, FailR
 		}else{
 			requestAddDATag(tagName);
 		}
-	}
-	
-
-
-	@Override
-	public void onFailure(int requestId, int error, int subErr, String errDescription) {
-		
 	}
 
 	@Override

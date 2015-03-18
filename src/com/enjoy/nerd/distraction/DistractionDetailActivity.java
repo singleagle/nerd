@@ -1,5 +1,6 @@
 package com.enjoy.nerd.distraction;
 
+import com.enjoy.nerd.BaseAcitivity;
 import com.enjoy.nerd.R;
 
 import android.app.Activity;
@@ -12,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class DistractionDetailActivity extends Activity implements View.OnClickListener {
+public class DistractionDetailActivity extends BaseAcitivity implements View.OnClickListener {
 	public static final String KEY_DA_ID ="da_id";
 	public static final String KEY_DA_CREATOR_UID ="da_creator_uid";
 	

@@ -2,13 +2,12 @@ package com.enjoy.nerd.home;
 
 import com.enjoy.nerd.AccountManager;
 import com.enjoy.nerd.R;
+import com.enjoy.nerd.feed.FeedTypeSelectActivity;
 import com.enjoy.nerd.usercenter.ConversationListActivity;
 import com.enjoy.nerd.usercenter.LoginActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -62,7 +61,7 @@ public class UserCenterFragment extends Fragment implements View.OnClickListener
     	switch(item.getItemId()){
     	case MENU_ID_CREATE:
     		if(AccountManager.getInstance(getActivity()).isLogin()){
-    			Intent intent = new Intent(getActivity(), CreateDistractionActivity.class);
+    			Intent intent = new Intent(getActivity(), FeedTypeSelectActivity.class);
     			startActivity(intent);
     		}else{
     			Toast.makeText(getActivity(), R.string.login_tips, Toast.LENGTH_LONG).show();

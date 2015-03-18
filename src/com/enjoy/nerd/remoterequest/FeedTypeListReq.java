@@ -8,15 +8,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 
 import android.content.Context;
-import android.os.Parcel;
-import android.os.Parcelable;
 
-public class DATagReq extends GetRequest<ArrayList<FeedTag>> {
 
-	public DATagReq(Context context) {
+import com.enjoy.nerd.remoterequest.FeedTypeListReq.FeedTagGroup;
+
+public class FeedTypeListReq extends GetRequest<ArrayList<FeedTagGroup>> {
+	
+	
+	public FeedTypeListReq(Context context) {
 		super(context);
 	}
 	
@@ -29,11 +30,11 @@ public class DATagReq extends GetRequest<ArrayList<FeedTag>> {
 
 	@Override
 	protected String buidRequestUrl() {
-		return  VENUS_BASE_URL + "/sec/tags/distraction";
+		return  VENUS_BASE_URL + "/sec/feedgroup";
 	}
 
 	@Override
-	protected ArrayList<FeedTag> parse(Gson gson, String response)
+	protected ArrayList<FeedTagGroup> parse(Gson gson, String response)
 			throws JSONException {
 		JSONObject respObj = new JSONObject(response);
 		int total = respObj.getInt("total");
@@ -42,10 +43,10 @@ public class DATagReq extends GetRequest<ArrayList<FeedTag>> {
 			return null;
 		}
 		
-		ArrayList<FeedTag>  typeList = new ArrayList<FeedTag>(list.length());
+		ArrayList<FeedTagGroup>  typeList = new ArrayList<FeedTagGroup>(list.length());
 		for(int i = 0; i < list.length(); i ++ ){
 			JSONObject typeObj = list.getJSONObject(i);
-			FeedTag type = gson.fromJson(typeObj.toString(), FeedTag.class);
+			FeedTagGroup type = gson.fromJson(typeObj.toString(), FeedTagGroup.class);
 			typeList.add(type); 
 		}
 		
@@ -53,6 +54,25 @@ public class DATagReq extends GetRequest<ArrayList<FeedTag>> {
 		
 	}
 	
-	
-	
+	static final public class FeedTagGroup{
+		private String name;
+		private FeedTag[] value;
+		private String moreurl;
+		
+		
+		public String getName() {
+			return name;
+		}
+		
+		public FeedTag[] getTagList() {
+			return value;
+		}
+		
+		public String getMoreurl() {
+			return moreurl;
+		}
+		
+		
+	}
+
 }

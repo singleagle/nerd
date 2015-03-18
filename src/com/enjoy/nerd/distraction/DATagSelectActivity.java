@@ -2,9 +2,10 @@ package com.enjoy.nerd.distraction;
 
 import java.util.ArrayList;
 
+import com.enjoy.nerd.BaseAcitivity;
 import com.enjoy.nerd.R;
 import com.enjoy.nerd.remoterequest.DATagReq;
-import com.enjoy.nerd.remoterequest.DATagReq.DATag;
+import com.enjoy.nerd.remoterequest.FeedTag;
 import com.enjoy.nerd.remoterequest.RemoteRequest.FailResponseListner;
 import com.enjoy.nerd.remoterequest.RemoteRequest.SuccessResponseListner;
 
@@ -24,10 +25,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-public class DATagSelectActivity extends Activity implements OnClickListener, FailResponseListner,
-										SuccessResponseListner<ArrayList<DATag>>, OnItemClickListener {
+public class DATagSelectActivity extends BaseAcitivity implements OnClickListener,
+										SuccessResponseListner<ArrayList<FeedTag>>, OnItemClickListener {
 	
-	public static final String DATAG = "datag";
+	public static final String FEEDTAG = "tag";
 	private static final int REQ_ID_TYPE = 1;
 	
 	private static final int REQ_CODE_ADDTYPE = 1;
@@ -43,10 +44,10 @@ public class DATagSelectActivity extends Activity implements OnClickListener, Fa
         mListView = (ListView)findViewById(R.id.type_list);
         mAddImg = (ImageView)findViewById(R.id.type_add);
         mAddImg.setOnClickListener(this);
-        requestDATypeList();
+        requestDATagList();
     }
 
-    private void requestDATypeList(){
+    private void requestDATagList(){
     	DATagReq request = new DATagReq(this);
     	request.registerListener(REQ_ID_TYPE, this, this);
     	request.submit();
@@ -55,7 +56,7 @@ public class DATagSelectActivity extends Activity implements OnClickListener, Fa
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == REQ_CODE_ADDTYPE && resultCode == RESULT_OK){
-			requestDATypeList();
+			requestDATagList();
 		}
 	}
     
@@ -68,33 +69,28 @@ public class DATagSelectActivity extends Activity implements OnClickListener, Fa
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		DATag tag = (DATag) mAdapter.getItem(position);
+		FeedTag tag = (FeedTag) mAdapter.getItem(position);
 		Intent data = new Intent();
-		data.putExtra(DATAG, tag);
+		data.putExtra(FEEDTAG, tag);
 		setResult(RESULT_OK, data);
 		finish();
 	}
 
 	@Override
-	public void onFailure(int requestId, int error, int subErr, String errDescription) {
-		
-	}
-
-	@Override
-	public void onSucess(int requestId, ArrayList<DATag> response) {
+	public void onSucess(int requestId, ArrayList<FeedTag> response) {
 		mAdapter = new DATagAdapter(this, response);
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
 	}
 	
 	private static class DATagAdapter extends BaseAdapter{
-		private ArrayList<DATag> mTagList;
+		private ArrayList<FeedTag> mTagList;
 		private Context mContext;
 		
 		
-		public DATagAdapter(Context context,  ArrayList<DATag> tagList ){
+		public DATagAdapter(Context context,  ArrayList<FeedTag> tagList ){
 			mContext = context;
-			mTagList = (ArrayList<DATag>) tagList.clone();
+			mTagList = (ArrayList<FeedTag>) tagList.clone();
 		}
 		
 		@Override
@@ -114,7 +110,7 @@ public class DATagSelectActivity extends Activity implements OnClickListener, Fa
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			DATag tag = (DATag) getItem(position);
+			FeedTag tag = (FeedTag) getItem(position);
 			if(tag == null){
 				return null;
 			}

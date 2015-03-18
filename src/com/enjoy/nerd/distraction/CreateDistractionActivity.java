@@ -1,4 +1,4 @@
-package com.enjoy.nerd.home;
+package com.enjoy.nerd.distraction;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,14 +9,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.enjoy.nerd.AccountManager;
+import com.enjoy.nerd.BaseAcitivity;
 import com.enjoy.nerd.R;
-import com.enjoy.nerd.distraction.DATagSelectActivity;
-import com.enjoy.nerd.remoterequest.Account;
 import com.enjoy.nerd.remoterequest.AddDistractionReq;
 import com.enjoy.nerd.remoterequest.BatchPostReqest;
 import com.enjoy.nerd.remoterequest.BatchPostReqest.PostRequestPipe;
-import com.enjoy.nerd.remoterequest.DATagReq.DATag;
-import com.enjoy.nerd.remoterequest.FileUploadReqPipe;
+import com.enjoy.nerd.remoterequest.FeedTag;
 import com.enjoy.nerd.remoterequest.ImageUploadReq;
 import com.enjoy.nerd.remoterequest.PostRequest;
 import com.enjoy.nerd.remoterequest.RemoteRequest.FailResponseListner;
@@ -26,33 +24,28 @@ import com.enjoy.nerd.utils.LogWrapper;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
-import android.app.Dialog;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CreateDistractionActivity extends FragmentActivity implements SuccessResponseListner<String>, FailResponseListner,
+public class CreateDistractionActivity extends BaseAcitivity implements SuccessResponseListner<String>,
 								View.OnClickListener, OnDateSetListener{
 	static private final String TAG = "CreateDistractionActivity";
+	
+	static public final String FEED_TAG = "feedtag";
 	
 	static private final int MENU_ID_PUBLISH = 0;
 	
@@ -67,7 +60,7 @@ public class CreateDistractionActivity extends FragmentActivity implements Succe
 	private TextView mDATypeView;
 	private EditText mDescriptionView;
 	private DatePickerDialog mDatePickerDialog;
-	private DATag  mSelectedType;
+	private FeedTag  mSelectedTag;
 	private String mImagLocalPath;
 	
 	private final SimpleDateFormat DATAFORMAT = new SimpleDateFormat("yy-MM-dd");
@@ -80,7 +73,11 @@ public class CreateDistractionActivity extends FragmentActivity implements Succe
     	mDescriptionView = (EditText)findViewById(R.id.description);
     	mDATypeContainer = findViewById(R.id.type_container);
     	mDATypeContainer.setOnClickListener(this);
+    	
     	mDATypeView = (TextView)findViewById(R.id.type);
+    	mSelectedTag = (FeedTag)getIntent().getParcelableExtra(FEED_TAG);
+    	mDATypeView.setText(mSelectedTag.getName());
+    	
     	mTimeView = (TextView)findViewById(R.id.time);
     	mTimeView.setText(DATAFORMAT.format(Calendar.getInstance().getTime()));
     	mTimeView.setOnClickListener(this);
@@ -166,9 +163,9 @@ public class CreateDistractionActivity extends FragmentActivity implements Succe
 		}
 		
 		if(REQ_CODE_SELECT_DATYPE == requestCode){
-			mSelectedType = data.getParcelableExtra(DATagSelectActivity.DATAG);
-			if(mSelectedType != null){
-				mDATypeView.setText(mSelectedType.getName());
+			mSelectedTag = data.getParcelableExtra(DATagSelectActivity.FEEDTAG);
+			if(mSelectedTag != null){
+				mDATypeView.setText(mSelectedTag.getName());
 			}
 		}else if(REQ_CODE_PICKUP_PHOTO == requestCode){
 			handlePickupPhtoResult(data);
@@ -203,7 +200,7 @@ public class CreateDistractionActivity extends FragmentActivity implements Succe
     	request.setDescription(mDescriptionView.getText().toString());
     	request.setPayType(AddDistractionReq.PAYTYPE_AA);
     	request.setCreatUserId(AccountManager.getInstance(this).getLoginUIN());
-    	request.setType(mSelectedType.getId());
+    	request.setType(mSelectedTag.getId());
     	
     	if(mDestinationView.getText() != null){
     		request.setAddress(mDestinationView.getText().toString());
@@ -244,7 +241,7 @@ public class CreateDistractionActivity extends FragmentActivity implements Succe
     	case MENU_ID_PUBLISH:
     		if(!AccountManager.getInstance(this).isLogin()){
     			Toast.makeText(this, R.string.login_tips, Toast.LENGTH_LONG).show();
-    		}else if(mSelectedType == null || mDescriptionView.getText() == null){
+    		}else if(mSelectedTag == null || mDescriptionView.getText() == null){
     			Toast.makeText(this, R.string.invalidate_input, Toast.LENGTH_LONG).show();
     		}else{
     			sendAddDAReq();
@@ -266,13 +263,6 @@ public class CreateDistractionActivity extends FragmentActivity implements Succe
         	mDatePickerDialog.dismiss();
         }
     }
-
-	@Override
-	public void onFailure(int requestId, int error, int subErr,
-			String errDescription) {
-		Toast.makeText(this, errDescription + ":" + error, Toast.LENGTH_SHORT).show();
-		
-	}
 
 	@Override
 	public void onSucess(int requestId, String response) {

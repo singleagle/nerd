@@ -38,11 +38,19 @@
         </activity>
         
         <activity
-            android:name=".home.CreateDistractionActivity"
+            android:name=".distraction.CreateDistractionActivity"
             android:screenOrientation="portrait" />
         
        <activity
             android:name=".distraction.DistractionDetailActivity"
+            android:screenOrientation="portrait" />
+       
+      <activity
+            android:name=".distraction.DATagSelectActivity"
+            android:screenOrientation="portrait" />
+              
+       <activity
+            android:name=".distraction.AddDATagActivity"
             android:screenOrientation="portrait" />
        
      <activity
@@ -61,15 +69,9 @@
             android:name=".usercenter.ConversationListActivity"
             android:screenOrientation="portrait" />
        
-       
        <activity
-            android:name=".distraction.DATagSelectActivity"
+            android:name=".feed.FeedTypeSelectActivity"
             android:screenOrientation="portrait" />
-              
-       <activity
-            android:name=".distraction.AddDATagActivity"
-            android:screenOrientation="portrait" />
-       
        <service 
            android:name=".remoterequest.xmpp.IMMessageRecieverService"
            android:exported = "false"/>
