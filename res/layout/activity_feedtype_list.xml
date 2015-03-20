@@ -12,6 +12,7 @@
         android:divider= "@drawable/item_divider_with_margin_left"
         android:dividerHeight="1.0dp" 
         android:groupIndicator="@null"
+        android:listSelector="@null"
         android:fadingEdge="vertical"  
         android:childDivider="@drawable/item_divider_with_margin_left"  
         android:scrollbarStyle="outsideOverlay"

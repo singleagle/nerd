@@ -1,7 +1,7 @@
 package com.enjoy.nerd.feed;
 
+
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 import com.enjoy.nerd.R;
 import com.enjoy.nerd.remoterequest.FeedTag;
@@ -83,7 +83,7 @@ public class FeedTypeListAdapter extends BaseExpandableListAdapter{
 	
 	@Override
 	public boolean isChildSelectable(int groupPosition, int childPosition) {
-		return false;
+		return true;
 	}	
 	
 	@Override

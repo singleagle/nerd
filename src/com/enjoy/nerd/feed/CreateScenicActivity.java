@@ -1,4 +1,4 @@
-package com.enjoy.nerd.distraction;
+package com.enjoy.nerd.feed;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,26 +8,24 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.enjoy.nerd.AccountManager;
 import com.enjoy.nerd.BaseAcitivity;
 import com.enjoy.nerd.R;
 import com.enjoy.nerd.remoterequest.AddDistractionReq;
+import com.enjoy.nerd.remoterequest.AddScenicReq;
 import com.enjoy.nerd.remoterequest.BatchPostReqest;
 import com.enjoy.nerd.remoterequest.BatchPostReqest.PostRequestPipe;
 import com.enjoy.nerd.remoterequest.FeedTag;
 import com.enjoy.nerd.remoterequest.ImageUploadReq;
 import com.enjoy.nerd.remoterequest.PostRequest;
-import com.enjoy.nerd.remoterequest.RemoteRequest.FailResponseListner;
 import com.enjoy.nerd.remoterequest.RemoteRequest.SuccessResponseListner;
 import com.enjoy.nerd.utils.LogWrapper;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -37,51 +35,44 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CreateDistractionActivity extends BaseAcitivity implements SuccessResponseListner<String>,
-								View.OnClickListener, OnDateSetListener{
-	static private final String TAG = "CreateDistractionActivity";
+public class CreateScenicActivity extends BaseAcitivity implements SuccessResponseListner<String>,
+								View.OnClickListener{
+	static private final String TAG = "CreateScenicActivity";
+	
 	static public final String FEED_TAG = "feedtag";
 	
 	static private final int MENU_ID_PUBLISH = 0;
-	static private final int ADD_DA_ID = 1;
 	
-	static private final int REQ_CODE_SELECT_DATYPE = 1;
+	static private final int ADD_SCENI_ID = 1;
+	
+	static private final int REQ_CODE_SELECT_LOCATION = 1;
 	static private final int REQ_CODE_PICKUP_PHOTO = 2;
 	
-	private TextView mTimeView;
-	private EditText mDestinationView;
-	private View     mDATypeContainer;
-	private TextView mDATypeView;
+	private TextView mLocationView;
+	private Location mLocation;
+	private GridView mTagGridView;
 	private EditText mDescriptionView;
-	private DatePickerDialog mDatePickerDialog;
-	private FeedTag  mSelectedTag;
+	private ArrayList<FeedTag>  mSelectedTagList;
 	private String mImagLocalPath;
 	
-	private final SimpleDateFormat DATAFORMAT = new SimpleDateFormat("yy-MM-dd");
 	
 	@Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-    	setContentView(R.layout.create_distraction);
+    	setContentView(R.layout.create_scenic);
     	supportInvalidateOptionsMenu();
+    	
+    	mLocationView = (TextView)findViewById(R.id.location);
+    	mLocationView.setOnClickListener(this);
     	mDescriptionView = (EditText)findViewById(R.id.description);
-    	mDATypeContainer = findViewById(R.id.type_container);
-    	mDATypeContainer.setOnClickListener(this);
-    	
-    	mDATypeView = (TextView)findViewById(R.id.type);
-    	mSelectedTag = (FeedTag)getIntent().getParcelableExtra(FEED_TAG);
-    	mDATypeView.setText(mSelectedTag.getName());
-    	
-    	mTimeView = (TextView)findViewById(R.id.time);
-    	mTimeView.setText(DATAFORMAT.format(Calendar.getInstance().getTime()));
-    	mTimeView.setOnClickListener(this);
-    	mDestinationView = (EditText)findViewById(R.id.destination);
+    	mTagGridView = (GridView)findViewById(R.id.tag_grid);
     	findViewById(R.id.add).setOnClickListener(this);
-		getActionBar().setTitle(R.string.create_distraction);
+		getActionBar().setTitle(R.string.create_scenic);
         
     }
 	
@@ -98,27 +89,11 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
 	public void onClick(View v) {
 		
 		switch(v.getId()){
-		case R.id.time:
-            final Calendar calendar = Calendar.getInstance();
-            if(mDatePickerDialog == null){
-                mDatePickerDialog = new DatePickerDialog(
-                        this,
-                        this,
-                        calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH));
-            }else{
-            	//TODO:
-            	//mDatePickerDialog.updateDate(year, monthOfYear, dayOfMonth);
-            }
-            mDatePickerDialog.show();
+		case R.id.location:
+   			Intent intent = new Intent(this, LocationPickerActivity.class);
+			startActivity(intent);
 			break;
 			
-		case R.id.type_container:
-			Intent intent = new Intent(this, DATagSelectActivity.class);
-			startActivityForResult(intent, REQ_CODE_SELECT_DATYPE);
-			
-			break;
 		case R.id.add:
 			pickupPhoto();
 			break;
@@ -160,24 +135,14 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
 			return;
 		}
 		
-		if(REQ_CODE_SELECT_DATYPE == requestCode){
-			mSelectedTag = data.getParcelableExtra(DATagSelectActivity.FEEDTAG);
-			if(mSelectedTag != null){
-				mDATypeView.setText(mSelectedTag.getName());
-			}
+		if(REQ_CODE_SELECT_LOCATION == requestCode){
+
 		}else if(REQ_CODE_PICKUP_PHOTO == requestCode){
 			handlePickupPhtoResult(data);
 		}
 	}
 
-	@Override
-	public void onDateSet(DatePicker view, int year, int monthOfYear,
-			int dayOfMonth) {
-		Calendar calendar =  Calendar.getInstance();
-		calendar.set(year, monthOfYear, dayOfMonth, 0, 0);
-		mTimeView.setText(DATAFORMAT.format(calendar.getTime()));
-	}
-    
+
 	
 	
     @Override
@@ -187,32 +152,16 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
     	return super.onCreateOptionsMenu(menu);
     }
 
-    private void sendAddDAReq(){
+    private void sendAddScenicReq(){
     	ImageUploadReq uploadReq = null;
     	if(mImagLocalPath != null){
     		uploadReq  = new ImageUploadReq(this);
     	    uploadReq.setFile(new File(mImagLocalPath));
     	}
     	
-    	AddDistractionReq request = new AddDistractionReq(this);
-    	request.setDescription(mDescriptionView.getText().toString());
-    	request.setPayType(AddDistractionReq.PAYTYPE_AA);
-    	request.setCreatUserId(AccountManager.getInstance(this).getLoginUIN());
-    	request.setType(mSelectedTag.getId());
-    	
-    	if(mDestinationView.getText() != null){
-    		request.setAddress(mDestinationView.getText().toString());
-    	}
-    	
-    	long startTime = 0;
-		try {
-			startTime = DATAFORMAT.parse(mTimeView.getText().toString()).getTime();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-    	request.setStartTime(startTime);
+    	AddScenicReq request = new AddScenicReq(this);
     	if(uploadReq == null){
-        	request.registerListener(ADD_DA_ID, this, this);
+        	request.registerListener(ADD_SCENI_ID, this, this);
         	request.submit();
     	}else{
     		BatchPostReqest batchReq = new BatchPostReqest(this);
@@ -227,7 +176,7 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
 				}
     			
     		});
-    		batchReq.registerListener(ADD_DA_ID, this, this);
+    		batchReq.registerListener(ADD_SCENI_ID, this, this);
     		batchReq.submit();
     	}
 
@@ -237,12 +186,10 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
     public boolean onOptionsItemSelected(MenuItem item) {
     	switch(item.getItemId()){
     	case MENU_ID_PUBLISH:
-    		if(!AccountManager.getInstance(this).isLogin()){
-    			Toast.makeText(this, R.string.login_tips, Toast.LENGTH_LONG).show();
-    		}else if(mSelectedTag == null || mDescriptionView.getText() == null){
+    		if( mDescriptionView.getText() == null){
     			Toast.makeText(this, R.string.invalidate_input, Toast.LENGTH_LONG).show();
     		}else{
-    			sendAddDAReq();
+    			sendAddScenicReq();
     		}
     		
     		break;
@@ -257,9 +204,6 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
 	@Override
     public void onDestroy() {
         super.onDestroy();
-        if(mDatePickerDialog != null){
-        	mDatePickerDialog.dismiss();
-        }
     }
 
 	@Override

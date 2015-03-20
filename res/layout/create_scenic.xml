@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@drawable/common_color_bg"
+    android:descendantFocusability="beforeDescendants"
+    android:orientation="vertical" >
+
+   <TextView
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="right"
+        android:drawableLeft="@drawable/selector_location"
+        android:textSize="@dimen/fontSize_C" />
+    
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="top|left"
+        android:hint="@string/input_title_hint"
+        android:inputType="textMultiLine"
+        android:singleLine="true"
+        android:padding="10dip"
+        android:textColor="@android:color/black"
+        android:textColorHint="@color/input_hint"
+        android:textSize="@dimen/fontSize_C" />
+    
+    <LinearLayout
+        android:id="@+id/photo_container"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+        
+        <ImageView
+	        android:id="@+id/photo"
+	        android:layout_width="100dp"
+	        android:layout_height="match_parent"
+	        android:visibility="gone"
+	        android:contentDescription="@string/img_common_desc"
+	        android:src="@drawable/default_da_img" />
+        
+         <ImageView
+	        android:id="@+id/add"
+	        android:layout_width="100dp"
+	        android:layout_height="match_parent"
+	        android:contentDescription="@string/img_common_desc"
+	        android:src="@drawable/selector_photo_addbtn" />
+     </LinearLayout>   
+             
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="top|left"
+        android:hint="@string/input_intrest_hint"
+        android:inputType="textMultiLine"
+        android:lines="4"
+        android:maxLength="99999"
+        android:maxLines="5"
+        android:padding="10dip"
+        android:textColor="@android:color/black"
+        android:textColorHint="@color/input_hint"
+        android:textSize="@dimen/fontSize_C"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+        
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:text="@string/charmful_tag"
+	        android:textSize="@dimen/fontSize_C" />
+	
+	    <GridView
+	        android:id="@+id/tag_grid"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:numColumns="4" />
+
+	</LinearLayout>
+
+</LinearLayout>

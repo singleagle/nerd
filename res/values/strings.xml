@@ -4,6 +4,7 @@
     <string name="recommend">推荐</string>
     <string name="nearby">附近</string>
     <string name="create_distraction">创建活动</string>
+    <string name="create_scenic">创建地点</string>
     <string name="user_center">个人中心</string>
     <string name="edit_distraction_hint">我的想法，写几句吧</string>
     <string name="distraction_type">活动类型</string>
@@ -46,5 +47,8 @@
     
     <string name="datype_name_hint">类型名称</string>
     <string name="submint">提交</string>
+    <string name="charmful_tag">魅力标签</string>
+    <string name="input_title_hint">起个响亮的标题吧</string>
+    <string name="input_intrest_hint">好好描绘这个有趣的地方吧</string>
     
 </resources>

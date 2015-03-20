@@ -65,10 +65,18 @@ public class FeedTypeSelectActivity extends BaseAcitivity implements OnChildClic
 	public boolean onChildClick(ExpandableListView parent, View v,
 			int groupPosition, int childPosition, long id) {
 		FeedTag tag = (FeedTag)mAdapter.getChild(groupPosition, childPosition);
+		Intent intent = null;
+		
 		switch(tag.getTargetType()){
 		case DISTRACTION:
-   			Intent intent = new Intent(this, CreateDistractionActivity.class);
+   			intent = new Intent(this, CreateDistractionActivity.class);
    			intent.putExtra(CreateDistractionActivity.FEED_TAG, tag);
+			startActivity(intent);
+			break;
+		
+		case SCENIC:
+   			intent = new Intent(this, CreateScenicActivity.class);
+   			intent.putExtra(CreateScenicActivity.FEED_TAG, tag);
 			startActivity(intent);
 			break;
 			

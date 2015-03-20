@@ -7,7 +7,7 @@ public class FeedTag implements Parcelable{
 	private String _id;
 	private String parent;
 	private String name;
-	private String targettype;
+	private String target;
 	
 	public FeedTag(String tagId, String parentId, String name, FeedType type) {
 		this._id = tagId;
@@ -31,11 +31,11 @@ public class FeedTag implements Parcelable{
 	}
 	
 	public void setTargetType(FeedType type){
-		targettype = type.description;
+		target= type.description;
 	}
 
 	public FeedType getTargetType(){
-		return FeedType.translateFrom(targettype);
+		return FeedType.translateFrom(target);
 	}
 
 	@Override
@@ -49,14 +49,14 @@ public class FeedTag implements Parcelable{
 		dest.writeString(_id);
 		dest.writeString(parent);
 		dest.writeString(name);
-		dest.writeString(targettype);
+		dest.writeString(target);
 	}
 	
 	private FeedTag(Parcel in){
 		_id = in.readString();
 		parent = in.readString();
 		name = in.readString();
-		targettype=in.readString();
+		target=in.readString();
 	}
 	
      public static final Parcelable.Creator<FeedTag> CREATOR= new Parcelable.Creator<FeedTag>() {
