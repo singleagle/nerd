@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
     android:background="@drawable/common_color_bg"
     android:descendantFocusability="beforeDescendants"
     android:orientation="vertical" >
@@ -11,7 +10,8 @@
         android:id="@+id/location"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:gravity="right"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
         android:drawableLeft="@drawable/selector_location"
         android:textSize="@dimen/fontSize_C" />
     
@@ -19,6 +19,7 @@
         android:id="@+id/title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@color/white"
         android:gravity="top|left"
         android:hint="@string/input_title_hint"
@@ -57,6 +58,7 @@
         android:id="@+id/description"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@color/white"
         android:gravity="top|left"
         android:hint="@string/input_intrest_hint"
@@ -71,8 +73,8 @@
     
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="vertical" >

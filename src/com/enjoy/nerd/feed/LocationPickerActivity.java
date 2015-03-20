@@ -1,7 +1,13 @@
 package com.enjoy.nerd.feed;
 
+import java.util.List;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,14 +44,21 @@ import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.enjoy.nerd.BaseAcitivity;
 import com.enjoy.nerd.R;
+import com.enjoy.nerd.remoterequest.Location;
 import com.enjoy.nerd.utils.LogWrapper;
 
-public class LocationPickerActivity extends BaseAcitivity implements OnMapClickListener, OnGetPoiSearchResultListener{
+public class LocationPickerActivity extends BaseAcitivity implements OnMapClickListener, 
+				OnGetPoiSearchResultListener, OnItemClickListener{
 	static final private String TAG = "LocationPickerActivity";
+	
+	
+	static final public  String POI_LOCATION = "location";
+	static final public String POI_NAME = "name";
 	
 	private Button  mSearchBtn;
 	private ListView mPoiListView;
-	private ArrayAdapter<String> sugAdapter = null;
+	private ArrayAdapter<String> mCanidateAdapter = null;
+	private List<PoiInfo> mCanidatePoiInfo;
 	
 	private MapView mMapView;
 	private BaiduMap mBaiduMap;
@@ -67,8 +80,10 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 		mPoiSearch.setOnGetPoiSearchResultListener(this);
 		
 		mPoiListView = (ListView)findViewById(R.id.poi_list);
-		sugAdapter = new ArrayAdapter<String>(this, R.layout.poiname_item,  R.id.poi_name);
-		mPoiListView.setAdapter(sugAdapter);
+		mCanidateAdapter = new ArrayAdapter<String>(this, R.layout.poiname_item,  R.id.poi_name);
+		mPoiListView.setAdapter(mCanidateAdapter);
+		mPoiListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		mPoiListView.setOnItemClickListener(this);
     	
     	mMapView = (MapView) findViewById(R.id.map);
     	mMapView.showZoomControls(false);
@@ -81,12 +96,13 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 	
 	private void initLocation(){
 		mBaiduMap.setMyLocationEnabled(true);
+		
 		BitmapDescriptor  locationMarker = BitmapDescriptorFactory.fromResource(R.drawable.ic_location);
 		mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(
 				LocationMode.NORMAL, true, locationMarker));
 		// 定位初始化
-		mLocClient = new LocationClient(this);
-		mMapView.setVisibility(ViewGroup.VISIBLE);
+		mLocClient = new LocationClient(getApplicationContext());
+		
 		mLocClient.registerLocationListener(new BDLocationListener(){
 
 			public void onReceiveLocation(BDLocation location) {
@@ -95,20 +111,11 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 					return;
 				}
 				LogWrapper.d(TAG, String.format("receive user location is:(%f, %f)", location.getLatitude(),location.getLongitude()));
-				MyLocationData locData = new MyLocationData.Builder()
-						.accuracy(location.getRadius())
-						// 此处设置开发者获取到的方向信息，顺时针0-360
-						.direction(100).latitude(location.getLatitude())
-						.longitude(location.getLongitude()).build();
-				mBaiduMap.setMyLocationData(locData);
-				mMapView.setVisibility(ViewGroup.VISIBLE);
 				
-				LatLng ll = new LatLng(location.getLatitude(),
-							location.getLongitude());
-				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
-				mBaiduMap.animateMapStatus(u);
-				
-				mLocClient.registerLocationListener(null);
+				LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+				relocate(ll);
+				searchNearyByPoi(ll);
+				mLocClient.unRegisterLocationListener(this);
 				mLocClient.stop(); //不再定位
 			}
 			
@@ -116,7 +123,7 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 		LocationClientOption option = new LocationClientOption();
 		option.setOpenGps(true);// 打开gps
 		option.setCoorType("bd09ll"); // 设置坐标类型
-		option.setScanSpan(1000);
+		option.setScanSpan(5000); //设置发起定位请求的间隔时间为5000ms
 		mLocClient.setLocOption(option);
 		mLocClient.start();
 	}
@@ -145,7 +152,22 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 		super.onDestroy();
 	}
 
-
+	private void searchNearyByPoi(LatLng location){
+		if(location != null){
+			PoiNearbySearchOption option = new PoiNearbySearchOption().location(location).radius(5000).pageCapacity(8).keyword("景点");
+			mPoiSearch.searchNearby(option);
+		}
+	}
+	
+	private void relocate(LatLng location){
+		MyLocationData locData = new MyLocationData.Builder()
+									.latitude(location.latitude)
+									.longitude(location.longitude).build();
+		
+		mBaiduMap.setMyLocationData(locData);
+		MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(location);
+		mBaiduMap.animateMapStatus(u);
+	}
 
 
 	public void onMapClick(LatLng location) {
@@ -158,8 +180,6 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 		mBaiduMap.setMyLocationData(locData); 
 		MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(location);
 		mBaiduMap.animateMapStatus(u);
-		PoiNearbySearchOption option = new PoiNearbySearchOption().location(location).radius(5000).pageCapacity(8).keyword("银行");
-		mPoiSearch.searchNearby(option);
 	}
 
 
@@ -179,13 +199,37 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 		if (result.error != SearchResult.ERRORNO.NO_ERROR) {
 			return;
 		}
-		sugAdapter.clear();
-		for(PoiInfo poiInfo : result.getAllPoi()){
+		mCanidateAdapter.clear();
+		mCanidatePoiInfo = result.getAllPoi();
+		for(PoiInfo poiInfo : mCanidatePoiInfo){
 			if(poiInfo.address != null){
-				sugAdapter.add(poiInfo.name);
+				mCanidateAdapter.add(poiInfo.name);
 			}
 		}
-		sugAdapter.notifyDataSetChanged();
+		mCanidateAdapter.notifyDataSetChanged();
+		
+	}
+
+	private int mLastCheckedPoiPos = 0;
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		
+		if(mCanidatePoiInfo == null || mCanidatePoiInfo.get(position) == null){
+			return ;
+		}
+		PoiInfo info = mCanidatePoiInfo.get(position);
+		if(mLastCheckedPoiPos == position){
+			Location location = new Location().setAddress(info.address).setLatLng(info.location.longitude, info.location.latitude);
+			Intent data = new Intent();
+			data.putExtra(POI_LOCATION, location);
+			data.putExtra(POI_NAME, info.name);
+			setResult(RESULT_OK, data);
+			finish();
+		}else{
+			mLastCheckedPoiPos = position;
+			relocate(new LatLng(info.location.latitude, info.location.longitude));
+			//searchNearyByPoi(info.location);
+		}
 		
 	}
 	

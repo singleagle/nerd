@@ -6,12 +6,12 @@
     android:orientation="horizontal"
     android:paddingLeft="10dp" >
     
-   <TextView
+   <CheckedTextView
        android:id="@+id/poi_name"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
+       android:checkMark="@drawable/selector_checkbox"
        android:gravity="bottom"
-       android:singleLine="true"
        android:textSize="@dimen/fontSize_A" />
 
 </LinearLayout>

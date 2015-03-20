@@ -2,11 +2,7 @@ package com.enjoy.nerd.feed;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 import com.enjoy.nerd.BaseAcitivity;
 import com.enjoy.nerd.R;
@@ -16,6 +12,7 @@ import com.enjoy.nerd.remoterequest.BatchPostReqest;
 import com.enjoy.nerd.remoterequest.BatchPostReqest.PostRequestPipe;
 import com.enjoy.nerd.remoterequest.FeedTag;
 import com.enjoy.nerd.remoterequest.ImageUploadReq;
+import com.enjoy.nerd.remoterequest.Location;
 import com.enjoy.nerd.remoterequest.PostRequest;
 import com.enjoy.nerd.remoterequest.RemoteRequest.SuccessResponseListner;
 import com.enjoy.nerd.utils.LogWrapper;
@@ -25,15 +22,12 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -91,7 +85,7 @@ public class CreateScenicActivity extends BaseAcitivity implements SuccessRespon
 		switch(v.getId()){
 		case R.id.location:
    			Intent intent = new Intent(this, LocationPickerActivity.class);
-			startActivity(intent);
+			startActivityForResult(intent, REQ_CODE_SELECT_LOCATION);
 			break;
 			
 		case R.id.add:
@@ -136,7 +130,9 @@ public class CreateScenicActivity extends BaseAcitivity implements SuccessRespon
 		}
 		
 		if(REQ_CODE_SELECT_LOCATION == requestCode){
-
+			mLocation = data.getParcelableExtra(LocationPickerActivity.POI_LOCATION);
+			String poiName = data.getStringExtra(LocationPickerActivity.POI_NAME);
+			mLocationView.setText(poiName);
 		}else if(REQ_CODE_PICKUP_PHOTO == requestCode){
 			handlePickupPhtoResult(data);
 		}
