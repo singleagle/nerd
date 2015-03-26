@@ -6,33 +6,26 @@ import java.util.HashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.enjoy.nerd.remoterequest.DistractionProfile.PageDAProfile;
+import com.enjoy.nerd.remoterequest.RecommendFeed.PageFeed;
 import com.google.gson.Gson;
 
 import android.content.Context;
 
 
-public class NearbyDistractionReq extends GetRequest<PageDAProfile>{
-
-	private String address;
+public class RecommendFeedReq extends GetRequest<PageFeed>{
 	private int maxNumPerPage = 5;
 	private int offset;
 	private int nearbyMiles = 5000;//5km
 	private double longitude,  latitude;
 	
-	public NearbyDistractionReq(Context context) {
+	public RecommendFeedReq(Context context) {
 		super(context);
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	
 	public void setLocation(double longitude, double latitude){
 		this.longitude = longitude;
 		this.latitude = latitude;
 	}
-
 
 	public void setPager(int offset, int maxNumPerPage) {
 		this.offset = offset;
@@ -49,9 +42,6 @@ public class NearbyDistractionReq extends GetRequest<PageDAProfile>{
 
 	@Override
 	protected void onFillRequestParams(HashMap<String, String> params) {
-		if(address != null){
-			params.put("address", address);
-		}
 		params.put("location", String.format("%f, %f", longitude, latitude)); 
 		params.put("fromIndex", String.valueOf(offset));
 		params.put("maxItemPerPage", String.valueOf(maxNumPerPage));
@@ -59,12 +49,12 @@ public class NearbyDistractionReq extends GetRequest<PageDAProfile>{
 
 	@Override
 	protected String buidRequestUrl() {
-		return  VENUS_BASE_URL + "/sec/distractions";
+		return  VENUS_BASE_URL + "/sec/recommend";
 	}
 
 	@Override
-	protected PageDAProfile parse(Gson gson, String response) throws JSONException {
-		return gson.fromJson(response, PageDAProfile.class);
+	protected PageFeed parse(Gson gson, String response) throws JSONException {
+		return gson.fromJson(response, PageFeed.class);
 	}
 	
 }

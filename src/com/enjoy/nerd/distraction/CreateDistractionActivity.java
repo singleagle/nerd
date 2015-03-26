@@ -237,9 +237,7 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
     public boolean onOptionsItemSelected(MenuItem item) {
     	switch(item.getItemId()){
     	case MENU_ID_PUBLISH:
-    		if(!AccountManager.getInstance(this).isLogin()){
-    			Toast.makeText(this, R.string.login_tips, Toast.LENGTH_LONG).show();
-    		}else if(mSelectedTag == null || mDescriptionView.getText() == null){
+    		if(mSelectedTag == null || mDescriptionView.getText() == null){
     			Toast.makeText(this, R.string.invalidate_input, Toast.LENGTH_LONG).show();
     		}else{
     			sendAddDAReq();

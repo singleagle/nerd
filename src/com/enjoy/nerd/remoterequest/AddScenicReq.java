@@ -1,8 +1,8 @@
 package com.enjoy.nerd.remoterequest;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,17 +13,10 @@ import android.content.Context;
 
 
 public  class AddScenicReq extends PostRequest<String>{
-	
-	static public final int PAYTYPE_ME = 0;
-	static public final int PAYTYPE_AA = 1;
-	static public final int PAYTYPE_YOU = 2;
-	
 	private String title;
 	private long creatUserId;
 	private String description;
-	private String address;
-	private int payType;
-	private long startTime;
+	private Location location;
 	private ArrayList<String> tagIdList = new ArrayList<String>();
 	private ArrayList<String> imgUrlList = new ArrayList<String>();
 
@@ -37,7 +30,6 @@ public  class AddScenicReq extends PostRequest<String>{
 	}
 
 
-
 	public AddScenicReq setTitle(String title) {
 		this.title = title;
 		return this;
@@ -49,10 +41,7 @@ public  class AddScenicReq extends PostRequest<String>{
 		return this;
 	}
 
-	public AddScenicReq setStartTime(long startTime) {
-		this.startTime = startTime;
-		return this;
-	}
+
 
 	public long getCreatUserId() {
 		return creatUserId;
@@ -81,25 +70,26 @@ public  class AddScenicReq extends PostRequest<String>{
 
 
 	public String getAddress() {
-		return address;
+		if(location != null){
+			return location.getAddress();
+		}
+		return null;
 	}
 
-	public AddScenicReq setAddress(String address) {
-		this.address = address;
-		return this;
+	public AddScenicReq setLocation(String address, double longitude, double latitude) {
+		Location location = new Location();
+		location.setAddress(address).setLatLng(longitude, latitude);
+		return setLocation(location);
 	}
-
-	/**
-	 * @param payType: PAYTYPE_XXX
-	 * @return
-	 */
-	public AddScenicReq setPayType(int payType) {
-		this.payType = payType;
+	
+	
+	public AddScenicReq setLocation(Location location){
+		this.location = location;
 		return this;
 	}
 
 	
-	public AddScenicReq setImgUrlList(AbstractList<String> urlList){
+	public AddScenicReq setImgUrlList(List<String> urlList){
 		imgUrlList.clear();
 		imgUrlList.addAll(urlList);
 		return this;	
@@ -114,13 +104,25 @@ public  class AddScenicReq extends PostRequest<String>{
 
 		params.put("createuser", Long.toString(creatUserId));
 		if(!imgUrlList.isEmpty()){
-			params.put("imgurllist", imgUrlList.get(0));
+			StringBuilder strBuilder = new StringBuilder();
+			int size = imgUrlList.size();
+			int num = 0;
+			for(String url:imgUrlList){
+				strBuilder.append(url);
+				if (++num < size){
+					strBuilder.append(",");
+				}
+			}
+			params.put("imgurllist", strBuilder.toString());
 		}
 		params.put("tagidlist", tagIdList.get(0));
 		params.put("description", description);
-		params.put("address", address);
-		params.put("paytype", Integer.toString(payType));
-		params.put("starttime", Long.toString(startTime));
+		if(location != null){
+			params.put("address", location.getAddress());
+			double[] cord = location.getLocation();
+			params.put("location", String.format("%f,  %f",cord[0],cord[1]));
+		}
+		
 	}
 
 	@Override

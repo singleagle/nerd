@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.enjoy.nerd.AccountManager;
 import com.enjoy.nerd.BaseAcitivity;
 import com.enjoy.nerd.R;
 import com.enjoy.nerd.remoterequest.AddDistractionReq;
@@ -50,6 +51,7 @@ public class CreateScenicActivity extends BaseAcitivity implements SuccessRespon
 	private TextView mLocationView;
 	private Location mLocation;
 	private GridView mTagGridView;
+	private EditText mTitleView;
 	private EditText mDescriptionView;
 	private ArrayList<FeedTag>  mSelectedTagList;
 	private String mImagLocalPath;
@@ -63,6 +65,7 @@ public class CreateScenicActivity extends BaseAcitivity implements SuccessRespon
     	
     	mLocationView = (TextView)findViewById(R.id.location);
     	mLocationView.setOnClickListener(this);
+    	mTitleView = (EditText)findViewById(R.id.title);
     	mDescriptionView = (EditText)findViewById(R.id.description);
     	mTagGridView = (GridView)findViewById(R.id.tag_grid);
     	findViewById(R.id.add).setOnClickListener(this);
@@ -148,7 +151,25 @@ public class CreateScenicActivity extends BaseAcitivity implements SuccessRespon
     	return super.onCreateOptionsMenu(menu);
     }
 
+    private boolean checkInput(){
+    	boolean validate = true;
+    	
+    	if(mLocation == null){
+    		return false;
+    	}
+    	if(mTitleView.getText() == null || mTitleView.getText().length() == 0){
+    		return  false;
+    	}
+    	
+    	return validate;
+    }
+    
     private void sendAddScenicReq(){
+    	if(!checkInput()){
+    		 Toast.makeText(this, R.string.invalidate_input, Toast.LENGTH_LONG).show();
+    		 return;
+    	}
+    	
     	ImageUploadReq uploadReq = null;
     	if(mImagLocalPath != null){
     		uploadReq  = new ImageUploadReq(this);
@@ -156,6 +177,11 @@ public class CreateScenicActivity extends BaseAcitivity implements SuccessRespon
     	}
     	
     	AddScenicReq request = new AddScenicReq(this);
+    	request.setTitle(mTitleView.getEditableText().toString());
+    	request.setLocation(mLocation);
+    	request.setDescription(mDescriptionView.getEditableText().toString());
+    	request.setCreatUserId(AccountManager.getInstance(this).getLoginUIN());
+    	
     	if(uploadReq == null){
         	request.registerListener(ADD_SCENI_ID, this, this);
         	request.submit();

@@ -106,7 +106,11 @@ public class DAProfileAdrapter extends BaseAdapter {
 		}else{
 			holder.titleView.setText("无主题");
 		}
-		holder.daImgView.setImageUrl(profile.getImageUrl(), mImageLoader);
+		
+		if(profile.getImageUrl() != null){
+			holder.daImgView.setImageUrl(profile.getImageUrl(), mImageLoader);
+		}
+		
 		SimpleUserInfo userInfo =  profile.getCreateUserInfo();
 		if(userInfo != null){
 			holder.creatorNameView.setText(String.valueOf(userInfo.getName()));

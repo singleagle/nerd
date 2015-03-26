@@ -50,5 +50,6 @@
     <string name="charmful_tag">魅力标签</string>
     <string name="input_title_hint">起个响亮的标题吧</string>
     <string name="input_intrest_hint">好好描绘这个有趣的地方吧</string>
+    <string name="retrieve_location_error">没有获取到你当前的位置信息</string>
     
 </resources>

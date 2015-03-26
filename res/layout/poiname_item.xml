@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:layout_gravity="center_vertical"
-    android:orientation="horizontal"
-    android:paddingLeft="10dp" >
-    
-   <CheckedTextView
-       android:id="@+id/poi_name"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:checkMark="@drawable/selector_checkbox"
-       android:gravity="bottom"
-       android:textSize="@dimen/fontSize_A" />
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:checkMark="@drawable/selector_checkbox"
+    android:gravity="bottom"
+    android:textSize="@dimen/fontSize_A" />
 
-</LinearLayout>

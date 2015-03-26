@@ -6,14 +6,13 @@ import com.enjoy.nerd.BaseAcitivity;
 import com.enjoy.nerd.R;
 import com.enjoy.nerd.distraction.CreateDistractionActivity;
 import com.enjoy.nerd.remoterequest.FeedTag;
+import com.enjoy.nerd.remoterequest.FeedSubject;
 import com.enjoy.nerd.remoterequest.FeedTypeListReq;
 import com.enjoy.nerd.remoterequest.FeedTypeListReq.FeedTagGroup;
-import com.enjoy.nerd.remoterequest.RemoteRequest.FailResponseListner;
 import com.enjoy.nerd.remoterequest.RemoteRequest.SuccessResponseListner;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView;
@@ -67,7 +66,7 @@ public class FeedTypeSelectActivity extends BaseAcitivity implements OnChildClic
 		FeedTag tag = (FeedTag)mAdapter.getChild(groupPosition, childPosition);
 		Intent intent = null;
 		
-		switch(tag.getTargetType()){
+		switch(tag.getSubject()){
 		case DISTRACTION:
    			intent = new Intent(this, CreateDistractionActivity.class);
    			intent.putExtra(CreateDistractionActivity.FEED_TAG, tag);

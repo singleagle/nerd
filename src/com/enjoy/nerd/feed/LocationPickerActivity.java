@@ -41,6 +41,7 @@ import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
+import com.baidu.mapapi.search.poi.PoiSortType;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.enjoy.nerd.BaseAcitivity;
 import com.enjoy.nerd.R;
@@ -80,7 +81,7 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 		mPoiSearch.setOnGetPoiSearchResultListener(this);
 		
 		mPoiListView = (ListView)findViewById(R.id.poi_list);
-		mCanidateAdapter = new ArrayAdapter<String>(this, R.layout.poiname_item,  R.id.poi_name);
+		mCanidateAdapter = new ArrayAdapter<String>(this, R.layout.poiname_item);
 		mPoiListView.setAdapter(mCanidateAdapter);
 		mPoiListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		mPoiListView.setOnItemClickListener(this);
@@ -102,19 +103,26 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 				LocationMode.NORMAL, true, locationMarker));
 		// 定位初始化
 		mLocClient = new LocationClient(getApplicationContext());
-		
 		mLocClient.registerLocationListener(new BDLocationListener(){
 
 			public void onReceiveLocation(BDLocation location) {
 				// map view 销毁后不在处理新接收的位置
 				if (location == null || mMapView == null){
+					if(mLocClient != null){
+						mLocClient.unRegisterLocationListener(this);
+					}
 					return;
 				}
 				LogWrapper.d(TAG, String.format("receive user location is:(%f, %f)", location.getLatitude(),location.getLongitude()));
 				
-				LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
-				relocate(ll);
-				searchNearyByPoi(ll);
+				if(location.getLatitude() != 0.0 && location.getLongitude() != 0.0){
+					LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+					relocate(ll);
+					searchNearyByPoi(ll);
+				}else{
+					LogWrapper.e(TAG, "not right location!!"); 
+					Toast.makeText(LocationPickerActivity.this, R.string.retrieve_location_error, Toast.LENGTH_SHORT).show();
+				}
 				mLocClient.unRegisterLocationListener(this);
 				mLocClient.stop(); //不再定位
 			}
@@ -125,6 +133,11 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 		option.setCoorType("bd09ll"); // 设置坐标类型
 		option.setScanSpan(5000); //设置发起定位请求的间隔时间为5000ms
 		mLocClient.setLocOption(option);
+		
+		BDLocation lastLoc = mLocClient.getLastKnownLocation();
+		if(lastLoc != null && lastLoc.getLatitude() != 0.0 && lastLoc.getLongitude() != 0.0){
+			relocate(new LatLng(lastLoc.getLatitude(), lastLoc.getLongitude()));
+		}
 		mLocClient.start();
 	}
 	
@@ -143,7 +156,10 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 	@Override
 	protected void onDestroy() {
 		// 退出时销毁定位
-		mLocClient.stop();
+		if(mLocClient.isStarted()){
+			mLocClient.stop();
+		}
+		
 		// 关闭定位图层
 		mBaiduMap.setMyLocationEnabled(false);
 		mMapView.onDestroy();
@@ -154,7 +170,9 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 
 	private void searchNearyByPoi(LatLng location){
 		if(location != null){
-			PoiNearbySearchOption option = new PoiNearbySearchOption().location(location).radius(5000).pageCapacity(8).keyword("景点");
+			PoiNearbySearchOption option = new PoiNearbySearchOption().location(location)
+										.radius(5000).sortType(PoiSortType.distance_from_near_to_far).pageCapacity(8).keyword("景点");
+			
 			mPoiSearch.searchNearby(option);
 		}
 	}
@@ -199,11 +217,20 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 		if (result.error != SearchResult.ERRORNO.NO_ERROR) {
 			return;
 		}
+		int lastSelectedPos = mPoiListView.getCheckedItemPosition();
+		String lastSelectedPoiName = null; 
+		if(lastSelectedPos != ListView.INVALID_POSITION){
+			lastSelectedPoiName = mCanidateAdapter.getItem(lastSelectedPos);
+		}
+		mPoiListView.clearChoices();
 		mCanidateAdapter.clear();
 		mCanidatePoiInfo = result.getAllPoi();
 		for(PoiInfo poiInfo : mCanidatePoiInfo){
-			if(poiInfo.address != null){
+			if(poiInfo.name != null){
 				mCanidateAdapter.add(poiInfo.name);
+				if(poiInfo.name.equalsIgnoreCase(lastSelectedPoiName)){
+					mPoiListView.setItemChecked(mCanidateAdapter.getCount() -1, true);
+				}
 			}
 		}
 		mCanidateAdapter.notifyDataSetChanged();
@@ -228,7 +255,7 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 		}else{
 			mLastCheckedPoiPos = position;
 			relocate(new LatLng(info.location.latitude, info.location.longitude));
-			//searchNearyByPoi(info.location);
+			searchNearyByPoi(info.location);
 		}
 		
 	}

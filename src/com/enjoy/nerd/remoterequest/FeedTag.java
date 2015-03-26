@@ -7,13 +7,13 @@ public class FeedTag implements Parcelable{
 	private String _id;
 	private String parent;
 	private String name;
-	private String target;
+	private String subject;
 	
-	public FeedTag(String tagId, String parentId, String name, FeedType type) {
+	public FeedTag(String tagId, String parentId, String name, FeedSubject subject) {
 		this._id = tagId;
 		this.parent = parentId;
 		this.name= name;
-		setTargetType(type);
+		setSubject(subject);
 	}
 
 	public String getId() {
@@ -30,12 +30,12 @@ public class FeedTag implements Parcelable{
 		return name;
 	}
 	
-	public void setTargetType(FeedType type){
-		target= type.description;
+	public void setSubject(FeedSubject subject){
+		this.subject= subject.getDescription();
 	}
 
-	public FeedType getTargetType(){
-		return FeedType.translateFrom(target);
+	public FeedSubject getSubject(){
+		return FeedSubject.translateFrom(subject);
 	}
 
 	@Override
@@ -49,14 +49,14 @@ public class FeedTag implements Parcelable{
 		dest.writeString(_id);
 		dest.writeString(parent);
 		dest.writeString(name);
-		dest.writeString(target);
+		dest.writeString(subject);
 	}
 	
 	private FeedTag(Parcel in){
 		_id = in.readString();
 		parent = in.readString();
 		name = in.readString();
-		target=in.readString();
+		subject =in.readString();
 	}
 	
      public static final Parcelable.Creator<FeedTag> CREATOR= new Parcelable.Creator<FeedTag>() {
@@ -68,28 +68,5 @@ public class FeedTag implements Parcelable{
 	         return new FeedTag[size];
 	     }
 	};
-	
-	static public  enum FeedType{
-		DISTRACTION("distraction"),
-		SCENIC("scenic"),
-		TOPIC("topic"),
-		USER("user");
-		
-		public final String description;
-		
-		private FeedType(String description){
-			this.description = description;
-		}
-		
-		public static FeedType translateFrom(String description){
-			for(FeedType type : FeedType.values()){
-				if(type.description.equalsIgnoreCase(description)){
-					return type;
-				}
-			}
-			throw new IllegalArgumentException("no such feedtype:" + description);
-		}
-		
-		
-	}
+
 }

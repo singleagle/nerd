@@ -1,8 +1,8 @@
 package com.enjoy.nerd.remoterequest;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -99,7 +99,7 @@ public  class AddDistractionReq extends PostRequest<String>{
 	}
 
 	
-	public AddDistractionReq setImgUrlList(AbstractList<String> urlList){
+	public AddDistractionReq setImgUrlList(List<String> urlList){
 		imgUrlList.clear();
 		imgUrlList.addAll(urlList);
 		return this;	
@@ -113,8 +113,18 @@ public  class AddDistractionReq extends PostRequest<String>{
 		}
 
 		params.put("createuser", Long.toString(creatUserId));
+		
 		if(!imgUrlList.isEmpty()){
-			params.put("imgurllist", imgUrlList.get(0));
+			StringBuilder strBuilder = new StringBuilder();
+			int size = imgUrlList.size();
+			int num = 0;
+			for(String url:imgUrlList){
+				strBuilder.append(url);
+				if (++num < size){
+					strBuilder.append(",");
+				}
+			}
+			params.put("imgurllist", strBuilder.toString());
 		}
 		params.put("tagidlist", tagIdList.get(0));
 		params.put("description", description);
