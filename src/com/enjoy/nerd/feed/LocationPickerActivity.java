@@ -24,6 +24,7 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMap.OnMapClickListener;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
@@ -67,7 +68,7 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 	private PoiSearch mPoiSearch;
 	private SuggestionSearch mSuggestionSearch;
 	private MyLocationData mCurrLocation;
-	
+	private ImageView mDestImgView;
 	
 	
 	@Override
@@ -76,6 +77,8 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
         SDKInitializer.initialize(getApplicationContext());
     	setContentView(R.layout.activity_location_picker);
     	mSearchBtn = (Button)findViewById(R.id.search);
+    	mDestImgView = new ImageView(this);
+    	mDestImgView.setImageResource(R.drawable.ic_location);
 		// 初始化搜索模块，注册搜索事件监听
 		mPoiSearch = PoiSearch.newInstance();
 		mPoiSearch.setOnGetPoiSearchResultListener(this);
@@ -117,7 +120,7 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 				
 				if(location.getLatitude() != 0.0 && location.getLongitude() != 0.0){
 					LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
-					relocate(ll);
+					relocateTarget(ll);
 					searchNearyByPoi(ll);
 				}else{
 					LogWrapper.e(TAG, "not right location!!"); 
@@ -136,7 +139,7 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 		
 		BDLocation lastLoc = mLocClient.getLastKnownLocation();
 		if(lastLoc != null && lastLoc.getLatitude() != 0.0 && lastLoc.getLongitude() != 0.0){
-			relocate(new LatLng(lastLoc.getLatitude(), lastLoc.getLongitude()));
+			relocateTarget(new LatLng(lastLoc.getLatitude(), lastLoc.getLongitude()));
 		}
 		mLocClient.start();
 	}
@@ -177,14 +180,10 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 		}
 	}
 	
-	private void relocate(LatLng location){
-		MyLocationData locData = new MyLocationData.Builder()
-									.latitude(location.latitude)
-									.longitude(location.longitude).build();
-		
-		mBaiduMap.setMyLocationData(locData);
+	private void relocateTarget(LatLng location){
 		MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(location);
 		mBaiduMap.animateMapStatus(u);
+		mBaiduMap.showInfoWindow(new InfoWindow(mDestImgView, location, 0));
 	}
 
 
@@ -254,7 +253,7 @@ public class LocationPickerActivity extends BaseAcitivity implements OnMapClickL
 			finish();
 		}else{
 			mLastCheckedPoiPos = position;
-			relocate(new LatLng(info.location.latitude, info.location.longitude));
+			relocateTarget(new LatLng(info.location.latitude, info.location.longitude));
 			searchNearyByPoi(info.location);
 		}
 		

@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.enjoy.nerd.R;
+import com.enjoy.nerd.distraction.DistractionDetailActivity;
+import com.enjoy.nerd.feed.ScenicDetailActivity;
 import com.enjoy.nerd.remoterequest.IFeed;
 import com.enjoy.nerd.remoterequest.RecommendFeed;
 import com.enjoy.nerd.remoterequest.RecommendFeed.PageFeed;
@@ -104,6 +106,26 @@ public class RecommandFeedFragment extends Fragment implements OnRefreshListener
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		RecommendFeed feed = (RecommendFeed)parent.getItemAtPosition(position);
+		
+		Intent intent;
+		switch(feed.getFeedSubject()){
+		case SCENIC:
+			intent = new Intent(getActivity(), ScenicDetailActivity.class);
+			intent.putExtra(ScenicDetailActivity.KEY_FEED_ID, feed.getId());
+			startActivity(intent);
+			break;
+			
+		case DISTRACTION:
+			intent = new Intent(getActivity(), DistractionDetailActivity.class);
+			intent.putExtra(DistractionDetailActivity.KEY_FEED_ID, feed.getId());
+			startActivity(intent);
+			break;
+			
+		default:
+			break;
+			
+		
+		}
 	}
 
 

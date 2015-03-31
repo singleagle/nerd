@@ -105,8 +105,7 @@ public class NearByFragment extends Fragment implements OnRefreshListener<ListVi
 			long id) {
 		DistractionProfile profile = (DistractionProfile)parent.getItemAtPosition(position);
 		Intent intent = new Intent(getActivity(), DistractionDetailActivity.class);
-		intent.putExtra(DistractionDetailActivity.KEY_DA_ID, profile.getId());
-		intent.putExtra(DistractionDetailActivity.KEY_DA_CREATOR_UID, profile.getCreateUserInfo().getUin());
+		intent.putExtra(DistractionDetailActivity.KEY_FEED_ID, profile.getId());
 		startActivity(intent);
 	}
 

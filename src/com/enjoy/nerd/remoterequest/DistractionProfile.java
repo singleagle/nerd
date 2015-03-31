@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DistractionProfile {
-	private String id;
+public class DistractionProfile implements IFeed{
+	private String _id;
 	private String title;
 	private long createTime;
 	private long startTime;
@@ -17,15 +17,14 @@ public class DistractionProfile {
 	private int requestMemberCount;
 	private int partnerCount;
 	private int likeNum;
-	private String[] tagNameArray;
-	private String imageurl;
+	private String imgurl;
 
 	public String getId() {
-		return id;
+		return _id;
 	}
 
 	public void setId(String id) {
-		this.id = id;
+		this._id = id;
 	}
 
 	public String getTitle() {
@@ -36,12 +35,6 @@ public class DistractionProfile {
 		this.title = title;
 	}
 	
-	public String getScheme(){
-		if(tagNameArray != null && tagNameArray.length != 0){
-			return tagNameArray[0];
-		}
-		return null;
-	}
 
 	public long getCreateTime() {
 		return createTime;
@@ -83,6 +76,10 @@ public class DistractionProfile {
 		return originLoc.getAddress();
 	}
 	
+	public Location getDestLocation(){
+		return dstLoc;
+	}
+	
 	public String getDestAddress(){
 		if(dstLoc == null){
 			return null;
@@ -92,7 +89,7 @@ public class DistractionProfile {
 	}
 	
 	
-	public int getFarawayMeters() {
+	public long getFarawayMeters() {
 		return farawayMeters;
 	}
 
@@ -121,13 +118,17 @@ public class DistractionProfile {
 	}
 
 	public String getImageUrl() {
-		return imageurl;
+		return imgurl;
+	}
+	
+	public String getContenturl() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageurl = imageUrl;
+	public FeedSubject getFeedSubject() {
+		return FeedSubject.DISTRACTION;
 	}
-
 	
 	static public class PageDAProfile{
 		private int startIndex;
@@ -159,5 +160,6 @@ public class DistractionProfile {
 			this.list = DAProfileList;
 		}
 	}
+
 	
 }

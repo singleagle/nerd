@@ -35,8 +35,7 @@ public class DAProfileAdrapter extends BaseAdapter {
 	public DAProfileAdrapter(Context context){
 		mContext = context;
 		NerdApp app = (NerdApp)context.getApplicationContext();
-	    RequestQueue queue = Volley.newRequestQueue(context);    
-	    mImageLoader = new ImageLoader(queue, app.getBitmapCache());
+		mImageLoader = app.getImageLoader();
 	}
 	
 	public void addProfileList(List<DistractionProfile> profileList, boolean clear){
@@ -83,7 +82,6 @@ public class DAProfileAdrapter extends BaseAdapter {
 			
 			holder.creatorNameView = (TextView) convertView.findViewById(R.id.user_name);
 			holder.titleView = (TextView) convertView.findViewById(R.id.title);
-			holder.contentView = (TextView)convertView.findViewById(R.id.description);  
 			holder.destView = (TextView)convertView.findViewById(R.id.dest);
 			holder.createTimeView = (TextView)convertView.findViewById(R.id.createtime);
 			holder.startTimeView = (TextView)convertView.findViewById(R.id.starttime);
@@ -101,10 +99,8 @@ public class DAProfileAdrapter extends BaseAdapter {
 	private void bindView(ViewHolder holder, DistractionProfile profile){
 		if(profile.getTitle() != null){
 			holder.titleView.setText(profile.getTitle());
-		}else if(profile.getScheme() != null){
-			holder.titleView.setText(profile.getScheme());
 		}else{
-			holder.titleView.setText("无主题");
+			holder.titleView.setText("无标题");
 		}
 		
 		if(profile.getImageUrl() != null){
@@ -117,7 +113,6 @@ public class DAProfileAdrapter extends BaseAdapter {
 			holder.userAvatar.setImageUrl(userInfo.getHeaderImgUrl(), mImageLoader);
 		}
 		
-		holder.contentView.setText(profile.getDescription());
 		holder.destView.setText(profile.getDestAddress());
 		holder.createTimeView.setText(TIMEFORMAT.format(new Date(profile.getCreateTime())));
 		holder.startTimeView.setText(TIMEFORMAT.format(new Date(profile.getStartTime())));
@@ -131,7 +126,6 @@ public class DAProfileAdrapter extends BaseAdapter {
 		NetworkImageView daImgView;
 		TextView  creatorNameView;
 		TextView  titleView;
-		TextView  contentView;
 		TextView  destView;
 		TextView  createTimeView;
 		TextView  startTimeView;

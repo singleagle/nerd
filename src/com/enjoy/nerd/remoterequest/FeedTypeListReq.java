@@ -30,7 +30,7 @@ public class FeedTypeListReq extends GetRequest<ArrayList<FeedTagGroup>> {
 
 	@Override
 	protected String buidRequestUrl() {
-		return  VENUS_BASE_URL + "/sec/feedgroup";
+		return  VENUS_BASE_URL + "/feedgroup";
 	}
 
 	@Override

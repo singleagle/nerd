@@ -23,6 +23,14 @@ public class Location implements Parcelable{
 		return this;
 	}
 	
+	public double getLongitude(){
+		return location[0];
+	}
+	
+	public double getLatitude(){
+		return location[1];
+	}
+	
 	public String getAddress() {
 		return address;
 	}

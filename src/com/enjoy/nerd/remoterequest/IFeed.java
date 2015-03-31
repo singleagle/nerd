@@ -4,7 +4,7 @@ public  interface IFeed{
 	
 	String getId();
 	String getTitle();
-	String getImgurl() ;
+	String getImageUrl() ;
 	String getContenturl();
 	FeedSubject getFeedSubject();
 	int getLikeNum();

@@ -35,7 +35,7 @@
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:paddingLeft="20dp"
-            android:textColor="@color/gainsboro"
+            android:textColor="@color/black"
             android:textSize="14sp" />
     </RelativeLayout>
 
@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:singleLine="true"
-        android:textSize="14sp" />
+        android:textSize="@dimen/fontSize_D" />
 
     <LinearLayout
         android:id="@+id/dest_container"
@@ -59,7 +59,7 @@
             android:layout_height="match_parent"
             android:text="@string/destination"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="@dimen/fontSize_A" />
 
         <TextView
             android:id="@+id/dest"
@@ -67,8 +67,8 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingLeft="20dp"
-            android:textColor="@color/gainsboro"
-            android:textSize="12sp" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/fontSize_A" />
     </LinearLayout>
 
     <LinearLayout
@@ -83,27 +83,22 @@
             android:layout_height="match_parent"
             android:text="@string/time"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="@dimen/fontSize_A" />
 
         <TextView
             android:id="@+id/starttime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingLeft="20dp"
-            android:textColor="@color/gainsboro"
-            android:textSize="14sp" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/fontSize_A" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp" />
     
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/photo"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="140dp"
         android:contentDescription="@string/img_common_desc"
         android:scaleType="fitXY"
         android:src="@drawable/default_da_img" />
@@ -121,7 +116,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:drawableLeft="@drawable/ic_partner"
-            android:textSize="12sp" />
+            android:textSize="@dimen/fontSize_A" />
         
         <TextView
             android:id="@+id/good_count"
@@ -130,7 +125,7 @@
             android:layout_weight="1"
             android:drawableLeft="@drawable/ic_partner_good"
             android:paddingLeft="20dp"
-            android:textSize="12sp" />
+            android:textSize="@dimen/fontSize_A" />
         
         <TextView
             android:id="@+id/distance"
@@ -139,7 +134,7 @@
             android:layout_weight="1"
             android:drawableLeft="@drawable/ic_distance"
             android:paddingLeft="20dp"
-            android:textSize="12sp" />
+            android:textSize="@dimen/fontSize_A" />
     </LinearLayout>
 
 </LinearLayout>

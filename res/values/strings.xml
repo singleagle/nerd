@@ -32,6 +32,7 @@
     <string name="login_fail">登录失败:%d</string>
     <string name="logout_success">退出登录</string>
     <string name="login_tips">请登录！</string>
+    <string name="join">申请加入</string>
     <string name="create_chat">发起对话</string>
     
     <string name="send">发送</string>
@@ -51,5 +52,8 @@
     <string name="input_title_hint">起个响亮的标题吧</string>
     <string name="input_intrest_hint">好好描绘这个有趣的地方吧</string>
     <string name="retrieve_location_error">没有获取到你当前的位置信息</string>
+    <string name="gohere">到这里去</string>
+    <string name="sharetoweixin">分享到微信</string>
+    <string name="like">喜欢</string>
     
 </resources>

@@ -23,7 +23,7 @@ public  class RecommendFeed implements IFeed{
 	}
 	
 	@Override
-	public String getImgurl() {
+	public String getImageUrl() {
 		return imgurl;
 	}
 	
@@ -41,7 +41,7 @@ public  class RecommendFeed implements IFeed{
 	}
 	
 	public FeedSubject getFeedSubject() {
-		return null;
+		return FeedSubject.translateFrom(subject);
 	}
 	
 	static public class PageFeed{

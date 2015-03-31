@@ -29,8 +29,7 @@ public class FeedAdrapter extends BaseAdapter {
 	public FeedAdrapter(Context context){
 		mContext = context;
 		NerdApp app = (NerdApp)context.getApplicationContext();
-	    RequestQueue queue = Volley.newRequestQueue(context);    
-	    mImageLoader = new ImageLoader(queue, app.getBitmapCache());
+	    mImageLoader = app.getImageLoader();
 	}
 	
 	public void addFeedList(List<RecommendFeed> feedList, boolean clear){
@@ -87,8 +86,8 @@ public class FeedAdrapter extends BaseAdapter {
 			holder.titleView.setText(feed.getTitle());
 		}
 		
-		if(feed.getImgurl() != null){
-			holder.imgView.setImageUrl(feed.getImgurl(), mImageLoader);
+		if(feed.getImageUrl() != null){
+			holder.imgView.setImageUrl(feed.getImageUrl(), mImageLoader);
 		}
 
 		holder.goodCounterView.setText(String.valueOf(feed.getLikeNum()));

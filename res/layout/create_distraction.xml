@@ -73,19 +73,16 @@
 	    
 	</LinearLayout>
 
-    <EditText
-        android:id="@+id/destination"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:inputType="text"
-        android:singleLine="true"
-        android:hint="@string/destination"
-        android:textColor="@android:color/black"
-        android:textColorHint="@color/input_hint"
-        android:textSize="16sp" />
+
+    
+    <TextView
+	    android:id="@+id/destination"
+	    android:layout_width="match_parent"
+	    android:layout_height="30dp"
+	    android:layout_marginTop="10dp"
+	    android:gravity="center"
+	    android:drawableLeft="@drawable/selector_location"
+	    android:textSize="@dimen/fontSize_C" />
 
     <LinearLayout
         android:layout_width="match_parent"

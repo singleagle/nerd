@@ -89,7 +89,15 @@
             android:screenOrientation="portrait" />
        
        <activity
+            android:name=".feed.LocationViewActivity"
+            android:screenOrientation="portrait" />
+       
+       <activity
             android:name=".feed.CreateScenicActivity"
+            android:screenOrientation="portrait" />
+       
+       <activity
+            android:name=".feed.ScenicDetailActivity"
             android:screenOrientation="portrait" />
        
        <service 

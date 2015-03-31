@@ -11,11 +11,13 @@ import java.util.Date;
 import com.enjoy.nerd.AccountManager;
 import com.enjoy.nerd.BaseAcitivity;
 import com.enjoy.nerd.R;
+import com.enjoy.nerd.feed.LocationPickerActivity;
 import com.enjoy.nerd.remoterequest.AddDistractionReq;
 import com.enjoy.nerd.remoterequest.BatchPostReqest;
 import com.enjoy.nerd.remoterequest.BatchPostReqest.PostRequestPipe;
 import com.enjoy.nerd.remoterequest.FeedTag;
 import com.enjoy.nerd.remoterequest.ImageUploadReq;
+import com.enjoy.nerd.remoterequest.Location;
 import com.enjoy.nerd.remoterequest.PostRequest;
 import com.enjoy.nerd.remoterequest.RemoteRequest.FailResponseListner;
 import com.enjoy.nerd.remoterequest.RemoteRequest.SuccessResponseListner;
@@ -45,21 +47,24 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
 								View.OnClickListener, OnDateSetListener{
 	static private final String TAG = "CreateDistractionActivity";
 	static public final String FEED_TAG = "feedtag";
+	static public final String POI_LOCATION = "location";
 	
 	static private final int MENU_ID_PUBLISH = 0;
 	static private final int ADD_DA_ID = 1;
 	
 	static private final int REQ_CODE_SELECT_DATYPE = 1;
 	static private final int REQ_CODE_PICKUP_PHOTO = 2;
+	static private final int REQ_CODE_SELECT_LOCATION = 3;
 	
 	private TextView mTimeView;
-	private EditText mDestinationView;
+	private TextView mDestinationView;
 	private View     mDATypeContainer;
 	private TextView mDATypeView;
 	private EditText mDescriptionView;
 	private DatePickerDialog mDatePickerDialog;
 	private FeedTag  mSelectedTag;
 	private String mImagLocalPath;
+	private Location mDestLocation;
 	
 	private final SimpleDateFormat DATAFORMAT = new SimpleDateFormat("yy-MM-dd");
 	
@@ -74,12 +79,20 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
     	
     	mDATypeView = (TextView)findViewById(R.id.type);
     	mSelectedTag = (FeedTag)getIntent().getParcelableExtra(FEED_TAG);
-    	mDATypeView.setText(mSelectedTag.getName());
+    	if(mSelectedTag != null){
+    		mDATypeView.setText(mSelectedTag.getName());
+    	}
     	
+    	mDestLocation = (Location)getIntent().getParcelableExtra(POI_LOCATION);
     	mTimeView = (TextView)findViewById(R.id.time);
     	mTimeView.setText(DATAFORMAT.format(Calendar.getInstance().getTime()));
     	mTimeView.setOnClickListener(this);
-    	mDestinationView = (EditText)findViewById(R.id.destination);
+    	mDestinationView = (TextView)findViewById(R.id.destination);
+    	if(mDestLocation == null){
+    		mDestinationView.setOnClickListener(this);
+    	}else{
+    		mDestinationView.setText(mDestLocation.getAddress());
+    	}
     	findViewById(R.id.add).setOnClickListener(this);
 		getActionBar().setTitle(R.string.create_distraction);
         
@@ -117,8 +130,13 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
 		case R.id.type_container:
 			Intent intent = new Intent(this, DATagSelectActivity.class);
 			startActivityForResult(intent, REQ_CODE_SELECT_DATYPE);
-			
 			break;
+			
+		case R.id.destination:
+   			Intent locationIntent = new Intent(this, LocationPickerActivity.class);
+			startActivityForResult(locationIntent, REQ_CODE_SELECT_LOCATION);
+			break;
+			
 		case R.id.add:
 			pickupPhoto();
 			break;
@@ -167,6 +185,10 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
 			}
 		}else if(REQ_CODE_PICKUP_PHOTO == requestCode){
 			handlePickupPhtoResult(data);
+		}else if(REQ_CODE_SELECT_LOCATION == requestCode){
+			mDestLocation = data.getParcelableExtra(LocationPickerActivity.POI_LOCATION);
+			String poiName = data.getStringExtra(LocationPickerActivity.POI_NAME);
+			mDestinationView.setText(poiName);
 		}
 	}
 
