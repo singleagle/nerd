@@ -45,7 +45,7 @@ public class AddDATagActivity extends BaseAcitivity implements OnClickListener,
     	request.setTagName(tagName);
     	request.setCreateUIN(AccountManager.getInstance(this).getLoginUIN());
     	request.registerListener(REQ_ID_ADDTAG, this, this);
-    	request.submit();
+    	request.submit(false);
     }
     
 	@Override

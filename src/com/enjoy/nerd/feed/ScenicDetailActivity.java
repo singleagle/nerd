@@ -49,7 +49,7 @@ public class ScenicDetailActivity extends BaseAcitivity implements View.OnClickL
 	private void requestScenicDetail(){
 		ScenicDetailReq request = new ScenicDetailReq(this, mFeedId);
 		request.registerListener(100, this, this);
-		request.submit();
+		request.submit(false);
 	}
 	
 	private void bindScenicDetail(final ScenicDetail scenic){

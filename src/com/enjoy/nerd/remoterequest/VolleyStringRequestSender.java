@@ -78,7 +78,7 @@ public class VolleyStringRequestSender implements Listener<String>, ErrorListene
         return url;
 	 }
 	    
-	 private StringRequestWithParam createVolleyRequest(HttpRequest<?> request){
+	 private StringRequestWithParam createVolleyRequest(HttpRequest<?> request, boolean shouldeCache){
 		 int method = Method.GET;
 		 String requestUrl = request.buidRequestUrl();
 		 HashMap<String, String> params = new HashMap<String, String>();
@@ -103,7 +103,7 @@ public class VolleyStringRequestSender implements Listener<String>, ErrorListene
 		 
 		 StringRequestWithParam volleyReq = new StringRequestWithParam(method, requestUrl, this, this);
 		 volleyReq.setBodyParams(bodyParams);
-		 volleyReq.setShouldCache(true);
+		 volleyReq.setShouldCache(shouldeCache);
 		 return volleyReq;
 	 }
 
@@ -128,9 +128,9 @@ public class VolleyStringRequestSender implements Listener<String>, ErrorListene
 	 }
 	 
 	 
-	 public int submitRequest(HttpRequest<?> request){
+	 public int submitRequest(HttpRequest<?> request, boolean ignoreCache){
 		 mRemoteRequest = request;
-		 StringRequest volleyReq = createVolleyRequest(request);
+		 StringRequest volleyReq = createVolleyRequest(request, !ignoreCache);
 		 mVolleyRequest = sRequestQueue.add(volleyReq);
 		 return 0;
 	 }

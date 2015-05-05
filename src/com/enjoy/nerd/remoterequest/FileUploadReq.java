@@ -47,7 +47,7 @@ public class FileUploadReq  extends PostRequest<String>{
 
 
 	@Override
-	public void onSubmitRequest() {
+	public void onSubmitRequest(boolean ignoreCache) {
 		mSender.submitRequest(this, file, contentType);
 	}
 

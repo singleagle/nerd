@@ -184,7 +184,7 @@ public class CreateScenicActivity extends BaseAcitivity implements SuccessRespon
     	
     	if(uploadReq == null){
         	request.registerListener(ADD_SCENI_ID, this, this);
-        	request.submit();
+        	request.submit(false);
     	}else{
     		BatchPostReqest batchReq = new BatchPostReqest(this);
     		batchReq.setRequestGroup(uploadReq, request, new PostRequestPipe(){
@@ -199,7 +199,7 @@ public class CreateScenicActivity extends BaseAcitivity implements SuccessRespon
     			
     		});
     		batchReq.registerListener(ADD_SCENI_ID, this, this);
-    		batchReq.submit();
+    		batchReq.submit(false);
     	}
 
     }

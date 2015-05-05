@@ -31,7 +31,7 @@ abstract public class XMPPRequest<T> extends RemoteRequest<T> {
 	}
 	
 	@Override
-	final public void onSubmitRequest(){
+	final public void onSubmitRequest(boolean ignoreCache){
 		mClient.excuteRequest(this);
 	}
 	

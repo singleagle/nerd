@@ -80,7 +80,7 @@ public class AccountManager {
 		request.setPassword(password);
 		LoginResponseListner respListner = new LoginResponseListner(listner);
 		request.registerListener(0, respListner, respListner);
-		request.submit();
+		request.submit(true);
 	}
 	
 	public void logout(){

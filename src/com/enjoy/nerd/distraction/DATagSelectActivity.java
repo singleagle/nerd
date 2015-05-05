@@ -50,7 +50,7 @@ public class DATagSelectActivity extends BaseAcitivity implements OnClickListene
     private void requestDATagList(){
     	DATagReq request = new DATagReq(this);
     	request.registerListener(REQ_ID_TYPE, this, this);
-    	request.submit();
+    	request.submit(true);
     }
     
 	@Override

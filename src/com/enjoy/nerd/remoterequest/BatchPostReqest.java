@@ -23,6 +23,7 @@ public class BatchPostReqest  extends PostRequest<Object> implements SuccessResp
 	private PostRequest<?> firstReq;
 	private PostRequest<?> secondReq;
 	private PostRequestPipe pipe;
+	private boolean ignoreCache;
 	
 	
 	public BatchPostReqest(Context context) {
@@ -63,8 +64,9 @@ public class BatchPostReqest  extends PostRequest<Object> implements SuccessResp
 
 
 	@Override
-	public void onSubmitRequest() {
-		firstReq.submit();
+	public void onSubmitRequest(boolean ignoreCache) {
+		this.ignoreCache = ignoreCache;
+		firstReq.submit(ignoreCache);
 	}
 
 	@Override
@@ -92,7 +94,7 @@ public class BatchPostReqest  extends PostRequest<Object> implements SuccessResp
 	public void onSucess(int requestId, Object response) {
 		if(requestId == FIRST_REQ_ID){
 			pipe.fillPipe(response, secondReq);
-			secondReq.submit();
+			secondReq.submit(ignoreCache);
 		}else if(requestId == SECOND_REQ_ID){
 			mSuccessListner.onSucess(mId, response);
 		}

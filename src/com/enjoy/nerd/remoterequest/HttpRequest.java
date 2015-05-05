@@ -18,7 +18,7 @@ abstract public class HttpRequest<T> extends RemoteRequest<T> {
 	static private final String TAG = "RemoteRequest";
 	
 	//static public final String VENUS_BASE_URL ="http://192.168.1.101/api/v1";
-	static public final String VENUS_BASE_URL = "http://120.24.208.105/venus/api/v1";
+	static public final String VENUS_BASE_URL = "http://www.funnycity.cn/venus/api/v1";
 	protected final VolleyStringRequestSender mSender;
 
 	
@@ -33,8 +33,8 @@ abstract public class HttpRequest<T> extends RemoteRequest<T> {
 	}
 	
 	@Override
-	public void onSubmitRequest(){
-		mSender.submitRequest(this);
+	public void onSubmitRequest(boolean ignoreCache){
+		mSender.submitRequest(this, ignoreCache);
 	}
 	
 	/**package*/ final boolean dispatchSuccessResult(String reqUrl,  boolean cached, String respondData){

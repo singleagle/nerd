@@ -3,7 +3,7 @@ package com.enjoy.nerd.remoterequest;
 public  enum FeedSubject{
 	DISTRACTION("distraction"),
 	SCENIC("scenic"),
-	TOPIC("topic"),
+	ALBUM("album"),
 	USER("user");
 	
 	public final String description;

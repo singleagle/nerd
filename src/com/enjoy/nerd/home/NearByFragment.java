@@ -49,16 +49,16 @@ public class NearByFragment extends Fragment implements OnRefreshListener<ListVi
     	mAdapter = new DAProfileAdrapter(getActivity());
     	mListView.setAdapter(mAdapter);
     	getActivity().getActionBar().setTitle(R.string.nearby);
-    	requestDAProfileList(0);
+    	requestDAProfileList(0, false);
     	return view;
     }
 
-    private void requestDAProfileList(int startIndex){
+    private void requestDAProfileList(int startIndex, boolean ignoreCache){
     	NearbyDistractionReq request = new NearbyDistractionReq(getActivity());
     	request.registerListener(REQ_ID_PROFILELIST, this, this);
     	request.setPager(startIndex, 6);
     	request.setLocation(113.9, 22.5);
-    	request.submit();
+    	request.submit(ignoreCache);
     }
     
     
@@ -86,12 +86,12 @@ public class NearByFragment extends Fragment implements OnRefreshListener<ListVi
     
 	@Override
 	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-		requestDAProfileList(0);
+		requestDAProfileList(0, true);
 	}
 
 	@Override
 	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-        requestDAProfileList(mAdapter.getCount());
+        requestDAProfileList(mAdapter.getCount(), false);
 	}
 	
 	

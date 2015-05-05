@@ -7,16 +7,16 @@ import java.util.List;
 public class DistractionProfile implements IFeed{
 	private String _id;
 	private String title;
-	private long createTime;
-	private long startTime;
-	private SimpleUserInfo createUserInfo;
+	private long create_time;
+	private long start_time;
+	private SimpleUserInfo created_by;
 	private String description;
-	private Location originLoc;
-	private Location dstLoc;
-	private int farawayMeters;
+	private Location origin_loc;
+	private Location dst_loc;
+	private int faraway_meters;
 	private int requestMemberCount;
-	private int partnerCount;
-	private int likeNum;
+	private int partner_count;
+	private int like_num;
 	private String imgurl;
 
 	public String getId() {
@@ -37,27 +37,27 @@ public class DistractionProfile implements IFeed{
 	
 
 	public long getCreateTime() {
-		return createTime;
+		return create_time;
 	}
 
 	public void setCreateTime(long createTime) {
-		this.createTime = createTime;
+		this.create_time = createTime;
 	}
 
 	public long getStartTime() {
-		return startTime;
+		return start_time;
 	}
 
 	public void setStartTime(long startTime) {
-		this.startTime = startTime;
+		this.start_time = startTime;
 	}
 
 	public SimpleUserInfo getCreateUserInfo() {
-		return createUserInfo;
+		return created_by;
 	}
 
 	public void setCreateUserInfo(SimpleUserInfo createUserInfo) {
-		this.createUserInfo = createUserInfo;
+		this.created_by = createUserInfo;
 	}
 
 	public String getDescription() {
@@ -69,32 +69,32 @@ public class DistractionProfile implements IFeed{
 	}
 
 	public String getOriginAddress(){
-		if(originLoc == null){
+		if(origin_loc == null){
 			return null;
 		}
 		
-		return originLoc.getAddress();
+		return origin_loc.getAddress();
 	}
 	
 	public Location getDestLocation(){
-		return dstLoc;
+		return dst_loc;
 	}
 	
 	public String getDestAddress(){
-		if(dstLoc == null){
+		if(dst_loc == null){
 			return null;
 		}
 		
-		return dstLoc.getAddress();
+		return dst_loc.getAddress();
 	}
 	
 	
 	public long getFarawayMeters() {
-		return farawayMeters;
+		return faraway_meters;
 	}
 
 	public void setFarawayMeters(int farawayMeters) {
-		this.farawayMeters = farawayMeters;
+		this.faraway_meters = farawayMeters;
 	}
 
 	public int getRequestMemberCount() {
@@ -106,15 +106,15 @@ public class DistractionProfile implements IFeed{
 	}
 
 	public int getPartnerCount() {
-		return partnerCount;
+		return partner_count;
 	}
 
 	public void setPartnerCount(int partnerCount) {
-		this.partnerCount = partnerCount;
+		this.partner_count = partnerCount;
 	}
 	
 	public int getLikeNum(){
-		return likeNum;
+		return like_num;
 	}
 
 	public String getImageUrl() {

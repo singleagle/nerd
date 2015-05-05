@@ -7,10 +7,10 @@ import java.util.List;
 import android.R.array;
 
 public  class ScenicDetail implements IFeed{
-	private String id;
+	private String _id;
 	private String title;
 	private String description;
-	private String main_imgurl;
+	private String imgurl;
 	private String contenturl;
 	private int likenum;
 	private long farawayMeters;
@@ -22,7 +22,7 @@ public  class ScenicDetail implements IFeed{
 	
 	@Override
 	public String getId() {
-		return id;
+		return _id;
 	}
 	
 	@Override
@@ -32,7 +32,7 @@ public  class ScenicDetail implements IFeed{
 	
 	@Override
 	public String getImageUrl() {
-		return main_imgurl;
+		return imgurl;
 	}
 	
 	public List<String> getOthersImgurl(){

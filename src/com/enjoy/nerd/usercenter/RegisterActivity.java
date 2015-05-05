@@ -61,7 +61,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener,
 			request.setName(mNameView.getText().toString());
 		}
 		request.registerListener(REQUEST_ID_REGISTER, this, this);
-		request.submit();
+		request.submit(true);
 		
 	}
 	

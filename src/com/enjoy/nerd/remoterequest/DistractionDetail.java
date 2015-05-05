@@ -8,6 +8,7 @@ import java.util.List;
 public  class DistractionDetail implements IFeed{
 	private DistractionProfile profile;
 	private long tribeId;
+	private String imgurl;
 	private String[] img_url_list;
 	private FeedTag[] tag_list;;
 	private Comment[] comment_list;
@@ -30,10 +31,7 @@ public  class DistractionDetail implements IFeed{
 	}
 
 	public String getImageUrl() {
-		if(img_url_list != null){
-			return img_url_list[0];
-		}
-		return null;
+		return imgurl;
 	}
 	
 	/*package*/void setImgurlList(String[] list){

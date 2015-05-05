@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public  class RecommendFeed implements IFeed{
-	private String id;
+	private String _id;
 	private String title;
 	private String imgurl;
 	private String contenturl;
 	private String subject;
-	private int likenum;
-	private long farawayMeters;
+	private int like_num;
+	private long faraway_meters;
 	
 	@Override
 	public String getId() {
-		return id;
+		return _id;
 	}
 	
 	@Override
@@ -33,11 +33,11 @@ public  class RecommendFeed implements IFeed{
 	}
 	
 	public int getLikeNum() {
-		return likenum;
+		return like_num;
 	}
 
 	public long getFarawayMeters() {
-		return farawayMeters;
+		return faraway_meters;
 	}
 	
 	public FeedSubject getFeedSubject() {

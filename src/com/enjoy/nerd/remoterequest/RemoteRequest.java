@@ -31,12 +31,12 @@ abstract public class RemoteRequest<T> {
 	}
 	
 	
-	public void submit(){
-		onSubmitRequest();
+	public void submit(boolean ignoreCache){
+		onSubmitRequest(ignoreCache);
 	}
 	
 	
-	abstract protected void onSubmitRequest();
+	abstract protected void onSubmitRequest(boolean ignoreCache);
 
 	
 	public interface SuccessResponseListner<T>{

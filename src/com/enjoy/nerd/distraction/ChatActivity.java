@@ -155,7 +155,7 @@ public class ChatActivity extends Activity implements OnRefreshListener<ListView
 		
 		ChatMsgSendResultListner listner = new ChatMsgSendResultListner(contentUri);
 		sendReq.registerListener(REQID_SEND_CHAT, listner, listner);
-		sendReq.submit();
+		sendReq.submit(true);
 	}
 
 	@Override

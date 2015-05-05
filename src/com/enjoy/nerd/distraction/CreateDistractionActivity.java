@@ -235,7 +235,7 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
     	request.setStartTime(startTime);
     	if(uploadReq == null){
         	request.registerListener(ADD_DA_ID, this, this);
-        	request.submit();
+        	request.submit(true);
     	}else{
     		BatchPostReqest batchReq = new BatchPostReqest(this);
     		batchReq.setRequestGroup(uploadReq, request, new PostRequestPipe(){
@@ -250,7 +250,7 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
     			
     		});
     		batchReq.registerListener(ADD_DA_ID, this, this);
-    		batchReq.submit();
+    		batchReq.submit(true);
     	}
 
     }

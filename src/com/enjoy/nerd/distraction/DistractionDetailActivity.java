@@ -51,7 +51,7 @@ public class DistractionDetailActivity extends BaseAcitivity implements View.OnC
 	private void requestDistractionDetail(){
 		DistractionDetailReq request = new DistractionDetailReq(this, mFeedId);
 		request.registerListener(100, this, this);
-		request.submit();
+		request.submit(false);
 	}
 
 	private void bindDistractionDetail(final DistractionDetail distraction){

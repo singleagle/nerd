@@ -51,16 +51,16 @@ public class RecommandFeedFragment extends Fragment implements OnRefreshListener
     	mAdapter = new FeedAdrapter(getActivity());
     	mListView.setAdapter(mAdapter);
     	getActivity().getActionBar().setTitle(R.string.recommend);
-    	requestRecommendList(0);
+    	requestRecommendList(0, false);
     	return view;
     }
 
-    private void requestRecommendList(int startIndex){
+    private void requestRecommendList(int startIndex, boolean ignoreCache){
     	RecommendFeedReq request = new RecommendFeedReq(getActivity());
     	request.registerListener(REQ_ID_FEEDLIST, this, this);
     	request.setPager(startIndex, 6);
     	request.setLocation(113.9, 22.5);
-    	request.submit();
+    	request.submit(ignoreCache);
     }
     
     
@@ -88,12 +88,12 @@ public class RecommandFeedFragment extends Fragment implements OnRefreshListener
     
 	@Override
 	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-		requestRecommendList(0);
+		requestRecommendList(0, true);
 	}
 
 	@Override
 	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-		requestRecommendList(mAdapter.getCount());
+		requestRecommendList(mAdapter.getCount(), false);
 	}
 	
 	
