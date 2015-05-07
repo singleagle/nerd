@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tag_name"
+    android:layout_marginLeft="5dip"
+	android:paddingLeft="2dp"
+	android:paddingRight="2dp"
+    android:layout_width="50dp"
+    android:layout_height="16dp"
+    android:background="@color/darkblue"
+    android:ellipsize="end"
+    android:gravity="center"
+    android:maxLength="5"
+    android:singleLine="true"
+    android:textSize="@dimen/fontSize_A" />
+

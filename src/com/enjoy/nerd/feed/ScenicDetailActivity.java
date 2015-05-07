@@ -1,5 +1,7 @@
 package com.enjoy.nerd.feed;
 
+import java.util.List;
+
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.enjoy.nerd.BaseAcitivity;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ScenicDetailActivity extends BaseAcitivity implements View.OnClickListener, SuccessResponseListner<ScenicDetail> {
@@ -24,6 +27,7 @@ public class ScenicDetailActivity extends BaseAcitivity implements View.OnClickL
 	public static final String KEY_CREATOR_UID ="creator_uid";
 	
 	private Button mDABtn, mShareBtn, mLikeBtn;
+	private LinearLayout mTagContainer;
 	private String mFeedId;
 	private ImageLoader mImageLoader;
 	private ScenicDetail mScenic;
@@ -40,7 +44,7 @@ public class ScenicDetailActivity extends BaseAcitivity implements View.OnClickL
 		mShareBtn.setOnClickListener(this);
 		mLikeBtn = (Button)findViewById(R.id.like);
 		mLikeBtn.setOnClickListener(this);
-		
+		mTagContainer = (LinearLayout)findViewById(R.id.tag_container);
 		mImageLoader = ((NerdApp)getApplication()).getImageLoader();
 		requestScenicDetail();
 		
@@ -52,6 +56,29 @@ public class ScenicDetailActivity extends BaseAcitivity implements View.OnClickL
 		request.submit(false);
 	}
 	
+	private void fillTag(List<String> tagNameList){
+		if(tagNameList.size() == 0){
+			mTagContainer.setVisibility(ViewGroup.GONE);
+			return;
+		}
+		mTagContainer.setVisibility(ViewGroup.VISIBLE);
+		mTagContainer.removeAllViews();
+		LayoutInflater inflater = LayoutInflater.from(this);
+		for(String name : tagNameList){
+			TextView tagView = (TextView) inflater.inflate(R.layout.tag_item, mTagContainer, false);
+			tagView.setText(name);
+			tagView.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					Intent intent = new Intent(ScenicDetailActivity.this, TagTimelineActivity.class);
+					intent.putExtra(TagTimelineActivity.FEED_TAG_NAME, ((TextView)v).getText());
+					startActivity(intent);
+				}
+			});
+			mTagContainer.addView(tagView);
+		}
+	}
+	
+	
 	private void bindScenicDetail(final ScenicDetail scenic){
 		NetworkImageView mainImage =(NetworkImageView)findViewById(R.id.main_image);
 		mainImage.setDefaultImageResId(R.drawable.default_scenic_img);
@@ -61,7 +88,6 @@ public class ScenicDetailActivity extends BaseAcitivity implements View.OnClickL
 		String distance = getString(R.string.distance_meters, scenic.getFarawayMeters());
 		((TextView)findViewById(R.id.distance)).setText(distance);
 		((TextView)findViewById(R.id.view_num)).setText(String.valueOf(scenic.getLikeNum()));
-		((TextView)findViewById(R.id.description)).setText(scenic.getDescription());
 		findViewById(R.id.location).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(ScenicDetailActivity.this, LocationViewActivity.class);
@@ -69,7 +95,9 @@ public class ScenicDetailActivity extends BaseAcitivity implements View.OnClickL
 				startActivity(intent);
 			}
 		});
+		fillTag(scenic.getTagNameList());
 		
+		((TextView)findViewById(R.id.description)).setText(scenic.getDescription());
 		if(scenic.getOthersImgurl() != null){
 			ViewGroup imgContainer = (ViewGroup)findViewById(R.id.img_container);
 			imgContainer.removeAllViews();

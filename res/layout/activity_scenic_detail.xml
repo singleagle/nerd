@@ -65,7 +65,26 @@
 	            android:textSize="@dimen/fontSize_B" />
 	
 		</RelativeLayout>
-		
+		<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="20dp"
+	        android:gravity="center_vertical"
+	        android:orientation="horizontal" >
+	      	<TextView 
+		       android:layout_width="wrap_content"
+		       android:layout_height="match_parent"
+		       android:text="@string/charmful_tag"
+		       android:gravity="bottom"
+		       android:textSize="@dimen/fontSize_A" />
+	      	
+	      <LinearLayout
+		    android:id="@+id/tag_container"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:orientation="horizontal" />
+		    
+	   </LinearLayout>
+	        
 		<LinearLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="40dp"

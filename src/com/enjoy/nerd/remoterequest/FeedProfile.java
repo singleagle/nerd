@@ -3,7 +3,7 @@ package com.enjoy.nerd.remoterequest;
 import java.util.ArrayList;
 import java.util.List;
 
-public  class RecommendFeed implements IFeed{
+public  class FeedProfile implements IFeed{
 	private String _id;
 	private String title;
 	private String imgurl;
@@ -45,32 +45,32 @@ public  class RecommendFeed implements IFeed{
 	}
 	
 	static public class PageFeed{
-		private int startIndex;
-		private int totalCount;
-		private ArrayList<RecommendFeed> list;
+		private int from;
+		private int total;
+		private ArrayList<FeedProfile> list;
 		
 		
 		public int getStartIndex() {
-			return startIndex;
+			return from;
 		}
 		
 		public void setStartIndex(int startIndex) {
-			this.startIndex = startIndex;
+			this.from = startIndex;
 		}
 		
 		public int getTotalCount() {
-			return totalCount;
+			return total;
 		}
 		
 		public void setTotalCount(int totalCount) {
-			this.totalCount = totalCount;
+			this.total = totalCount;
 		}
 		
-		public List<RecommendFeed> getFeedList() {
+		public List<FeedProfile> getFeedList() {
 			return list;
 		}
 		
-		public void setFeedList(ArrayList<RecommendFeed> feedlist) {
+		public void setFeedList(ArrayList<FeedProfile> feedlist) {
 			this.list = feedlist;
 		}
 	}

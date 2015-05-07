@@ -1,16 +1,13 @@
-package com.enjoy.nerd.home;
+package com.enjoy.nerd.feed;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.android.volley.toolbox.Volley;
 import com.enjoy.nerd.NerdApp;
 import com.enjoy.nerd.R;
 import com.enjoy.nerd.remoterequest.IFeed;
-import com.enjoy.nerd.remoterequest.FeedProfile;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -20,10 +17,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class FeedAdrapter extends BaseAdapter {
-	
 	private Context mContext;
 	private ImageLoader mImageLoader;
-	private ArrayList<FeedProfile> mFeedList = new ArrayList<FeedProfile>();
+	private ArrayList<IFeed> mFeedList = new ArrayList<IFeed>();
 	
 	
 	public FeedAdrapter(Context context){
@@ -32,7 +28,7 @@ public class FeedAdrapter extends BaseAdapter {
 	    mImageLoader = app.getImageLoader();
 	}
 	
-	public void addFeedList(List<FeedProfile> feedList, boolean clear){
+	public void addFeedList(List<? extends IFeed> feedList, boolean clear){
 		if(clear){
 			mFeedList.clear();
 		}

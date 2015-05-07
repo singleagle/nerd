@@ -1,14 +1,17 @@
 package com.enjoy.nerd.remoterequest;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 public class DistractionProfile implements IFeed{
+	
 	private String _id;
 	private String title;
-	private long create_time;
-	private long start_time;
+	private String create_time;
+	private String start_time;
 	private SimpleUserInfo created_by;
 	private String description;
 	private Location origin_loc;
@@ -37,19 +40,31 @@ public class DistractionProfile implements IFeed{
 	
 
 	public long getCreateTime() {
-		return create_time;
+		try {
+			return DATAFORMAT.parse(create_time).getTime();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return System.currentTimeMillis();
 	}
 
 	public void setCreateTime(long createTime) {
-		this.create_time = createTime;
+		this.create_time = DATAFORMAT.format(new Date(createTime));
 	}
 
 	public long getStartTime() {
-		return start_time;
+		try {
+			return DATAFORMAT.parse(start_time).getTime();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return System.currentTimeMillis();
 	}
 
 	public void setStartTime(long startTime) {
-		this.start_time = startTime;
+		this.start_time = DATAFORMAT.format(new Date(startTime));
 	}
 
 	public SimpleUserInfo getCreateUserInfo() {
@@ -131,25 +146,25 @@ public class DistractionProfile implements IFeed{
 	}
 	
 	static public class PageDAProfile{
-		private int startIndex;
-		private int totalCount;
+		private int from;
+		private int total;
 		private ArrayList<DistractionProfile> list;
 		
 		
 		public int getStartIndex() {
-			return startIndex;
+			return from;
 		}
 		
 		public void setStartIndex(int startIndex) {
-			this.startIndex = startIndex;
+			this.from = startIndex;
 		}
 		
 		public int getTotalCount() {
-			return totalCount;
+			return total;
 		}
 		
 		public void setTotalCount(int totalCount) {
-			this.totalCount = totalCount;
+			this.total = totalCount;
 		}
 		
 		public List<DistractionProfile> getDAProfileList() {

@@ -1,10 +1,7 @@
 package com.enjoy.nerd.remoterequest;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import android.R.array;
 
 public  class ScenicDetail implements IFeed{
 	private String _id;
@@ -18,7 +15,7 @@ public  class ScenicDetail implements IFeed{
 	private String[] others_imgurl;
 	private DistractionProfile[] profile_list;
 	private Comment[] comment_list;
-	private FeedTag[] tag_list;
+	private String[] tag_list;
 	
 	@Override
 	public String getId() {
@@ -39,7 +36,7 @@ public  class ScenicDetail implements IFeed{
 		return Arrays.asList(others_imgurl);
 	}
 	
-	public List<FeedTag> getTagList(){
+	public List<String> getTagNameList(){
 		return Arrays.asList(tag_list);
 	}
 	

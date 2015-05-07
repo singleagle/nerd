@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -60,6 +62,8 @@ public class VolleyStringRequestSender implements Listener<String>, ErrorListene
 	 
 	 
 	 static private String getUrlWithQueryString(String url, HashMap<String, String> urlparams) {
+		String encodeurl = url;
+		
         if (urlparams != null) {
             List<BasicNameValuePair> lparams = new LinkedList<BasicNameValuePair>();
 
@@ -67,15 +71,16 @@ public class VolleyStringRequestSender implements Listener<String>, ErrorListene
                 lparams.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
             }
             String paramString = URLEncodedUtils.format(lparams, HTTP.UTF_8);
+ 
             
             if (!url.contains("?")) {
-                url += "?" + paramString;
+            	encodeurl = url + "?" + paramString;
             } else {
-                url += "&" + paramString;
+            	encodeurl = url +  "&" + paramString;
             }
         }
 
-        return url;
+        return encodeurl;
 	 }
 	    
 	 private StringRequestWithParam createVolleyRequest(HttpRequest<?> request, boolean shouldeCache){

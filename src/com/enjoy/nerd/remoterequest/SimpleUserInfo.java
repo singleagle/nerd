@@ -8,8 +8,8 @@ public class SimpleUserInfo  {
 
 	long uin;
 	String name;
-	String headerImgUrl;
-	int sexType; 
+	String avatar_id;
+	int sex_type; 
 	
 	public SimpleUserInfo() {
 		
@@ -34,11 +34,11 @@ public class SimpleUserInfo  {
 	}
 
 	public String getHeaderImgUrl() {
-		return headerImgUrl;
+		return avatar_id;
 	}
 
 	public void setHeaderImgUrl(String headerImgUrl) {
-		this.headerImgUrl = headerImgUrl;
+		this.avatar_id = headerImgUrl;
 	}
 	
 }

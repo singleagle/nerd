@@ -99,7 +99,10 @@
        <activity
             android:name=".feed.ScenicDetailActivity"
             android:screenOrientation="portrait" />
-       
+       <activity
+            android:name=".feed.TagTimelineActivity"
+            android:screenOrientation="portrait" />
+              
        <service 
            android:name=".remoterequest.xmpp.IMMessageRecieverService"
            android:exported = "false"/>
