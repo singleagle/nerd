@@ -23,7 +23,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class DAProfileAdrapter extends BaseAdapter {
+public class DAProfileAdapter extends BaseAdapter {
 	
 	private final SimpleDateFormat TIMEFORMAT = new SimpleDateFormat("MM-dd HH:mm");
 	
@@ -32,7 +32,7 @@ public class DAProfileAdrapter extends BaseAdapter {
 	private ArrayList<DistractionProfile> mProfileList = new ArrayList<DistractionProfile>();
 	
 	
-	public DAProfileAdrapter(Context context){
+	public DAProfileAdapter(Context context){
 		mContext = context;
 		NerdApp app = (NerdApp)context.getApplicationContext();
 		mImageLoader = app.getImageLoader();

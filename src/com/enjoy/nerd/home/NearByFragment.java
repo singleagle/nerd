@@ -35,7 +35,7 @@ public class NearByFragment extends Fragment implements OnRefreshListener<ListVi
     private ListView mListView;
     private PullToRefreshListView mPullListView;
     private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
-    private DAProfileAdrapter mAdapter;
+    private DAProfileAdapter mAdapter;
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +46,7 @@ public class NearByFragment extends Fragment implements OnRefreshListener<ListVi
     	mPullListView.setPullLoadEnabled(true);
     	mListView = mPullListView.getRefreshableView();
     	mListView.setOnItemClickListener(this);
-    	mAdapter = new DAProfileAdrapter(getActivity());
+    	mAdapter = new DAProfileAdapter(getActivity());
     	mListView.setAdapter(mAdapter);
     	getActivity().getActionBar().setTitle(R.string.nearby);
     	requestDAProfileList(0, false);

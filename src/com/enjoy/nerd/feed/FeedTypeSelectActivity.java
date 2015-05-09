@@ -41,7 +41,7 @@ public class FeedTypeSelectActivity extends BaseAcitivity implements OnChildClic
 		mFeedTyeListView.setOnChildClickListener(this);
 		FeedTypeListReq request = new FeedTypeListReq(this);
 		request.registerListener(1, this, this);
-		request.submit(false);
+		request.submit();
 		
 	}
 	

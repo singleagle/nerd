@@ -100,7 +100,7 @@
             android:name=".feed.ScenicDetailActivity"
             android:screenOrientation="portrait" />
        <activity
-            android:name=".feed.TagTimelineActivity"
+            android:name=".feed.FocusTimelineActivity"
             android:screenOrientation="portrait" />
               
        <service 

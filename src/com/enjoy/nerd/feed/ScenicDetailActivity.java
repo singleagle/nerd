@@ -69,8 +69,8 @@ public class ScenicDetailActivity extends BaseAcitivity implements View.OnClickL
 			tagView.setText(name);
 			tagView.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					Intent intent = new Intent(ScenicDetailActivity.this, TagTimelineActivity.class);
-					intent.putExtra(TagTimelineActivity.FEED_TAG_NAME, ((TextView)v).getText());
+					Intent intent = new Intent(ScenicDetailActivity.this, FocusTimelineActivity.class);
+					intent.putExtra(FocusTimelineActivity.FEED_FOCUS_NAME, ((TextView)v).getText());
 					startActivity(intent);
 				}
 			});

@@ -94,6 +94,7 @@ public class HomeActivity extends FragmentActivity{
     void showTabContent(){
     	mTabManger.addTab(RecommandFeedFragment.class, R.string.recommend, R.drawable.home_normal);
     	mTabManger.addTab(NearByFragment.class, R.string.nearby, R.drawable.nearby_normal);
+    	mTabManger.addTab(HotspotFragment.class, R.string.seek, R.drawable.seek_normal);
     	mTabManger.addTab(UserCenterFragment.class, R.string.user_center, R.drawable.user_center_normal);
     	mTabHost.setCurrentTab(0);
     }

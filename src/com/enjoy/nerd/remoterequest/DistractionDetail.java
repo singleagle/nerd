@@ -10,7 +10,7 @@ public  class DistractionDetail implements IFeed{
 	private long tribeId;
 	private String imgurl;
 	private String[] img_url_list;
-	private FeedTag[] tag_list;;
+	private String[] tag_list;;
 	private Comment[] comment_list;
 	private SimpleUserInfo[] partner_list;
 	

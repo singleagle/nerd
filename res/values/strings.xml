@@ -3,6 +3,7 @@
     <string name="img_common_desc">nerd</string>
     <string name="recommend">推荐</string>
     <string name="nearby">附近</string>
+    <string name="seek">发现</string>
     <string name="create_distraction">创建活动</string>
     <string name="create_scenic">创建地点</string>
     <string name="user_center">个人中心</string>
@@ -55,5 +56,8 @@
     <string name="gohere">到这里去</string>
     <string name="sharetoweixin">分享到微信</string>
     <string name="like">喜欢</string>
-    
+    <string name="follow">关注</string>
+    <string name="unfollow">取消关注</string>
+    <string name="hot_tag">热门标签</string>
+    <string name="hot_topic">热门话题</string>
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/common_color_bg" >
+    
+    <ExpandableListView 
+        android:id="@+id/focus_list"  
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"  
+        android:cacheColorHint="@color/transparent"
+        android:divider= "@drawable/item_divider_with_margin_left"
+        android:dividerHeight="1.0dp" 
+        android:groupIndicator="@null"
+        android:listSelector="@null"
+        android:fadingEdge="vertical"  
+        android:childDivider="@drawable/item_divider_with_margin_left"  
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbarThumbVertical="@drawable/comm_scroller_bar"
+        android:scrollbars="none"
+        android:scrollingCache="false"
+    />  
+
+</FrameLayout>

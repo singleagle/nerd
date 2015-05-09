@@ -30,6 +30,9 @@ abstract public class RemoteRequest<T> {
 		mFailResponseListner = failResponseListner;
 	}
 	
+	public void submit(){
+		submit(false);
+	}
 	
 	public void submit(boolean ignoreCache){
 		onSubmitRequest(ignoreCache);
