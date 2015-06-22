@@ -12,7 +12,7 @@ public class BaseAcitivity extends FragmentActivity implements FailResponseListn
 	@Override
 	public void onFailure(int requestId, int error, int subErr,
 			String errDescription) {
-		Toast.makeText(this, errDescription + ":" + error, Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), errDescription + ":" + error, Toast.LENGTH_SHORT).show();
 	}
 
 }

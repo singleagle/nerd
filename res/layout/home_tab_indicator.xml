@@ -8,8 +8,6 @@
         android:gravity="bottom|center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/nearby"
-        android:textSize="12sp"  
-        android:drawableTop="@drawable/nearby_normal"
+        android:textSize="@dimen/fontSize_A"  
         android:layout_centerInParent="true" />
 </RelativeLayout>

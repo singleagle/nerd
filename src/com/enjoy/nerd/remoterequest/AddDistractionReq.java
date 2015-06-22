@@ -21,7 +21,7 @@ public  class AddDistractionReq extends PostRequest<String>{
 	private String title;
 	private long creatUserId;
 	private String description;
-	private String address;
+	Location location;
 	private int payType;
 	private long startTime;
 	private ArrayList<String> tagIdList = new ArrayList<String>();
@@ -78,14 +78,17 @@ public  class AddDistractionReq extends PostRequest<String>{
 		return this;
 	}
 
-
-
 	public String getAddress() {
-		return address;
+		if(location != null){
+			return location.getAddress();
+		}
+		return null;
 	}
+	
 
-	public AddDistractionReq setAddress(String address) {
-		this.address = address;
+	
+	public AddDistractionReq setLocation(Location location){
+		this.location = location;
 		return this;
 	}
 
@@ -124,11 +127,15 @@ public  class AddDistractionReq extends PostRequest<String>{
 					strBuilder.append(",");
 				}
 			}
-			params.put("imgurllist", strBuilder.toString());
+			params.put("img_url_list", strBuilder.toString());
 		}
-		params.put("tagidlist", tagIdList.get(0));
+		params.put("tag_list", tagIdList.get(0));
 		params.put("description", description);
-		params.put("address", address);
+		if(location != null){
+			params.put("address", location.getAddress());
+			double[] cord = location.getLocation();
+			params.put("location", String.format("%f,%f",cord[0],cord[1]));
+		}
 		params.put("paytype", Integer.toString(payType));
 		params.put("starttime", Long.toString(startTime));
 	}

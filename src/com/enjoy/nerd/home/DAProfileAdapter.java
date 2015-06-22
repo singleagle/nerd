@@ -16,6 +16,7 @@ import com.enjoy.nerd.remoterequest.SimpleUserInfo;
 import com.enjoy.nerd.utils.BitmapCache;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,6 +105,7 @@ public class DAProfileAdapter extends BaseAdapter {
 		}
 		
 		if(profile.getImageUrl() != null){
+			String host = Uri.parse(profile.getImageUrl()).getHost();
 			holder.daImgView.setImageUrl(profile.getImageUrl(), mImageLoader);
 		}
 		

@@ -58,6 +58,7 @@ public class HotspotFragment extends Fragment implements OnChildClickListener,
 		});
 		
 		mFocusListView.setOnChildClickListener(this);
+		getActivity().getActionBar().setTitle(R.string.seek);
 		requestHotFocusList(0);
     	return view;
     }

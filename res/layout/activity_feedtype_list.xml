@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/common_color_bg" >
+    android:background="@color/common_bg" >
     
     <ExpandableListView 
         android:id="@+id/feedtype_list"  

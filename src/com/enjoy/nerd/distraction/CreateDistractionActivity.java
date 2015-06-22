@@ -26,10 +26,12 @@ import com.enjoy.nerd.utils.LogWrapper;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -55,6 +57,9 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
 	static private final int REQ_CODE_SELECT_DATYPE = 1;
 	static private final int REQ_CODE_PICKUP_PHOTO = 2;
 	static private final int REQ_CODE_SELECT_LOCATION = 3;
+	
+	static private final float PHOTO_WIDTH = 300.0f;
+	static private final float PHOTO_HEIGHT = 300.0f;
 	
 	private TextView mTimeView;
 	private TextView mDestinationView;
@@ -146,21 +151,30 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
 		
 	}
 
+
 	protected void handlePickupPhtoResult(Intent data){
 	    //外界的程序访问ContentProvider所提供数据 可以通过ContentResolver接口
 	    ContentResolver resolver = getContentResolver();
 
         try {
         	Uri originalUri = data.getData();        //获得图片的uri 
-            Bitmap bm = MediaStore.Images.Media.getBitmap(resolver, originalUri);        //显得到bitmap图片
+            Bitmap bm = MediaStore.Images.Media.getBitmap(resolver, originalUri);
+            Matrix matrix = new Matrix();
+
+            float scaleX = PHOTO_WIDTH / bm.getWidth();
+            float scaleY = PHOTO_HEIGHT / bm.getHeight();
+            float scale = Math.min(scaleX, scaleY);
+            matrix.setScale(scale, scale);
+            Bitmap thumb = Bitmap.createBitmap(bm, 0, 0,
+                                               bm.getWidth(),
+                                               bm.getHeight(), matrix,
+                                               true);
             ImageView photoView = (ImageView)findViewById(R.id.photo);
-            photoView.setImageBitmap(bm);
+            photoView.setImageBitmap(thumb);
             photoView.setVisibility(View.VISIBLE);
             String[] proj = {MediaStore.Images.Media.DATA};
 
-            //好像是android多媒体数据库的封装接口，具体的看Android文档
-            Cursor cursor = managedQuery(originalUri, proj, null, null, null); 
-            //按我个人理解 这个是获得用户选择的图片的索引值
+            Cursor cursor = MediaStore.Images.Media.query(resolver, originalUri, proj); 
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             //将光标移至开头 ，这个很重要，不小心很容易引起越界
             cursor.moveToFirst();
@@ -222,8 +236,8 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
     	request.setCreatUserId(AccountManager.getInstance(this).getLoginUIN());
     	request.setType(mSelectedTag.getId());
     	
-    	if(mDestinationView.getText() != null){
-    		request.setAddress(mDestinationView.getText().toString());
+    	if(mDestLocation!= null){
+    		request.setLocation(mDestLocation);
     	}
     	
     	long startTime = 0;
@@ -263,6 +277,7 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
     			Toast.makeText(this, R.string.invalidate_input, Toast.LENGTH_LONG).show();
     		}else{
     			sendAddDAReq();
+    			finish();
     		}
     		
     		break;
@@ -276,15 +291,15 @@ public class CreateDistractionActivity extends BaseAcitivity implements SuccessR
     
 	@Override
     public void onDestroy() {
-        super.onDestroy();
         if(mDatePickerDialog != null){
         	mDatePickerDialog.dismiss();
         }
+        super.onDestroy();
     }
 
 	@Override
 	public void onSucess(int requestId, String response) {
-		Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
 	}
     
     

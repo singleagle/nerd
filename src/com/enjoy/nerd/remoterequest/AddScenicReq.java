@@ -113,14 +113,14 @@ public  class AddScenicReq extends PostRequest<String>{
 					strBuilder.append(",");
 				}
 			}
-			params.put("imgurllist", strBuilder.toString());
+			params.put("img_url_list", strBuilder.toString());
 		}
-		params.put("tagidlist", tagIdList.get(0));
+		params.put("tag_list", tagIdList.get(0));
 		params.put("description", description);
 		if(location != null){
 			params.put("address", location.getAddress());
 			double[] cord = location.getLocation();
-			params.put("location", String.format("%f,  %f",cord[0],cord[1]));
+			params.put("location", String.format("%f,%f",cord[0],cord[1]));
 		}
 		
 	}

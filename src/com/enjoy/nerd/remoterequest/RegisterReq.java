@@ -67,21 +67,21 @@ public class RegisterReq  extends PostRequest<Account>{
 
 	@Override
 	protected void onFillRequestParams(HashMap<String, String> params) {
-		params.put("phoneno", phoneNO);
+		params.put("phone", phoneNO);
 		params.put("password", Encryptor.encode(password));
 		if(name != null){
-			params.put("nickname", name);
+			params.put("name", name);
 		}
 		
 		if(headerImgUrl != null){
-			params.put("headerImgUrl", headerImgUrl);
+			params.put("avatarurl", headerImgUrl);
 		}
 		
 	}
 
 	@Override
 	protected String buidRequestUrl() {
-		return VENUS_BASE_URL + "/register";
+		return VENUS_BASE_URL + "/users";
 	}
 
 	@Override

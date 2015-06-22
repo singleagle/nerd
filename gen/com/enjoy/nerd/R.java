@@ -120,6 +120,9 @@ containing a value of this type.
         public static final int brightergrey=0x7f050010;
         public static final int brightgrey=0x7f050011;
         public static final int brightorange=0x7f05001a;
+        /**  背景色 
+         */
+        public static final int common_bg=0x7f05001e;
         public static final int darkblue=0x7f05000c;
         public static final int darkgrey=0x7f050012;
         /**  深粉红色 
@@ -132,8 +135,8 @@ containing a value of this type.
         /**  热粉红色 
          */
         public static final int hotpink=0x7f050008;
-        public static final int input=0x7f05001f;
-        public static final int input_hint=0x7f050020;
+        public static final int input=0x7f050020;
+        public static final int input_hint=0x7f050021;
         /**  草绿色 
          */
         public static final int lawngreen=0x7f05000a;
@@ -141,7 +144,7 @@ containing a value of this type.
         public static final int lightgreen=0x7f05000b;
         public static final int lightgrey=0x7f050014;
         public static final int lightransparent=0x7f050016;
-        public static final int main_txt=0x7f05001e;
+        public static final int main_txt=0x7f05001f;
         public static final int middlegrey=0x7f05000f;
         public static final int navpage=0x7f050017;
         /**  橙色 
@@ -156,7 +159,7 @@ containing a value of this type.
          */
         public static final int snow=0x7f050006;
         public static final int split=0x7f05001b;
-        public static final int tips=0x7f050021;
+        public static final int tips=0x7f050022;
         public static final int toasterro=0x7f050013;
         public static final int transparent=0x7f05001c;
         public static final int transparent_black=0x7f05001d;

@@ -50,7 +50,7 @@ public class LoginActivity extends Activity implements View.OnClickListener, Log
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(requestCode == CODE_REGISTER){
+		if(requestCode == CODE_REGISTER && resultCode == Activity.RESULT_OK){
 			long uin = data.getLongExtra(RegisterActivity.KEY_UIN, 0);
 			if(uin != 0){
 				mUIDView.setText(String.valueOf(uin));
